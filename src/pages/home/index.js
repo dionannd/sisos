@@ -1,25 +1,36 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Flex, Text, Box, Avatar, Image, IconButton } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Box,
+  Avatar,
+  Image,
+  IconButton,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { FiHeart } from "react-icons/fi";
 import { BsChatLeftDots } from "react-icons/bs";
+import { ModalComment } from "components";
 
 export default function HomePage() {
-  const data = {
+  const image = {
     imageUrl: "https://bit.ly/2Z4KKcF",
     imageAlt: "Viewer",
   };
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Helmet>
         <title>Home</title>
       </Helmet>
       <Box px={5} py={6} rounded="lg" borderColor="#E5E5E5" borderWidth="2px">
-        <Image src={data.imageUrl} mb={5} />
+        <Image src={image.imageUrl} mb={5} />
         <Flex alignItems="center" justifyContent="space-between">
           <Flex alignItems="center">
             <Avatar size="sm" mr={4} />
-            <Text fontWeight="semibold" fontSize="23">
+            <Text fontWeight="semibold" fontSize="20px">
               Jhon Doe
             </Text>
           </Flex>
@@ -37,6 +48,7 @@ export default function HomePage() {
             icon={<BsChatLeftDots />}
             bg="white"
             size="lg"
+            onClick={onOpen}
           />
           <IconButton
             ml={1}
@@ -47,6 +59,8 @@ export default function HomePage() {
           />
         </Flex>
       </Box>
+
+      <ModalComment isOpen={isOpen} onClose={onClose} />
     </>
   );
 }
