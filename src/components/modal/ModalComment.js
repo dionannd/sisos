@@ -29,7 +29,11 @@ const ModalTransaction = (props) => {
         </ModalHeader>
         <ModalBody>
           <FormControl isRequired="true">
-            <Textarea focusBorderColor="#C4C4C4" h="10rem" />
+            <Textarea
+              focusBorderColor="#C4C4C4"
+              h="10rem"
+              placeholder="Comment here..."
+            />
           </FormControl>
         </ModalBody>
 
