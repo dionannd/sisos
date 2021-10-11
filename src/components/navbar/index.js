@@ -1,11 +1,22 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { Avatar, Input, InputGroup } from "@chakra-ui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  Avatar,
+  Input,
+  InputGroup,
+} from "@chakra-ui/react";
+import { RiUserLine } from "react-icons/ri";
+import { FiSettings, FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
-  // const logout = () => {
-  //   localStorage.clear();
-  //   window.location.href = "/";
-  // };
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
 
   return (
     <>
@@ -30,9 +41,23 @@ const Navbar = () => {
             }}
           />
         </InputGroup>
-        <Flex ml={10}>
-          <Avatar size="sm" />
-        </Flex>
+        <Menu isLazy>
+          <MenuButton>
+            <Avatar size="sm" />
+          </MenuButton>
+          <MenuList>
+            <MenuItem icon={<RiUserLine />}>Profile</MenuItem>
+            <MenuItem icon={<FiSettings />}>Setting</MenuItem>
+            <MenuDivider />
+            <MenuItem
+              color="#FF4C4C"
+              icon={<FiLogOut />}
+              onClick={handleLogout}
+            >
+              Sign Out
+            </MenuItem>
+          </MenuList>
+        </Menu>
       </Flex>
     </>
   );
