@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import {
+  Text,
   Center,
   FormControl,
   FormLabel,
@@ -8,10 +9,11 @@ import {
   Button,
   Flex,
   useToast,
+  useMediaQuery,
 } from "@chakra-ui/react";
-import { AuthLayout, CardLogin } from "components";
+import { AuthLayout, CardAuth } from "components";
 import authRequest from "api/auth";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 export default function LoginPage() {
   const history = useHistory();
@@ -21,16 +23,6 @@ export default function LoginPage() {
     password: "",
   });
   const [isLoading, setLoading] = useState(false);
-
-  const isLogedIn = useCallback(() => {
-    if (localStorage.getItem("token")) {
-      history.push("/home");
-    }
-  }, [history]);
-
-  React.useEffect(() => {
-    isLogedIn();
-  }, []);
 
   const handleLogin = async () => {
     try {
@@ -59,14 +51,27 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
+
+  const [isNotSmallerScreen] = useMediaQuery("(min-width:800px)");
+
+  const isLogedIn = useCallback(() => {
+    if (localStorage.getItem("token")) {
+      history.push("/home");
+    }
+  }, [history]);
+
+  React.useEffect(() => {
+    isLogedIn();
+  });
+
   return (
     <>
       <Helmet>
         <title>Sign In</title>
       </Helmet>
       <AuthLayout>
-        <CardLogin px={20} py={20}>
-          <Center fontWeight="bold" fontSize="30px">
+        <CardAuth p={20}>
+          <Center fontWeight="semibold" fontSize="30px">
             Sign In
           </Center>
           <FormControl mb={4} mt={4}>
@@ -101,13 +106,17 @@ export default function LoginPage() {
             Sign In
           </Button>
           <Flex mt={6} justifyContent="center">
-            <Center mr={1}>Not registered yet?</Center>
-            <Button variant="link" color="black">
+            <Text mr={1}>Not registered yet?</Text>
+            <Button variant="link" color="black" as={Link} to="/register">
               Sign up here
             </Button>
           </Flex>
-        </CardLogin>
-        <CardLogin px={100} py="50vh" bg="#DFDFDF" maxH="100vh"></CardLogin>
+        </CardAuth>
+        <CardAuth
+          bg="#DFDFDF"
+          py={isNotSmallerScreen ? "50vh" : "0"}
+          px={isNotSmallerScreen ? "20" : "0"}
+        ></CardAuth>
       </AuthLayout>
     </>
   );
