@@ -6,7 +6,7 @@ export default function MainLayout({ children }) {
   return (
     <>
       <Navbar />
-      <Box maxW="47em" margin="auto" mt={5} mb={10}>
+      <Box px={10} maxW="50rem" margin="auto" mb={10} mt={5}>
         {children}
       </Box>
     </>

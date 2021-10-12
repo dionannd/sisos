@@ -22,7 +22,7 @@ const Navbar = () => {
     <>
       <Flex
         height="5rem"
-        px="10rem"
+        px={{ base: "3rem", lg: "10rem", md: "6rem" }}
         alignItems="center"
         bg="white"
         boxShadow="sm"
@@ -31,7 +31,10 @@ const Navbar = () => {
         <Text fontWeight="semibold" fontSize="22px">
           SISOS
         </Text>
-        <InputGroup mr={20} ml={20}>
+        <InputGroup
+          mr={{ base: 3, lg: "7.5rem", md: 5 }}
+          ml={{ base: 3, lg: "5.5rem", md: 5 }}
+        >
           <Input
             type="tel"
             placeholder="Search email or username"
