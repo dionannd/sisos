@@ -7,7 +7,7 @@ export { default as Navbar } from "./navbar";
 
 // Cards
 export { default as CardAuth } from "./card/CardAuth";
-export { default as CardHome } from "./card/CardHome";
+export { default as CardUserPosting } from "./card/CardUserPosting";
 
 // Modals
 export { default as ModalComment } from "./modal/ModalComment";

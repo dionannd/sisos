@@ -1,9 +1,9 @@
 import request from ".";
 
 const homeRequest = {
-  getPosting: async () => {
+  getUserPosting: async () => {
     try {
-      const response = await request.get("/home/posting");
+      const response = await request.get("/posting/list");
       return Promise.resolve(response.data);
     } catch (error) {
       return Promise.reject(error);
