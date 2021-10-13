@@ -8,9 +8,10 @@ import {
   Avatar,
   Input,
   InputGroup,
+  Button,
+  HStack,
 } from "@chakra-ui/react";
-import { RiUserLine } from "react-icons/ri";
-import { FiSettings, FiLogOut } from "react-icons/fi";
+import { IconUser, SettingIcon, SignOutIcon, IconPost } from "components";
 
 const Navbar = () => {
   const handleLogout = () => {
@@ -44,23 +45,36 @@ const Navbar = () => {
             }}
           />
         </InputGroup>
-        <Menu isLazy>
-          <MenuButton>
-            <Avatar size="sm" />
-          </MenuButton>
-          <MenuList>
-            <MenuItem icon={<RiUserLine />}>Profile</MenuItem>
-            <MenuItem icon={<FiSettings />}>Setting</MenuItem>
-            <MenuDivider />
-            <MenuItem
-              color="#FF4C4C"
-              icon={<FiLogOut />}
-              onClick={handleLogout}
+        <HStack spacing={2}>
+          <Button variant="ghost" _hover={{ bg: "transparent" }}>
+            <IconPost h="35px" w="35px" />
+          </Button>
+          <Menu isLazy lazyBehavior="unmount">
+            <MenuButton>
+              <Avatar size="sm" />
+            </MenuButton>
+            <MenuList
+              minH="48px"
+              border="0"
+              boxShadow="md"
+              rounded="lg"
+              fontWeight="800"
+              color="gray.600"
+              tabIndex={0}
             >
-              Sign Out
-            </MenuItem>
-          </MenuList>
-        </Menu>
+              <MenuItem icon={<IconUser />}>Profile</MenuItem>
+              <MenuItem icon={<SettingIcon />}>Setting</MenuItem>
+              <MenuDivider borderColor="gray.100" />
+              <MenuItem
+                color="#FF4C4C"
+                icon={<SignOutIcon />}
+                onClick={handleLogout}
+              >
+                Sign Out
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </HStack>
       </Flex>
     </>
   );
