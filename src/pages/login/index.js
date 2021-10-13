@@ -9,7 +9,6 @@ import {
   Button,
   Flex,
   useToast,
-  useMediaQuery,
 } from "@chakra-ui/react";
 import { AuthLayout, CardAuth } from "components";
 import authRequest from "api/auth";
@@ -52,8 +51,6 @@ export default function LoginPage() {
     }
   };
 
-  const [isNotSmallerScreen] = useMediaQuery("(min-width:800px)");
-
   const isLogedIn = useCallback(() => {
     if (localStorage.getItem("token")) {
       history.push("/home");
@@ -62,15 +59,19 @@ export default function LoginPage() {
 
   React.useEffect(() => {
     isLogedIn();
-  });
+  }, []);
 
   return (
     <>
       <Helmet>
         <title>Sign In</title>
       </Helmet>
-      <AuthLayout>
-        <CardAuth p={20}>
+      <AuthLayout display="flex">
+        <CardAuth
+          p={{ base: 20, md: 10, lg: 20, sm: 5 }}
+          mx={{ base: 0, sm: 10, md: 10, lg: 0 }}
+          my={{ base: 0, sm: 20, md: 0, lg: 0 }}
+        >
           <Center fontWeight="semibold" fontSize="30px">
             Sign In
           </Center>
@@ -82,10 +83,10 @@ export default function LoginPage() {
               onChange={(e) => setData({ ...data, username: e.target.value })}
             />
           </FormControl>
-          <FormControl mb={4} mt={8}>
+          <FormControl mb={4} mt={6}>
             <Flex justifyContent="space-between">
               <FormLabel>Password</FormLabel>
-              <Button mb={2} color="black" fontWeight="reguler" variant="link">
+              <Button mb={2} fontWeight="reguler" variant="link">
                 forgot password?
               </Button>
             </Flex>
@@ -96,7 +97,7 @@ export default function LoginPage() {
             />
           </FormControl>
           <Button
-            mt={6}
+            mt={4}
             w="full"
             variant="gray"
             onClick={handleLogin}
@@ -114,8 +115,8 @@ export default function LoginPage() {
         </CardAuth>
         <CardAuth
           bg="#DFDFDF"
-          py={isNotSmallerScreen ? "50vh" : "0"}
-          px={isNotSmallerScreen ? "20" : "0"}
+          py={{ base: 0, lg: "50vh", md: "50vh", sm: "50vh" }}
+          px={{ base: 0, lg: "12vh", md: "25%", sm: "20vh" }}
         ></CardAuth>
       </AuthLayout>
     </>
