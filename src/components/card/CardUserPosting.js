@@ -7,11 +7,11 @@ export default function CardUserPosting(props) {
   return (
     <>
       <Box
-        px={6}
-        py={6}
+        px={4}
+        py={4}
         rounded="lg"
         borderColor="#E5E5E5"
-        borderWidth="1px"
+        borderWidth={{ base: 0, sm: 0, md: "1px" }}
         mb={8}
       >
         <Image
@@ -29,11 +29,13 @@ export default function CardUserPosting(props) {
               name={data.username}
               src={data.profil_pic}
             />
-            <Text fontWeight="semibold" fontSize="20px">
+            <Text fontWeight="semibold" fontSize="14px">
               {data.username}
             </Text>
           </Flex>
-          <Text>{data.total_like} Likes</Text>
+          <Text fontSize="14px" fontWeight="bold">
+            {data.total_like} Likes
+          </Text>
         </Flex>
         <Text mt={4} mb={4} fontSize="14px">
           {data.content}

@@ -23,9 +23,13 @@ const Navbar = () => {
     <>
       <Flex
         height="5rem"
-        px={{ base: "3rem", lg: "10rem", md: "6rem" }}
+        px={{ base: "1rem", md: "3rem", lg: "10rem" }}
         alignItems="center"
+        top={0}
         bg="white"
+        w="full"
+        position="fixed"
+        zIndex="1"
         boxShadow="sm"
         justifyContent="space-between"
       >
