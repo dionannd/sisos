@@ -25,6 +25,14 @@ const homeRequest = {
       return Promise.reject(error);
     }
   },
+  newPosting: async (payload) => {
+    try {
+      const response = await request.post("/posting/create", payload);
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
   getDetailPosting: async (id) => {
     try {
       const res = await request.get(`/posting/detail/${id}`);

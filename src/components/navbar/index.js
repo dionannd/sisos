@@ -13,7 +13,9 @@ import {
 } from "@chakra-ui/react";
 import { IconUser, SettingIcon, SignOutIcon, IconPost } from "components";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { openPosting } = props;
+
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/";
@@ -50,7 +52,11 @@ const Navbar = () => {
           />
         </InputGroup>
         <HStack spacing={2}>
-          <Button variant="ghost" _hover={{ bg: "transparent" }}>
+          <Button
+            variant="ghost"
+            _hover={{ bg: "transparent" }}
+            onClick={openPosting}
+          >
             <IconPost h="35px" w="35px" />
           </Button>
           <Menu isLazy lazyBehavior="unmount">
