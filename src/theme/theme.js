@@ -15,6 +15,18 @@ const theme = extendTheme({
       },
     },
   },
+  styles: {
+    global: {
+      html: {
+        scorllBehavior: "smooth",
+      },
+      "button:focus": {
+        outline: "none",
+        border: "0",
+        boxShadow: "none !important",
+      },
+    },
+  },
 });
 
 export default theme;

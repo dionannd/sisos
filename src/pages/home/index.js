@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
 import { useDisclosure } from "@chakra-ui/react";
 
 import homeRequest from "api/home";
@@ -17,6 +16,24 @@ export default function HomePage() {
     setUser(response.data);
   };
 
+  const likePosting = async (id) => {
+    try {
+      await homeRequest.likePosting({ post_id: id });
+      getPosting();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const unLikePosting = async (id) => {
+    try {
+      await homeRequest.unLikePosting(id);
+      getPosting();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getPosting = async () => {
     const response = await homeRequest.getUserPosting();
     setPosting(response.data);
@@ -29,15 +46,14 @@ export default function HomePage() {
 
   return (
     <>
-      <Helmet>
-        <title>Home</title>
-      </Helmet>
       {posting.map((item, index) => (
         <CardUserPosting
           data={item}
           key={index}
           onOpen={onOpen}
-        ></CardUserPosting>
+          likePosting={likePosting}
+          unLikePosting={unLikePosting}
+        />
       ))}
       <ModalComment data={user} isOpen={isOpen} onClose={onClose} />
     </>
