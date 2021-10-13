@@ -12,9 +12,11 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
+import React from "react";
 
-const ModalTransaction = (props) => {
-  const { data, isOpen, onClose } = props;
+const ModalComment = (props) => {
+  const { data, isOpen, onClose, createComments } = props;
+  const [comment, setComment] = React.useState("");
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -31,8 +33,11 @@ const ModalTransaction = (props) => {
         <ModalBody>
           <FormControl isRequired="true">
             <Textarea
-              focusBorderColor="#C4C4C4"
+              p={0}
+              border={0}
+              _focus={{ border: 0 }}
               h="10rem"
+              onChange={(e) => setComment(e.target.value)}
               placeholder="Comment here..."
             />
           </FormControl>
@@ -42,13 +47,17 @@ const ModalTransaction = (props) => {
           <Flex>
             <Button
               fontWeight="reguler"
-              bg="white"
+              variant="ghost"
               _hover={{ bg: "white" }}
               onClick={onClose}
             >
               Cancel
             </Button>
-            <Button fontWeight="reguler" bg="#C4C4C4" ml={2}>
+            <Button
+              onClick={() => createComments(comment)}
+              fontWeight="reguler"
+              ml={2}
+            >
               Comment
             </Button>
           </Flex>
@@ -58,4 +67,4 @@ const ModalTransaction = (props) => {
   );
 };
 
-export default ModalTransaction;
+export default ModalComment;

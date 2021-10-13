@@ -25,6 +25,30 @@ const homeRequest = {
       return Promise.reject(error);
     }
   },
+  getDetailPosting: async (id) => {
+    try {
+      const res = await request.get(`/posting/detail/${id}`);
+      return Promise.resolve(res.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+  createComments: async (payload) => {
+    try {
+      const res = await request.post("/comment/create", payload);
+      return Promise.resolve(res.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+  deleteComments: async (id) => {
+    try {
+      const res = await request.delete(`/comment/${id}/delete`);
+      return Promise.resolve(res.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
 };
 
 export default homeRequest;

@@ -1,8 +1,45 @@
-import { Flex, Text, Box, Avatar, Image, Button } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  Flex,
+  Text,
+  Box,
+  Avatar,
+  Image,
+  Button,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { IconLike, IconLikeActive, IconComment } from "components";
+import { ModalListComment, ModalComment } from "components";
+import homeRequest from "api/home";
 
 export default function CardUserPosting(props) {
-  const { data, onOpen, likePosting, unLikePosting } = props;
+  const { data, likePosting, unLikePosting, user, getPost } = props;
+  const [detail, setDetail] = useState({});
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const {
+    isOpen: isOpenComment,
+    onOpen: onOpenComment,
+    onClose: onCloseComment,
+  } = useDisclosure();
+
+  const getDetailPosting = async (id) => {
+    const res = await homeRequest.getDetailPosting(id);
+    setDetail(res);
+  };
+
+  const createComments = async (payload) => {
+    await homeRequest.createComments(payload);
+    onClose();
+    getPost();
+  };
+
+  const deleteComments = async (id) => {
+    await homeRequest.deleteComments(id);
+    onCloseComment();
+    getPost();
+  };
 
   return (
     <>
@@ -37,9 +74,24 @@ export default function CardUserPosting(props) {
             {data.total_like} Likes
           </Text>
         </Flex>
-        <Text mt={4} mb={4} fontSize="14px">
+        <Text mt={4} mb={2} fontSize="14px" whiteSpace="pre-line">
           {data.content}
         </Text>
+        {Number(data.total_comment) !== 0 && (
+          <Button
+            mb={1}
+            variant="link"
+            size="sm"
+            color="#0000FF"
+            _hover={{ bg: "white" }}
+            onClick={() => {
+              getDetailPosting(data.post_id);
+              onOpenComment();
+            }}
+          >
+            View comment
+          </Button>
+        )}
         <Flex>
           <Button
             size="sm"
@@ -70,6 +122,22 @@ export default function CardUserPosting(props) {
           </Button>
         </Flex>
       </Box>
+
+      <ModalComment
+        data={user}
+        isOpen={isOpen}
+        onClose={onClose}
+        createComments={(comment) =>
+          createComments({ post_id: data.post_id, content: comment })
+        }
+      />
+
+      <ModalListComment
+        data={detail}
+        isOpenComment={isOpenComment}
+        onCloseComment={onCloseComment}
+        deleteComments={(id) => deleteComments(id)}
+      />
     </>
   );
 }
