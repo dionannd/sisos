@@ -14,16 +14,17 @@ import {
 } from "@chakra-ui/react";
 
 const ModalTransaction = (props) => {
-  const { isOpen, onClose } = props;
+  const { data, isOpen, onClose } = props;
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
           <Flex alignItems="center">
-            <Avatar size="sm" />
+            <Avatar size="sm" name={data.username} src={data.profil_pic} />
             <Text ml={5} fontWeight="reguler">
-              Jhon Doe
+              {data.username}
             </Text>
           </Flex>
         </ModalHeader>
