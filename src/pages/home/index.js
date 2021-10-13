@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useDisclosure } from "@chakra-ui/react";
 
 import homeRequest from "api/home";
 import userRequest from "api/user";
-import { CardUserPosting, ModalComment } from "components";
+import { CardUserPosting } from "components";
 
 export default function HomePage() {
   const [posting, setPosting] = useState([]);
   const [user, setUser] = useState([]);
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const getUserLogin = async () => {
     const response = await userRequest.getUserLogin();
@@ -50,12 +47,12 @@ export default function HomePage() {
         <CardUserPosting
           data={item}
           key={index}
-          onOpen={onOpen}
+          user={user}
+          getPost={getPosting}
           likePosting={likePosting}
           unLikePosting={unLikePosting}
         />
       ))}
-      <ModalComment data={user} isOpen={isOpen} onClose={onClose} />
     </>
   );
 }

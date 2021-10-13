@@ -11,6 +11,7 @@ export { default as CardUserPosting } from "./card/CardUserPosting";
 
 // Modals
 export { default as ModalComment } from "./modal/ModalComment";
+export { default as ModalListComment } from "./modal/ModalListComment";
 
 export * from "./icons";
 export { default as ModalPosting } from "./modal/ModalPosting";
