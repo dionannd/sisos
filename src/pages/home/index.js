@@ -1,22 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { CardUserPosting, ModalComment } from "components";
-import homeRequest from "api/home";
 import { useDisclosure } from "@chakra-ui/react";
+
+import homeRequest from "api/home";
+import userRequest from "api/user";
+import { CardUserPosting, ModalComment } from "components";
 
 export default function HomePage() {
   const [posting, setPosting] = useState([]);
+  const [user, setUser] = useState([]);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const getUserLogin = async () => {
+    const response = await userRequest.getUserLogin();
+    setUser(response.data);
+  };
 
   const getPosting = async () => {
     const response = await homeRequest.getUserPosting();
     setPosting(response.data);
   };
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   useEffect(() => {
+    getUserLogin();
     getPosting();
-  });
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -29,7 +39,7 @@ export default function HomePage() {
           onOpen={onOpen}
         ></CardUserPosting>
       ))}
-      <ModalComment isOpen={isOpen} onClose={onClose} />
+      <ModalComment data={user} isOpen={isOpen} onClose={onClose} />
     </>
   );
 }
