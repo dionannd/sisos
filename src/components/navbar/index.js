@@ -12,6 +12,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { IconUser, SettingIcon, SignOutIcon, IconPost } from "components";
+import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
   const { openPosting, user } = props;
@@ -48,6 +49,7 @@ const Navbar = (props) => {
             bg="#F2F2F2"
             _focus={{
               borderColor: "gray.600",
+              borderWidth: "0px",
             }}
           />
         </InputGroup>
@@ -72,7 +74,14 @@ const Navbar = (props) => {
               color="gray.600"
               tabIndex={0}
             >
-              <MenuItem icon={<IconUser />}>Profile</MenuItem>
+              <MenuItem
+                icon={<IconUser />}
+                as={Link}
+                to="/setting/profile"
+                fontWeight="400"
+              >
+                Profile
+              </MenuItem>
               <MenuItem icon={<SettingIcon />}>Setting</MenuItem>
               <MenuDivider borderColor="gray.100" />
               <MenuItem
