@@ -25,6 +25,25 @@ const theme = extendTheme({
         border: "0",
         boxShadow: "none !important",
       },
+      /* width */
+      "::-webkit-scrollbar": {
+        width: "4px",
+      },
+
+      /* Track */
+      "::-webkit-scrollbar-track": {
+        background: "#f1f1f1",
+      },
+
+      /* Handle */
+      "::-webkit-scrollbar-thumb": {
+        background: "gray.200",
+      },
+
+      /* Handle on hover */
+      "::-webkit-scrollbar-thumb:hover": {
+        background: "#555",
+      },
     },
   },
 });

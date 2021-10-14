@@ -5,17 +5,19 @@ import {
   Box,
   Avatar,
   Image,
+  HStack,
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
 import { IconLike, IconLikeActive, IconComment } from "components";
 import { ModalListComment, ModalComment } from "components";
 import homeRequest from "api/home";
+import moment from "moment";
 
 export default function CardUserPosting(props) {
   const { data, likePosting, unLikePosting, user, getPost } = props;
   const [detail, setDetail] = useState({});
-
+  const [readMore, setMore] = React.useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
@@ -70,19 +72,32 @@ export default function CardUserPosting(props) {
               {data.username}
             </Text>
           </Flex>
-          <Text fontSize="14px" fontWeight="bold">
-            {data.total_like} Likes
-          </Text>
         </Flex>
-        <Text mt={4} mb={2} fontSize="14px" whiteSpace="pre-line">
+        <Text
+          mt={4}
+          mb={Number(data.total_comment) !== 0 ? 0 : 4}
+          fontSize="14px"
+          whiteSpace="pre-line"
+          isTruncated={readMore}
+        >
           {data.content}
         </Text>
+        {readMore && data.content.length > 200 && (
+          <Text
+            onClick={() => setMore(false)}
+            cursor="pointer"
+            fontSize="14px"
+            color="gray.400"
+          >
+            read more
+          </Text>
+        )}
         {Number(data.total_comment) !== 0 && (
           <Button
-            mb={1}
+            mb={4}
             variant="link"
             size="sm"
-            color="#0000FF"
+            color="gray.400"
             _hover={{ bg: "white" }}
             onClick={() => {
               getDetailPosting(data.post_id);
@@ -92,34 +107,44 @@ export default function CardUserPosting(props) {
             View comment
           </Button>
         )}
-        <Flex>
-          <Button
-            size="sm"
-            variant="ghost"
-            _hover={{ bg: "transparent" }}
-            _focus={{ bg: "transparent" }}
-            onClick={onOpen}
-            p={0}
-          >
-            <IconComment />
-          </Button>
-          <Button
-            size="sm"
-            ml={1}
-            variant="ghost"
-            _hover={{ bg: "transparent" }}
-            _focus={{ bg: "transparent" }}
-            onClick={() => {
-              if (data.has_you_like) {
-                unLikePosting(data.post_id);
-              } else {
-                likePosting(data.post_id);
-              }
-            }}
-            p={0}
-          >
-            {data.has_you_like ? <IconLikeActive /> : <IconLike />}
-          </Button>
+        <Flex alignItems="center" justifyContent="space-between">
+          <HStack>
+            <Button
+              size="sm"
+              variant="ghost"
+              _hover={{ bg: "transparent" }}
+              _focus={{ bg: "transparent" }}
+              onClick={onOpen}
+              p={0}
+            >
+              <IconComment />
+            </Button>
+            <Button
+              size="sm"
+              ml={1}
+              variant="ghost"
+              _hover={{ bg: "transparent" }}
+              _focus={{ bg: "transparent" }}
+              onClick={() => {
+                if (data.has_you_like) {
+                  unLikePosting(data.post_id);
+                } else {
+                  likePosting(data.post_id);
+                }
+              }}
+              p={0}
+            >
+              {data.has_you_like ? <IconLikeActive /> : <IconLike />}
+            </Button>
+            {Number(data.total_like) !== 0 && (
+              <Text fontSize="14px" fontWeight="bold">
+                {data.total_like} Likes
+              </Text>
+            )}
+          </HStack>
+          <Text color="gray.400" fontSize="14px" fontWeight="600">
+            {moment(data.created_at).from(new Date())}
+          </Text>
         </Flex>
       </Box>
 
@@ -135,8 +160,10 @@ export default function CardUserPosting(props) {
       <ModalListComment
         data={detail}
         isOpenComment={isOpenComment}
+        posting={data}
         onCloseComment={onCloseComment}
         deleteComments={(id) => deleteComments(id)}
+        getComments={() => getDetailPosting(data.post_id)}
       />
     </>
   );

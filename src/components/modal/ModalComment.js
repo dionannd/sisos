@@ -24,9 +24,9 @@ const ModalComment = (props) => {
       <ModalContent>
         <ModalHeader>
           <Flex alignItems="center">
-            <Avatar size="sm" name={data.username} src={data.profil_pic} />
+            <Avatar size="sm" name={data?.username} src={data?.profil_pic} />
             <Text ml={5} fontWeight="reguler">
-              {data.username}
+              {data?.username}
             </Text>
           </Flex>
         </ModalHeader>
