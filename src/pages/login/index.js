@@ -59,6 +59,7 @@ export default function LoginPage() {
 
   React.useEffect(() => {
     isLogedIn();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

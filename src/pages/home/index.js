@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import homeRequest from "api/home";
-import userRequest from "api/user";
 import { CardUserPosting } from "components";
+import UserContext from "context/user/UserContext";
 
 export default function HomePage() {
   const [posting, setPosting] = useState([]);
-  const [user, setUser] = useState([]);
-
-  const getUserLogin = async () => {
-    const response = await userRequest.getUserLogin();
-    setUser(response.data);
-  };
+  const { userProfile } = useContext(UserContext);
 
   const likePosting = async (id) => {
     try {
@@ -37,7 +32,6 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    getUserLogin();
     getPosting();
   }, []);
 
@@ -46,8 +40,8 @@ export default function HomePage() {
       {posting.map((item, index) => (
         <CardUserPosting
           data={item}
+          user={userProfile}
           key={index}
-          user={user}
           getPost={getPosting}
           likePosting={likePosting}
           unLikePosting={unLikePosting}

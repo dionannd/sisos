@@ -14,7 +14,7 @@ import {
 import { IconUser, SettingIcon, SignOutIcon, IconPost } from "components";
 
 const Navbar = (props) => {
-  const { openPosting } = props;
+  const { openPosting, user } = props;
 
   const handleLogout = () => {
     localStorage.clear();
@@ -61,7 +61,7 @@ const Navbar = (props) => {
           </Button>
           <Menu isLazy lazyBehavior="unmount">
             <MenuButton>
-              <Avatar size="sm" />
+              <Avatar size="sm" src={user?.profil_pic} />
             </MenuButton>
             <MenuList
               minH="48px"
