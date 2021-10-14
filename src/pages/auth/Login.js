@@ -16,36 +16,32 @@ import { useHistory, Link } from "react-router-dom";
 
 export default function LoginPage() {
   const history = useHistory();
-  const toast = useToast();
   const [data, setData] = useState({
     username: "",
     password: "",
   });
   const [isLoading, setLoading] = useState(false);
+  const toast = useToast();
+  const notif = (title, message, type) => {
+    toast({
+      title: title,
+      description: message,
+      status: type,
+      position: "top",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
 
   const handleLogin = async () => {
     try {
       setLoading(true);
       const response = await authRequest.login(data);
       localStorage.setItem("token", response.token);
-
-      toast({
-        title: "Succes!",
-        description: "Sign In success",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-
       window.location.href = "/home";
+      notif("Success!", "Welcome back", "success");
     } catch (error) {
-      toast({
-        title: "Oops!",
-        description: error.response.data.message,
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+      notif("Ooops!", error.response.data.message, "error");
     } finally {
       setLoading(false);
     }
@@ -81,19 +77,31 @@ export default function LoginPage() {
             <Input
               type="text"
               variant="filled"
+              bg="#F2F2F2"
+              _hover={{ bg: "#F2F2F2" }}
+              _focus={{ bg: "#F2F2F2" }}
               onChange={(e) => setData({ ...data, username: e.target.value })}
             />
           </FormControl>
           <FormControl mb={4} mt={6}>
             <Flex justifyContent="space-between">
               <FormLabel>Password</FormLabel>
-              <Button mb={2} fontWeight="reguler" variant="link">
+              <Button
+                as={Link}
+                to="/forgot"
+                mb={2}
+                fontWeight="reguler"
+                variant="link"
+              >
                 forgot password?
               </Button>
             </Flex>
             <Input
               type="password"
               variant="filled"
+              bg="#F2F2F2"
+              _hover={{ bg: "#F2F2F2" }}
+              _focus={{ bg: "#F2F2F2" }}
               onChange={(e) => setData({ ...data, password: e.target.value })}
             />
           </FormControl>

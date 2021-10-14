@@ -8,8 +8,7 @@ const theme = extendTheme({
           background: "#A7A7A7",
           color: "white",
           _hover: {
-            background: "gray.500",
-            boxShadow: "md",
+            background: "#696969",
           },
         },
       },

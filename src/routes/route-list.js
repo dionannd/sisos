@@ -10,7 +10,7 @@ const routeList = [
     component: EditProfile,
   },
   {
-    path: "/setting/change_password",
+    path: "/setting/password",
     component: EditPassword,
   },
   {

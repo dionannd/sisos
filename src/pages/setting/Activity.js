@@ -1,5 +1,6 @@
 import React from "react";
+import { CardSetting } from "components";
 
-export default function Activity() {
-  return <div>Activity Page</div>;
+export default function EditProfile() {
+  return <CardSetting>Activity</CardSetting>;
 }

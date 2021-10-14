@@ -1,50 +1,75 @@
 import React from "react";
 import {
-  Flex,
-  Button,
-  Box,
   Text,
   FormControl,
   FormLabel,
   Input,
   Textarea,
   Avatar,
+  Flex,
+  Button,
 } from "@chakra-ui/react";
+import { CardSetting } from "components";
 
-export default function EditProfile() {
+const EditProfile = () => {
   return (
-    <Flex mt="8rem">
-      <Box mr={10}>
-        <Button>Edit Profile</Button>
-        <Button>Change Password</Button>
-        <Button>Activity</Button>
-        <Button>Sign Out</Button>
-      </Box>
-      <Box ml={10}>
-        <Flex mb={8}>
-          <Avatar />
-          <Text ml={4} mt={2}>
-            Jhon Doe
-          </Text>
-        </Flex>
+    <CardSetting>
+      <Flex mb={8}>
+        <Avatar />
+        <Text ml={4}>
+          Jhon Doe
+          <br />
+          <Button variant="link" fontSize="14px" color="black">
+            Change profile pic
+          </Button>
+        </Text>
+      </Flex>
 
-        <FormControl>
-          <FormLabel>Username</FormLabel>
-          <Input type="text" variant="filled" />
-        </FormControl>
-        <FormControl mb={4}>
-          <FormLabel>Email</FormLabel>
-          <Input type="text" variant="filled" />
-        </FormControl>
-        <FormControl mb={4}>
-          <FormLabel>Bio</FormLabel>
-          <Textarea />
-        </FormControl>
-        <FormControl mb={4}>
-          <FormLabel>Address</FormLabel>
-          <Textarea />
-        </FormControl>
-      </Box>
-    </Flex>
+      <FormControl mb={4}>
+        <FormLabel>Username</FormLabel>
+        <Input
+          type="text"
+          variant="filled"
+          bg="#F2F2F2"
+          _hover={{ bg: "#F2F2F2" }}
+          _focus={{ bg: "#F2F2F2" }}
+        />
+      </FormControl>
+      <FormControl mb={4}>
+        <FormLabel>Email</FormLabel>
+        <Input
+          type="text"
+          variant="filled"
+          bg="#F2F2F2"
+          _hover={{ bg: "#F2F2F2" }}
+          _focus={{ bg: "#F2F2F2" }}
+        />
+      </FormControl>
+      <FormControl mb={4}>
+        <FormLabel>Bio</FormLabel>
+        <Textarea
+          variant="filled"
+          bg="#F2F2F2"
+          _hover={{ bg: "#F2F2F2" }}
+          _focus={{ bg: "#F2F2F2" }}
+        />
+      </FormControl>
+      <FormControl mb={7}>
+        <FormLabel>Address</FormLabel>
+        <Textarea
+          variant="filled"
+          bg="#F2F2F2"
+          _hover={{ bg: "#F2F2F2" }}
+          _focus={{ bg: "#F2F2F2" }}
+        />
+      </FormControl>
+      <Flex justifyContent="right">
+        <Button size="sm" color="white" variant="gray">
+          Save
+        </Button>
+      </Flex>
+    </CardSetting>
   );
-}
+};
+
+export default EditProfile;
