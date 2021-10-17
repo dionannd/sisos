@@ -15,12 +15,12 @@ const EditProfile = () => {
   return (
     <CardSetting>
       <Flex mb={8}>
-        <Avatar />
+        <Avatar size="md" />
         <Text ml={4}>
           Jhon Doe
           <br />
           <Button variant="link" fontSize="14px" color="black">
-            Change profile pic
+            Change Profile Pic
           </Button>
         </Text>
       </Flex>
@@ -63,11 +63,9 @@ const EditProfile = () => {
           _focus={{ bg: "#F2F2F2" }}
         />
       </FormControl>
-      <Flex justifyContent="right">
-        <Button size="sm" color="white" variant="gray">
-          Save
-        </Button>
-      </Flex>
+      <Button size="sm" color="white" variant="gray">
+        Save
+      </Button>
     </CardSetting>
   );
 };
