@@ -1,4 +1,10 @@
-import { HomePage, EditProfile, EditPassword, Activity } from "../pages";
+import {
+  HomePage,
+  ProfilePage,
+  EditProfile,
+  EditPassword,
+  Activity,
+} from "../pages";
 
 const routeList = [
   {
@@ -6,15 +12,19 @@ const routeList = [
     component: HomePage,
   },
   {
-    path: "/setting/profile",
+    path: "/profile",
+    component: ProfilePage,
+  },
+  {
+    path: "/setting/accounts/edit",
     component: EditProfile,
   },
   {
-    path: "/setting/password",
+    path: "/setting/accounts/password/change",
     component: EditPassword,
   },
   {
-    path: "/setting/activity",
+    path: "/session/activity",
     component: Activity,
   },
 ];

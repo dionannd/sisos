@@ -89,13 +89,18 @@ const Navbar = (props) => {
               color="gray.600"
               tabIndex={0}
             >
-              <MenuItem icon={<IconUser />} fontWeight="400">
+              <MenuItem
+                icon={<IconUser />}
+                as={Link}
+                to="/profile"
+                fontWeight="400"
+              >
                 Profile
               </MenuItem>
               <MenuItem
                 icon={<SettingIcon />}
                 as={Link}
-                to="/setting/profile"
+                to="/setting/accounts/edit"
                 fontWeight="400"
               >
                 Setting

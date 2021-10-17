@@ -1,11 +1,25 @@
 import React from "react";
-import { Flex, FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Avatar,
+} from "@chakra-ui/react";
 import { CardSetting } from "components";
 
 export default function EditProfile() {
   return (
     <CardSetting>
-      <FormControl mb={4} isRequired>
+      <Flex mb={8} alignItems="center">
+        <Avatar size="md" />
+        <Text ml={4} fontSize="18px">
+          Jhon Doe
+        </Text>
+      </Flex>
+      <FormControl mb={4}>
         <FormLabel>Old Password</FormLabel>
         <Input
           type="password"
@@ -16,7 +30,7 @@ export default function EditProfile() {
           isRequired={true}
         />
       </FormControl>
-      <FormControl mb={4} isRequired>
+      <FormControl mb={4}>
         <FormLabel>New Password</FormLabel>
         <Input
           type="password"
@@ -27,8 +41,8 @@ export default function EditProfile() {
           isRequired={true}
         />
       </FormControl>
-      <FormControl mb={5} isRequired>
-        <FormLabel>New Password Confirm</FormLabel>
+      <FormControl mb={8}>
+        <FormLabel>Confirm New Password</FormLabel>
         <Input
           type="password"
           variant="filled"
@@ -38,11 +52,9 @@ export default function EditProfile() {
           isRequired={true}
         />
       </FormControl>
-      <Flex justifyContent="right">
-        <Button size="sm" color="white" variant="gray">
-          Save
-        </Button>
-      </Flex>
+      <Button size="sm" color="white" variant="gray">
+        Change Password
+      </Button>
     </CardSetting>
   );
 }
