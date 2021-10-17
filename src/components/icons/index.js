@@ -5,4 +5,5 @@ export { default as SignOutIcon } from "./SignOutIcon";
 export { default as SettingIcon } from "./SettingIcon";
 export { default as IconUser } from "./IconUser";
 export { default as IconPost } from "./IconPost";
+export { default as IconHome } from "./IconHome";
 export { default as IconGallery } from "./IconGallery";

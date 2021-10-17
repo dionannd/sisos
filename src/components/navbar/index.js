@@ -11,7 +11,14 @@ import {
   Button,
   HStack,
 } from "@chakra-ui/react";
-import { IconUser, SettingIcon, SignOutIcon, IconPost } from "components";
+import {
+  IconUser,
+  SettingIcon,
+  SignOutIcon,
+  IconPost,
+  IconHome,
+} from "components";
+import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
   const { openPosting, user } = props;
@@ -35,29 +42,39 @@ const Navbar = (props) => {
         boxShadow="sm"
         justifyContent="space-between"
       >
-        <Text fontWeight="semibold" fontSize="22px">
+        <Text fontWeight="semibold" fontSize="22px" color="gray.600">
           SISOS
         </Text>
         <InputGroup
-          mr={{ base: 3, lg: "7.5rem", md: 5 }}
+          mr={{ base: 3, lg: "5.5rem", md: 5 }}
           ml={{ base: 3, lg: "5.5rem", md: 5 }}
         >
           <Input
             type="tel"
-            placeholder="Search email or username"
+            placeholder="Search username or email"
             bg="#F2F2F2"
             _focus={{
               borderColor: "gray.600",
+              borderWidth: "0px",
             }}
           />
         </InputGroup>
-        <HStack spacing={2}>
+        <HStack>
           <Button
             variant="ghost"
             _hover={{ bg: "transparent" }}
             onClick={openPosting}
           >
             <IconPost h="35px" w="35px" />
+          </Button>
+          <Button
+            as={Link}
+            to="/home"
+            variant="ghost"
+            _hover={{ bg: "transparent" }}
+            _focus={{ border: 0 }}
+          >
+            <IconHome h="35px" w="35px" />
           </Button>
           <Menu isLazy lazyBehavior="unmount">
             <MenuButton>
@@ -72,8 +89,17 @@ const Navbar = (props) => {
               color="gray.600"
               tabIndex={0}
             >
-              <MenuItem icon={<IconUser />}>Profile</MenuItem>
-              <MenuItem icon={<SettingIcon />}>Setting</MenuItem>
+              <MenuItem icon={<IconUser />} fontWeight="400">
+                Profile
+              </MenuItem>
+              <MenuItem
+                icon={<SettingIcon />}
+                as={Link}
+                to="/setting/profile"
+                fontWeight="400"
+              >
+                Setting
+              </MenuItem>
               <MenuDivider borderColor="gray.100" />
               <MenuItem
                 color="#FF4C4C"

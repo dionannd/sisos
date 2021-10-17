@@ -56,29 +56,41 @@ export default function RegisterPage() {
           <Center fontWeight="semibold" fontSize="30px">
             Sign Up
           </Center>
-          <FormControl mb={4} mt={4}>
+          <FormControl mb={4} mt={4} isRequired>
             <FormLabel>Username</FormLabel>
             <Input
               type="text"
               variant="filled"
+              bg="#F2F2F2"
+              _hover={{ bg: "#F2F2F2" }}
+              _focus={{ bg: "#F2F2F2" }}
+              isRequired={true}
               onChange={(e) => setData({ ...data, username: e.target.value })}
             />
           </FormControl>
-          <FormControl mb={4} mt={4}>
+          <FormControl mb={4} mt={4} isRequired>
             <FormLabel>Email</FormLabel>
             <Input
               type="text"
               variant="filled"
+              bg="#F2F2F2"
+              _hover={{ bg: "#F2F2F2" }}
+              _focus={{ bg: "#F2F2F2" }}
+              isRequired={true}
               onChange={(e) => setData({ ...data, email: e.target.value })}
             />
           </FormControl>
-          <FormControl mb={4}>
+          <FormControl mb={4} isRequired>
             <Flex justifyContent="space-between">
               <FormLabel>Password</FormLabel>
             </Flex>
             <Input
               type="password"
               variant="filled"
+              bg="#F2F2F2"
+              _hover={{ bg: "#F2F2F2" }}
+              _focus={{ bg: "#F2F2F2" }}
+              isRequired={true}
               onChange={(e) => setData({ ...data, password: e.target.value })}
             />
           </FormControl>
