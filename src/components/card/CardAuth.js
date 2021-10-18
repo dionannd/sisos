@@ -1,10 +1,15 @@
-import { Box } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 const CardAuth = ({ children, ...rest }) => {
   return (
-    <Box w={{ base: "auto", lg: "full" }} margin="auto" bg="white" {...rest}>
+    <Flex
+      alignItems="center"
+      justifyContent="start"
+      w={{ base: "100%", md: "50%", lg: "42%" }}
+      {...rest}
+    >
       {children}
-    </Box>
+    </Flex>
   );
 };
 
