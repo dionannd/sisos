@@ -30,7 +30,9 @@ export default function Profile() {
               mt="0.5"
               bg="white"
               borderWidth="1px"
+              borderColor="gray.200"
               _hover={{ bg: "white" }}
+              _active={{ bg: "white" }}
               _focus={{ bg: "white", color: "gray.500", borderWidth: "1px" }}
             >
               Edit Profile
@@ -41,10 +43,10 @@ export default function Profile() {
               <b>0</b> posts
             </Text>
             <Text ml={10}>
-              <b>0</b> posts
+              <b>0</b> follower
             </Text>
             <Text ml={10}>
-              <b>0</b> posts
+              <b>0</b> following
             </Text>
           </Flex>
           <Text>
