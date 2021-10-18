@@ -82,7 +82,7 @@ export default function LoginPage() {
               fontWeight="bold"
               fontSize="14px"
             >
-              Enter your account to sign in.
+              Enter your account to connect with your friends.
             </Text>
             <FormControl mb={6} mt={4}>
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">

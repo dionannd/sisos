@@ -9,6 +9,14 @@ const homeRequest = {
       return Promise.reject(error);
     }
   },
+  getPostingSelf: async () => {
+    try {
+      const response = await request.get("/posting/self");
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
   likePosting: async (payload) => {
     try {
       const response = await request.post("/like/posting", payload);

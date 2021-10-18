@@ -54,14 +54,19 @@ export default function RegisterPage() {
         overflow="hidden"
         bg="gray.50"
       >
-        <Flex alignItems="center" justifyContent="center" mb="50px" mt="20px">
+        <Flex
+          alignItems="center"
+          justifyContent="center"
+          mb={{ base: 0, sm: "30px", md: "30px", lg: "30px" }}
+          mt={{ base: 0, sm: "40px", md: "40px", lg: "40px" }}
+        >
           <Flex
             direction="column"
-            w="445px"
+            w={{ lg: "445px" }}
             background="transparent"
             borderRadius="15px"
             p="40px"
-            mx={{ base: "100px" }}
+            mx={{ base: 0, lg: "100px" }}
             bg="white"
             boxShadow="0 20px 27px 0 rgb(0 0 0 / 5%)"
           >
