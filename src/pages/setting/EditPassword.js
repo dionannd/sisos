@@ -20,40 +20,55 @@ export default function EditProfile() {
         </Text>
       </Flex>
       <FormControl mb={4}>
-        <FormLabel>Old Password</FormLabel>
+        <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+          Old Password
+        </FormLabel>
         <Input
           type="password"
           variant="filled"
           bg="#F2F2F2"
+          ms="4px"
+          fontSize="sm"
+          size="sm"
           _hover={{ bg: "#F2F2F2" }}
           _focus={{ border: "0" }}
           isRequired={true}
         />
       </FormControl>
       <FormControl mb={4}>
-        <FormLabel>New Password</FormLabel>
+        <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+          New Password
+        </FormLabel>
         <Input
           type="password"
           variant="filled"
           bg="#F2F2F2"
+          ms="4px"
+          fontSize="sm"
+          size="sm"
           _hover={{ bg: "#F2F2F2" }}
           _focus={{ border: "white" }}
           isRequired={true}
         />
       </FormControl>
       <FormControl mb={8}>
-        <FormLabel>Confirm New Password</FormLabel>
+        <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+          Confirm New Password
+        </FormLabel>
         <Input
           type="password"
           variant="filled"
           bg="#F2F2F2"
+          ms="4px"
+          fontSize="sm"
+          size="sm"
           _hover={{ bg: "#F2F2F2" }}
           _focus={{ border: "white" }}
           isRequired={true}
         />
       </FormControl>
-      <Button size="sm" color="white" variant="gray">
-        Change Password
+      <Button size="sm" fontSize="12px" color="white" variant="gray" ml={1}>
+        CHANGE PASSWORD
       </Button>
     </CardSetting>
   );

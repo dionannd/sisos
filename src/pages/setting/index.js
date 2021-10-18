@@ -11,13 +11,14 @@ import {
 } from "@chakra-ui/react";
 import { CardSetting } from "components";
 
-const EditProfile = () => {
+export default function EditProfile(props) {
+  const { user } = props;
   return (
     <CardSetting>
       <Flex mb={8}>
         <Avatar size="md" />
         <Text ml={4}>
-          Jhon Doe
+          {user?.username}
           <br />
           <Button variant="link" fontSize="14px" color="black">
             Change Profile Pic
@@ -26,48 +27,65 @@ const EditProfile = () => {
       </Flex>
 
       <FormControl mb={4}>
-        <FormLabel>Username</FormLabel>
+        <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+          Username
+        </FormLabel>
         <Input
           type="text"
           variant="filled"
           bg="#F2F2F2"
+          ms="4px"
+          fontSize="sm"
+          size="sm"
+          _hover={{ bg: "#F2F2F2" }}
+          _focus={{ bg: "#F2F2F2" }}
+          value={user?.uername}
+        />
+      </FormControl>
+      <FormControl mb={4}>
+        <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+          Email
+        </FormLabel>
+        <Input
+          type="text"
+          variant="filled"
+          bg="#F2F2F2"
+          ms="4px"
+          fontSize="sm"
+          size="sm"
           _hover={{ bg: "#F2F2F2" }}
           _focus={{ bg: "#F2F2F2" }}
         />
       </FormControl>
       <FormControl mb={4}>
-        <FormLabel>Email</FormLabel>
-        <Input
-          type="text"
-          variant="filled"
-          bg="#F2F2F2"
-          _hover={{ bg: "#F2F2F2" }}
-          _focus={{ bg: "#F2F2F2" }}
-        />
-      </FormControl>
-      <FormControl mb={4}>
-        <FormLabel>Bio</FormLabel>
+        <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+          Bio
+        </FormLabel>
         <Textarea
           variant="filled"
           bg="#F2F2F2"
+          ms="4px"
+          fontSize="sm"
           _hover={{ bg: "#F2F2F2" }}
           _focus={{ bg: "#F2F2F2" }}
         />
       </FormControl>
       <FormControl mb={7}>
-        <FormLabel>Address</FormLabel>
+        <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+          Address
+        </FormLabel>
         <Textarea
           variant="filled"
           bg="#F2F2F2"
+          ms="4px"
+          fontSize="sm"
           _hover={{ bg: "#F2F2F2" }}
           _focus={{ bg: "#F2F2F2" }}
         />
       </FormControl>
-      <Button size="sm" color="white" variant="gray">
-        Save
+      <Button size="sm" fontSize="12px" color="white" variant="gray" ml={1}>
+        SAVE
       </Button>
     </CardSetting>
   );
-};
-
-export default EditProfile;
+}

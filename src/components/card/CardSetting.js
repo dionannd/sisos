@@ -47,7 +47,7 @@ const CardSetting = ({ children }) => {
             Sign Out
           </Button>
         </Box>
-        <Box mt={6} ml={5} data={userProfile}>
+        <Box mt={6} ml={5} user={userProfile}>
           {children}
         </Box>
       </Flex>
