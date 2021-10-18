@@ -2,7 +2,8 @@ import React, { useState, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import {
   Text,
-  Center,
+  Box,
+  Heading,
   FormControl,
   FormLabel,
   Input,
@@ -28,7 +29,7 @@ export default function LoginPage() {
       description: message,
       status: type,
       position: "top",
-      duration: 5000,
+      duration: 2000,
       isClosable: true,
     });
   };
@@ -39,7 +40,6 @@ export default function LoginPage() {
       const response = await authRequest.login(data);
       localStorage.setItem("token", response.token);
       window.location.href = "/home";
-      notif("Success!", "Welcome back", "success");
     } catch (error) {
       notif("Ooops!", error.response.data.message, "error");
     } finally {
@@ -61,72 +61,112 @@ export default function LoginPage() {
   return (
     <>
       <Helmet>
-        <title>Sign In</title>
+        <title>Sign in &bull; Sisos</title>
       </Helmet>
-      <AuthLayout display="flex">
-        <CardAuth
-          p={{ base: 20, md: 10, lg: 20, sm: 5 }}
-          mx={{ base: 0, sm: 10, md: 10, lg: 0 }}
-          my={{ base: 0, sm: 20, md: 0, lg: 0 }}
-        >
-          <Center fontWeight="semibold" fontSize="30px">
-            Sign In
-          </Center>
-          <FormControl mb={4} mt={4}>
-            <FormLabel>Email/Username</FormLabel>
-            <Input
-              type="text"
-              variant="filled"
-              bg="#F2F2F2"
-              _hover={{ bg: "#F2F2F2" }}
-              _focus={{ bg: "#F2F2F2" }}
-              onChange={(e) => setData({ ...data, username: e.target.value })}
-            />
-          </FormControl>
-          <FormControl mb={4} mt={6}>
-            <Flex justifyContent="space-between">
-              <FormLabel>Password</FormLabel>
+      <AuthLayout>
+        <CardAuth>
+          <Flex
+            direction="column"
+            w="100%"
+            background="transparant"
+            p="48px"
+            mt={{ md: "100px", lg: "80px" }}
+          >
+            <Heading fontSize="32px" mb="10px">
+              Sign In
+            </Heading>
+            <Text
+              mb="20px"
+              ms="4px"
+              color="gray.500"
+              fontWeight="bold"
+              fontSize="14px"
+            >
+              Enter your account to sign in.
+            </Text>
+            <FormControl mb={6} mt={4}>
+              <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                Email/Username
+              </FormLabel>
+              <Input
+                type="text"
+                variant="filled"
+                fontSize="sm"
+                placeholder="Enter your email or username"
+                bg="#F2F2F2"
+                _hover={{ bg: "#F2F2F2" }}
+                _focus={{ bg: "#F2F2F2" }}
+                isRequired={true}
+                onChange={(e) => setData({ ...data, username: e.target.value })}
+              />
+            </FormControl>
+            <FormControl mb={4}>
+              <Flex justifyContent="space-between">
+                <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                  Password
+                </FormLabel>
+                <Button
+                  as={Link}
+                  to="/forgot"
+                  mb={2}
+                  ms="4px"
+                  fontSize="sm"
+                  fontWeight="normal"
+                  variant="link"
+                >
+                  forgot password?
+                </Button>
+              </Flex>
+              <Input
+                type="password"
+                variant="filled"
+                fontSize="sm"
+                placeholder="Enter your password"
+                bg="#F2F2F2"
+                _hover={{ bg: "#F2F2F2" }}
+                _focus={{ bg: "#F2F2F2" }}
+                isRequired={true}
+                onChange={(e) => setData({ ...data, password: e.target.value })}
+              />
+            </FormControl>
+            <Button
+              mt={4}
+              w="full"
+              variant="gray"
+              fontSize="12px"
+              onClick={handleLogin}
+              isLoading={isLoading}
+              loadingText="Please wait..."
+            >
+              SIGN IN
+            </Button>
+            <Flex mt={6} justifyContent="center">
+              <Text ms="4px" fontSize="14px">
+                Not registered yet?
+              </Text>
               <Button
-                as={Link}
-                to="/forgot"
-                mb={2}
-                fontWeight="reguler"
                 variant="link"
+                color="black"
+                as={Link}
+                to="/register"
+                ml={1}
+                ms="4px"
+                fontSize="14px"
               >
-                forgot password?
+                Sign up here
               </Button>
             </Flex>
-            <Input
-              type="password"
-              variant="filled"
-              bg="#F2F2F2"
-              _hover={{ bg: "#F2F2F2" }}
-              _focus={{ bg: "#F2F2F2" }}
-              onChange={(e) => setData({ ...data, password: e.target.value })}
-            />
-          </FormControl>
-          <Button
-            mt={4}
-            w="full"
-            variant="gray"
-            onClick={handleLogin}
-            isLoading={isLoading}
-            loadingText="Please wait..."
-          >
-            Sign In
-          </Button>
-          <Flex mt={6} justifyContent="center">
-            <Text mr={1}>Not registered yet?</Text>
-            <Button variant="link" color="black" as={Link} to="/register">
-              Sign up here
-            </Button>
           </Flex>
         </CardAuth>
-        <CardAuth
+        <Box
+          display={{ base: "none", md: "block" }}
+          overflowX="hidden"
+          h="100vh"
+          w="50vw"
+          position="absolute"
+          right="0px"
           bg="#DFDFDF"
-          py={{ base: 0, lg: "50vh", md: "50vh", sm: "50vh" }}
-          px={{ base: 0, lg: "12vh", md: "25%", sm: "20vh" }}
-        ></CardAuth>
+        ></Box>
       </AuthLayout>
     </>
   );

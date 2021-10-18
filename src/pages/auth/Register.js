@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import {
-  Center,
   FormControl,
   FormLabel,
   Input,
   Button,
   Flex,
+  Text,
   useToast,
 } from "@chakra-ui/react";
-import { AuthLayout, CardAuth } from "components";
 import authRequest from "api/auth";
 import { Link } from "react-router-dom";
 
@@ -25,7 +24,8 @@ export default function RegisterPage() {
       title: title,
       description: message,
       status: type,
-      duration: 5000,
+      position: "top",
+      duration: 3000,
       isClosable: true,
     });
   };
@@ -45,77 +45,123 @@ export default function RegisterPage() {
   return (
     <>
       <Helmet>
-        <title>Sign Up</title>
+        <title>Sign up &bull; Sisos</title>
       </Helmet>
-      <AuthLayout>
-        <CardAuth
-          p={{ base: 20, md: 10, lg: 20, sm: 5 }}
-          mx={{ base: 0, sm: 10, md: 10, lg: 0 }}
-          my={{ base: 0, sm: 20, md: 0, lg: 0 }}
-        >
-          <Center fontWeight="semibold" fontSize="30px">
-            Sign Up
-          </Center>
-          <FormControl mb={4} mt={4} isRequired>
-            <FormLabel>Username</FormLabel>
-            <Input
-              type="text"
-              variant="filled"
-              bg="#F2F2F2"
-              _hover={{ bg: "#F2F2F2" }}
-              _focus={{ bg: "#F2F2F2" }}
-              isRequired={true}
-              onChange={(e) => setData({ ...data, username: e.target.value })}
-            />
-          </FormControl>
-          <FormControl mb={4} mt={4} isRequired>
-            <FormLabel>Email</FormLabel>
-            <Input
-              type="text"
-              variant="filled"
-              bg="#F2F2F2"
-              _hover={{ bg: "#F2F2F2" }}
-              _focus={{ bg: "#F2F2F2" }}
-              isRequired={true}
-              onChange={(e) => setData({ ...data, email: e.target.value })}
-            />
-          </FormControl>
-          <FormControl mb={4} isRequired>
-            <Flex justifyContent="space-between">
-              <FormLabel>Password</FormLabel>
-            </Flex>
-            <Input
-              type="password"
-              variant="filled"
-              bg="#F2F2F2"
-              _hover={{ bg: "#F2F2F2" }}
-              _focus={{ bg: "#F2F2F2" }}
-              isRequired={true}
-              onChange={(e) => setData({ ...data, password: e.target.value })}
-            />
-          </FormControl>
-          <Button
-            mt={4}
-            w="full"
-            variant="gray"
-            onClick={handleRegister}
-            isLoading={isLoading}
-            loadingText="Please wait..."
+      <Flex
+        direction="column"
+        alignSelf="center"
+        justifySelf="center"
+        overflow="hidden"
+        bg="gray.50"
+      >
+        <Flex alignItems="center" justifyContent="center" mb="50px" mt="20px">
+          <Flex
+            direction="column"
+            w="445px"
+            background="transparent"
+            borderRadius="15px"
+            p="40px"
+            mx={{ base: "100px" }}
+            bg="white"
+            boxShadow="0 20px 27px 0 rgb(0 0 0 / 5%)"
           >
-            Sign Up
-          </Button>
-          <Flex mt={5} justifyContent="center">
-            <Button as={Link} variant="link" color="black" to="/">
-              Sign in here
+            <Text
+              fontSize="24px"
+              fontWeight="bold"
+              textAlign="center"
+              mb="10px"
+            >
+              Sign up
+            </Text>
+            <Text
+              mb="20px"
+              ms="4px"
+              color="gray.500"
+              fontWeight="bold"
+              fontSize="14px"
+            >
+              Sign up to see photos and videos from your friends.
+            </Text>
+            <FormControl mb={4} mt={4}>
+              <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                Username
+              </FormLabel>
+              <Input
+                type="text"
+                variant="filled"
+                fontSize="sm"
+                placeholder="Enter your username"
+                bg="#F2F2F2"
+                _hover={{ bg: "#F2F2F2" }}
+                _focus={{ bg: "#F2F2F2" }}
+                isRequired={true}
+                onChange={(e) => setData({ ...data, username: e.target.value })}
+              />
+            </FormControl>
+            <FormControl mb={4}>
+              <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                Email
+              </FormLabel>
+              <Input
+                type="text"
+                variant="filled"
+                fontSize="sm"
+                placeholder="Enter your email address"
+                bg="#F2F2F2"
+                _hover={{ bg: "#F2F2F2" }}
+                _focus={{ bg: "#F2F2F2" }}
+                isRequired={true}
+                onChange={(e) => setData({ ...data, email: e.target.value })}
+              />
+            </FormControl>
+            <FormControl mb={4}>
+              <Flex justifyContent="space-between">
+                <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                  Password
+                </FormLabel>
+              </Flex>
+              <Input
+                type="password"
+                variant="filled"
+                fontSize="sm"
+                placeholder="Enter your password"
+                bg="#F2F2F2"
+                _hover={{ bg: "#F2F2F2" }}
+                _focus={{ bg: "#F2F2F2" }}
+                isRequired={true}
+                onChange={(e) => setData({ ...data, password: e.target.value })}
+              />
+            </FormControl>
+            <Button
+              mt={4}
+              w="full"
+              fontSize="12px"
+              variant="gray"
+              onClick={handleRegister}
+              isLoading={isLoading}
+              loadingText="Please wait..."
+            >
+              SIGN UP
             </Button>
+            <Flex mt={6} justifyContent="center">
+              <Text ms="4px" fontSize="14px">
+                Have an account?
+              </Text>
+              <Button
+                as={Link}
+                variant="link"
+                color="black"
+                to="/"
+                ml={1}
+                ms="4px"
+                fontSize="14px"
+              >
+                Sign in here
+              </Button>
+            </Flex>
           </Flex>
-        </CardAuth>
-        <CardAuth
-          bg="#DFDFDF"
-          py={{ base: 0, lg: "50vh", md: "50vh", sm: "50vh" }}
-          px={{ base: 0, lg: "12vh", md: "25%", sm: "15vh" }}
-        ></CardAuth>
-      </AuthLayout>
+        </Flex>
+      </Flex>
     </>
   );
 }

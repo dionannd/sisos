@@ -3,14 +3,17 @@ import { Flex } from "@chakra-ui/react";
 
 export default function AuthLayout({ children, ...rest }) {
   return (
-    <Flex
-      w="100%"
-      alignItems="center"
-      justifyContent="center"
-      margin="auto"
-      {...rest}
-    >
-      {children}
+    <Flex position="relative">
+      <Flex
+        w="100%"
+        maxW="1044px"
+        mx="auto"
+        justifyContent="space-between"
+        pt={{ sm: "100px", md: "0px" }}
+        {...rest}
+      >
+        {children}
+      </Flex>
     </Flex>
   );
 }
