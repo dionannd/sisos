@@ -25,13 +25,14 @@ export default function EditProfile() {
         </FormLabel>
         <Input
           type="password"
+          placeholder="Enter current password"
           variant="filled"
           bg="#F2F2F2"
           ms="4px"
           fontSize="sm"
           size="sm"
           _hover={{ bg: "#F2F2F2" }}
-          _focus={{ border: "0" }}
+          _focus={{ borderWidth: 0 }}
           isRequired={true}
         />
       </FormControl>
@@ -41,29 +42,31 @@ export default function EditProfile() {
         </FormLabel>
         <Input
           type="password"
+          placeholder="Enter new password"
           variant="filled"
           bg="#F2F2F2"
           ms="4px"
           fontSize="sm"
           size="sm"
           _hover={{ bg: "#F2F2F2" }}
-          _focus={{ border: "white" }}
+          _focus={{ borderWidth: 0 }}
           isRequired={true}
         />
       </FormControl>
       <FormControl mb={8}>
         <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-          Confirm New Password
+          Verify New Password
         </FormLabel>
         <Input
           type="password"
+          placeholder="New password (again)"
           variant="filled"
           bg="#F2F2F2"
           ms="4px"
           fontSize="sm"
           size="sm"
           _hover={{ bg: "#F2F2F2" }}
-          _focus={{ border: "white" }}
+          _focus={{ borderWidth: 0 }}
           isRequired={true}
         />
       </FormControl>

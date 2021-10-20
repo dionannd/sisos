@@ -33,7 +33,7 @@ export default function MainLayout({ children }) {
         maxW="36rem"
         margin="auto"
         mb={10}
-        mt="6rem"
+        mt="5.5rem"
       >
         {children}
       </Box>
