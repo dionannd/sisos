@@ -25,7 +25,7 @@ export default function Profile(props) {
         </Box>
         <Box ml={20}>
           <Flex mb={4}>
-            <Text fontSize="26px">{user?.username}</Text>
+            <Text fontSize="26px">Jhon Doe</Text>
             <Button
               size="sm"
               ml={4}

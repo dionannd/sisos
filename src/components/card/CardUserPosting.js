@@ -48,7 +48,7 @@ export default function CardUserPosting(props) {
       <Box
         px={4}
         py={4}
-        rounded="lg"
+        rounded="sm"
         borderColor="#E5E5E5"
         borderWidth={{ base: 0, sm: 0, md: "1px" }}
         mb={8}
@@ -136,8 +136,13 @@ export default function CardUserPosting(props) {
             >
               {data.has_you_like ? <IconLikeActive /> : <IconLike />}
             </Button>
+            {Number(data.total_comment) !== 0 && (
+              <Text fontSize="12px" fontWeight="semibold">
+                {data.total_comment} Comment
+              </Text>
+            )}
             {Number(data.total_like) !== 0 && (
-              <Text fontSize="14px" fontWeight="bold">
+              <Text fontSize="12px" fontWeight="semibold">
                 {data.total_like} Likes
               </Text>
             )}

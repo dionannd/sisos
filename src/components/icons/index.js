@@ -7,3 +7,4 @@ export { default as IconUser } from "./IconUser";
 export { default as IconPost } from "./IconPost";
 export { default as IconHome } from "./IconHome";
 export { default as IconGallery } from "./IconGallery";
+export { default as IconMore } from "./IconMore";

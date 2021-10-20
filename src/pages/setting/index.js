@@ -18,7 +18,7 @@ export default function EditProfile(props) {
       <Flex mb={8}>
         <Avatar size="md" />
         <Text ml={4}>
-          {user?.username}
+          Jhon Doe
           <br />
           <Button variant="link" fontSize="14px" color="black">
             Change Profile Pic
@@ -60,19 +60,6 @@ export default function EditProfile(props) {
       <FormControl mb={4}>
         <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
           Bio
-        </FormLabel>
-        <Textarea
-          variant="filled"
-          bg="#F2F2F2"
-          ms="4px"
-          fontSize="sm"
-          _hover={{ bg: "#F2F2F2" }}
-          _focus={{ bg: "#F2F2F2" }}
-        />
-      </FormControl>
-      <FormControl mb={7}>
-        <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-          Address
         </FormLabel>
         <Textarea
           variant="filled"

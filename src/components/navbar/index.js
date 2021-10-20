@@ -1,3 +1,4 @@
+import { SearchIcon } from "@chakra-ui/icons";
 import { Flex, Text } from "@chakra-ui/react";
 import {
   Menu,
@@ -10,6 +11,7 @@ import {
   InputGroup,
   Button,
   HStack,
+  InputLeftElement,
 } from "@chakra-ui/react";
 import {
   IconUser,
@@ -31,7 +33,7 @@ const Navbar = (props) => {
   return (
     <>
       <Flex
-        height="5rem"
+        height="4rem"
         px={{ base: "1rem", md: "3rem", lg: "10rem" }}
         alignItems="center"
         top={0}
@@ -42,39 +44,50 @@ const Navbar = (props) => {
         boxShadow="sm"
         justifyContent="space-between"
       >
-        <Text fontWeight="semibold" fontSize="22px" color="gray.600">
+        <Text fontWeight="semibold" fontSize="20px" color="gray.700">
           SISOS
         </Text>
         <InputGroup
-          mr={{ base: 3, lg: "5.5rem", md: 5 }}
-          ml={{ base: 3, lg: "5.5rem", md: 5 }}
+          mr={{ base: 1, sm: 1, md: 3, lg: "2rem" }}
+          ml={{ base: 4, lg: "5.5rem", md: 5 }}
         >
+          <InputLeftElement
+            pointerEvents="none"
+            color="gray.300"
+            fontSize="12px"
+            pb="0.5rem"
+            children={<SearchIcon />}
+          />
           <Input
             type="tel"
-            placeholder="Search username or email"
+            placeholder="Search"
+            size="sm"
             bg="#F2F2F2"
             _focus={{
-              borderColor: "gray.600",
-              borderWidth: "0px",
+              borderColor: "gray.300",
+              borderWidth: "1px",
             }}
           />
         </InputGroup>
-        <HStack>
+        <HStack spacing={0}>
           <Button
             variant="ghost"
             _hover={{ bg: "transparent" }}
+            _focus={{ borderWidth: 0 }}
+            _active={{ borderWidth: 0, bg: "white" }}
             onClick={openPosting}
           >
-            <IconPost h="35px" w="35px" />
+            <IconPost h="26px" w="26px" />
           </Button>
           <Button
             as={Link}
             to="/home"
             variant="ghost"
             _hover={{ bg: "transparent" }}
-            _focus={{ border: 0 }}
+            _focus={{ borderWidth: 0 }}
+            _active={{ borderWidth: 0, bg: "white" }}
           >
-            <IconHome h="35px" w="35px" />
+            <IconHome h="25px" w="25px" />
           </Button>
           <Menu isLazy lazyBehavior="unmount">
             <MenuButton>
