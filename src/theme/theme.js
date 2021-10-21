@@ -11,6 +11,20 @@ const theme = extendTheme({
             background: "#696969",
           },
         },
+        "edit-profile": {
+          background: "transparant",
+          borderWidth: "1px",
+          borderColor: "gray.200",
+          _hover: {
+            borderWidth: "1px",
+            borderColor: "gray.400",
+          },
+          _focus: {
+            color: "gray.400",
+            borderWidth: "1px",
+            borderColor: "gray.400",
+          },
+        },
       },
     },
   },

@@ -14,7 +14,7 @@ import { ModalListComment, ModalComment } from "components";
 import homeRequest from "api/home";
 import moment from "moment";
 
-export default function CardUserPosting(props) {
+export default function CardUserPosting(props, { ...rest }) {
   const { data, likePosting, unLikePosting, user, getPost } = props;
   const [detail, setDetail] = useState({});
   const [readMore, setMore] = React.useState(true);
@@ -46,12 +46,14 @@ export default function CardUserPosting(props) {
   return (
     <>
       <Box
-        px={4}
-        py={4}
+        px={{ base: "1rem", lg: 4 }}
+        py={{ base: "1rem", lg: 4 }}
         rounded="sm"
         borderColor="#E5E5E5"
         borderWidth={{ base: 0, sm: 0, md: "1px" }}
         mb={8}
+        w={{ md: "36rem", lg: "36rem" }}
+        {...rest}
       >
         <Image
           alignItems="center"

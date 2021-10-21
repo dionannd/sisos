@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import { Navbar, ModalPosting } from "components";
 import UserContext from "context/user/UserContext";
 
@@ -28,15 +28,17 @@ export default function MainLayout({ children }) {
   return (
     <>
       <Navbar openPosting={onOpen} user={userProfile} />
-      <Box
-        px={{ base: 0, sm: 0, md: 4, lg: 4 }}
-        maxW="36rem"
-        margin="auto"
-        mb={10}
-        mt="5.5rem"
-      >
-        {children}
-      </Box>
+      <Flex justifyContent="center">
+        <Box
+          px={{ base: 0, sm: 0, md: 4, lg: 4 }}
+          maxW="100%"
+          margin="auto"
+          mb={10}
+          mt="5.5rem"
+        >
+          {children}
+        </Box>
+      </Flex>
       <ModalPosting isOpen={isOpen} onClose={onClose} />
     </>
   );

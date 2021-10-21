@@ -33,29 +33,29 @@ const Navbar = (props) => {
   return (
     <>
       <Flex
-        height="4rem"
-        px={{ base: "1rem", md: "3rem", lg: "10rem" }}
+        height="3.4rem"
+        px={{ base: "1rem", md: "1.5rem", lg: "13rem" }}
         alignItems="center"
         top={0}
         bg="white"
         w="full"
         position="fixed"
         zIndex="1"
-        boxShadow="sm"
+        borderBottomWidth="1px"
         justifyContent="space-between"
       >
-        <Text fontWeight="semibold" fontSize="20px" color="gray.700">
+        <Text fontWeight="500" fontSize="22px" mt={1.5}>
           SISOS
         </Text>
         <InputGroup
           mr={{ base: 1, sm: 1, md: 3, lg: "2rem" }}
-          ml={{ base: 4, lg: "5.5rem", md: 5 }}
+          ml={{ base: 4, lg: "7rem", md: 5 }}
         >
           <InputLeftElement
             pointerEvents="none"
             color="gray.300"
             fontSize="12px"
-            pb="0.5rem"
+            pb="0.6rem"
             children={<SearchIcon />}
           />
           <Input
