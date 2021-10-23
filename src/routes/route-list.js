@@ -12,7 +12,7 @@ const routeList = [
     component: HomePage,
   },
   {
-    path: "/profile/:id",
+    path: "/:username",
     component: ProfilePage,
   },
   {

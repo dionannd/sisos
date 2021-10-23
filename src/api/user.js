@@ -10,9 +10,9 @@ const userRequest = {
     }
   },
 
-  getUserStats: async (id) => {
+  getUserStats: async (username) => {
     try {
-      const response = await request.get(`/user/profil/stats/${id}`);
+      const response = await request.get(`/user/profil/stats/${username}`);
       return Promise.resolve(response.data);
     } catch (error) {
       return Promise.reject(error);

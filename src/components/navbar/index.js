@@ -105,7 +105,7 @@ const Navbar = (props) => {
               <MenuItem
                 icon={<IconUser />}
                 as={Link}
-                to={`/profile/${user.user_id}`}
+                to={`/${user.username}`}
                 fontWeight="400"
               >
                 Profile

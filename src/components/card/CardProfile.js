@@ -1,38 +1,6 @@
-import React, { useState, useEffect } from "react";
-import {
-  Avatar,
-  Box,
-  Flex,
-  Text,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-} from "@chakra-ui/react";
-import { CardUserPosting } from "components";
-import homeRequest from "api/home";
-import userRequest from "api/user";
+import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
 
-const CardProfile = ({ self, ...rest }) => {
-  const [posting, setPosting] = useState([]);
-  const [stats, setStats] = useState([]);
-
-  const getPostingSelf = async () => {
-    const response = await homeRequest.getPostingSelf();
-    setPosting(response.data);
-  };
-
-  const getStats = async (id) => {
-    const response = await userRequest.getUserStats(id);
-    setStats(response.data);
-  };
-
-  useEffect(() => {
-    getPostingSelf();
-    getStats();
-  }, []);
-
+const CardProfile = ({ stats, self, ...rest }) => {
   return (
     <Flex
       mb={10}
@@ -53,45 +21,14 @@ const CardProfile = ({ self, ...rest }) => {
               <b>{stats?.total_post}</b> posts
             </Text>
             <Text ml={10}>
-              <b>0</b> followers
+              <b>{stats?.total_follower}</b> followers
             </Text>
             <Text ml={10}>
-              <b>0</b> following
+              <b>{stats?.total_following}</b> following
             </Text>
           </Flex>
-          <Text>
-            "Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry."
-          </Text>
+          <Text>"{stats.bio}"</Text>
         </Box>
-      </Flex>
-      <Flex>
-        <Tabs mb={5} variant="unstyled">
-          <TabList mb="1em">
-            <Tab _selected={{ color: "white", bg: "blue.500" }}>Postingan</Tab>
-            <Tab _selected={{ color: "white", bg: "blue.500" }}>Tersimpan</Tab>
-            <Tab _selected={{ color: "white", bg: "blue.500" }}>Ditandai</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <Flex justifyContent="center" direction="column">
-                {posting.map((item, index) => (
-                  <CardUserPosting
-                    data={item}
-                    key={index}
-                    getPost={getPostingSelf}
-                  />
-                ))}
-              </Flex>
-            </TabPanel>
-            <TabPanel>
-              <Text>Under maintenance</Text>
-            </TabPanel>
-            <TabPanel>
-              <Text>Under maintenance</Text>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
       </Flex>
     </Flex>
   );

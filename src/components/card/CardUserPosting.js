@@ -35,13 +35,13 @@ export default function CardUserPosting(props, { ...rest }) {
   const createComments = async (payload) => {
     await homeRequest.createComments(payload);
     onClose();
-    getPost();
+    getPost(user.user_id);
   };
 
   const deleteComments = async (id) => {
     await homeRequest.deleteComments(id);
     onCloseComment();
-    getPost();
+    getPost(user.user_id);
   };
 
   return (
@@ -75,7 +75,7 @@ export default function CardUserPosting(props, { ...rest }) {
               />
               <Button
                 as={Link}
-                to={`/profile/${data.user_id}`}
+                to={`/${data.username}`}
                 variant="link"
                 color="black"
                 _hover={{ color: "gray.500" }}
@@ -178,7 +178,10 @@ export default function CardUserPosting(props, { ...rest }) {
         data={detail}
         isOpenComment={isOpenComment}
         posting={data}
-        onCloseComment={onCloseComment}
+        onCloseComment={() => {
+          onCloseComment();
+          getPost(user.user_id);
+        }}
         deleteComments={(id) => deleteComments(id)}
         getComments={() => getDetailPosting(data.post_id)}
       />
