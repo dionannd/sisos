@@ -9,6 +9,15 @@ const userRequest = {
       return Promise.reject(error);
     }
   },
+
+  getUserStats: async (id) => {
+    try {
+      const response = await request.get(`/user/profil/stats/${id}`);
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
 };
 
 export default userRequest;

@@ -48,7 +48,7 @@ const Navbar = (props) => {
           SISOS
         </Text>
         <InputGroup
-          mr={{ base: 1, sm: 1, md: 3, lg: "2rem" }}
+          mr={{ base: 1, sm: 1, md: 3, lg: "1.5rem" }}
           ml={{ base: 4, lg: "7rem", md: 5 }}
         >
           <InputLeftElement
@@ -69,7 +69,7 @@ const Navbar = (props) => {
             }}
           />
         </InputGroup>
-        <HStack spacing={0}>
+        <HStack>
           <Button
             variant="ghost"
             _hover={{ bg: "transparent" }}
@@ -91,7 +91,7 @@ const Navbar = (props) => {
           </Button>
           <Menu isLazy lazyBehavior="unmount">
             <MenuButton>
-              <Avatar size="sm" src={user?.profil_pic} />
+              <Avatar size="xs" src={user?.profil_pic} />
             </MenuButton>
             <MenuList
               minH="48px"
@@ -105,7 +105,7 @@ const Navbar = (props) => {
               <MenuItem
                 icon={<IconUser />}
                 as={Link}
-                to="/profile"
+                to={`/profile/${user.user_id}`}
                 fontWeight="400"
               >
                 Profile
