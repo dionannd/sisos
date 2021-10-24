@@ -1,4 +1,3 @@
-import { CloseIcon } from "@chakra-ui/icons";
 import {
   Modal,
   ModalOverlay,
@@ -16,6 +15,7 @@ import {
   Box,
   ModalHeader,
 } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
 import UserContext from "context/user/UserContext";
 import React from "react";
 import moment from "moment";
@@ -101,7 +101,7 @@ const ModalListComment = (props) => {
                     size="xs"
                     onClick={() => deleteComments(item.comment_id)}
                   >
-                    <CloseIcon color="red.500" />
+                    <DeleteIcon color="red.500" />
                   </Button>
                 )}
               </Flex>

@@ -13,13 +13,7 @@ import {
   HStack,
   InputLeftElement,
 } from "@chakra-ui/react";
-import {
-  IconUser,
-  SettingIcon,
-  SignOutIcon,
-  IconPost,
-  IconHome,
-} from "components";
+import { IconUser, SettingIcon, IconPost } from "components";
 import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
@@ -48,7 +42,7 @@ const Navbar = (props) => {
           SISOS
         </Text>
         <InputGroup
-          mr={{ base: 1, sm: 1, md: 3, lg: "1.5rem" }}
+          mr={{ base: 1, sm: 1, md: 3, lg: "5.5rem" }}
           ml={{ base: 4, lg: "7rem", md: 5 }}
         >
           <InputLeftElement
@@ -79,16 +73,6 @@ const Navbar = (props) => {
           >
             <IconPost h="26px" w="26px" />
           </Button>
-          <Button
-            as={Link}
-            to="/home"
-            variant="ghost"
-            _hover={{ bg: "transparent" }}
-            _focus={{ borderWidth: 0 }}
-            _active={{ borderWidth: 0, bg: "white" }}
-          >
-            <IconHome h="25px" w="25px" />
-          </Button>
           <Menu isLazy lazyBehavior="unmount">
             <MenuButton>
               <Avatar size="xs" src={user?.profil_pic} />
@@ -107,6 +91,7 @@ const Navbar = (props) => {
                 as={Link}
                 to={`/${user.username}`}
                 fontWeight="400"
+                fontSize="14px"
               >
                 Profile
               </MenuItem>
@@ -115,16 +100,13 @@ const Navbar = (props) => {
                 as={Link}
                 to="/setting/accounts/edit"
                 fontWeight="400"
+                fontSize="14px"
               >
                 Setting
               </MenuItem>
-              <MenuDivider borderColor="gray.100" />
-              <MenuItem
-                color="#FF4C4C"
-                icon={<SignOutIcon />}
-                onClick={handleLogout}
-              >
-                Sign Out
+              <MenuDivider borderColor="gray.300" />
+              <MenuItem color="#FF4C4C" onClick={handleLogout} fontSize="14px">
+                Logout
               </MenuItem>
             </MenuList>
           </Menu>

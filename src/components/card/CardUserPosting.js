@@ -8,6 +8,11 @@ import {
   HStack,
   Button,
   useDisclosure,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuDivider,
+  MenuItem,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { IconLike, IconLikeActive, IconComment, IconMore } from "components";
@@ -50,12 +55,12 @@ export default function CardUserPosting(props, { ...rest }) {
         rounded="sm"
         borderColor="#E5E5E5"
         borderWidth={{ base: 0, sm: 0, md: "1px" }}
-        mb={8}
+        mb={{ base: 4, md: 8, lg: 8 }}
         w={{ md: "36rem", lg: "36rem" }}
         {...rest}
       >
         {data.image !== null && (
-          <Box borderBottom="1px" borderColor="gray.200">
+          <Box borderColor="gray.200">
             <Image
               alignItems="center"
               src={data.image}
@@ -64,7 +69,7 @@ export default function CardUserPosting(props, { ...rest }) {
             />
           </Box>
         )}
-        <Box px={{ base: "1rem", lg: 4 }} py={{ base: "1rem", lg: 4 }}>
+        <Box px={{ base: "1rem", lg: 4 }} py={{ base: "1rem", lg: 2 }}>
           <Flex justifyContent="space-between">
             <Flex alignItems="center" mt={2}>
               <Avatar
@@ -85,9 +90,21 @@ export default function CardUserPosting(props, { ...rest }) {
                 {data.username}
               </Button>
             </Flex>
-            <Text as="button">
-              <IconMore />
-            </Text>
+            <Menu isLazy>
+              <MenuButton>
+                <IconMore />
+              </MenuButton>
+              <MenuList>
+                <MenuItem fontSize="14px">Send</MenuItem>
+                <MenuItem fontSize="14px">Save</MenuItem>
+                {data.user_id === user.user_id && <MenuDivider />}
+                {data.user_id === user.user_id && (
+                  <MenuItem color="red.500" fontSize="14px">
+                    Delete
+                  </MenuItem>
+                )}
+              </MenuList>
+            </Menu>
           </Flex>
           <Text
             mt={4}

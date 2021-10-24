@@ -1,13 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Flex,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { CardProfile } from "components";
 import UserContext from "context/user/UserContext";
 import { CardUserPosting } from "components";
@@ -58,38 +50,41 @@ export default function Profile() {
 
   return (
     <>
-      <CardProfile maxW="36rem" self={userProfile} stats={stats} />
-      <Flex>
-        <Tabs mb={5} variant="unstyled">
-          <TabList mb="1em">
-            <Tab _selected={{ color: "white", bg: "blue.500" }}>Postingan</Tab>
-            <Tab _selected={{ color: "white", bg: "blue.500" }}>Tersimpan</Tab>
-            <Tab _selected={{ color: "white", bg: "blue.500" }}>Ditandai</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <Flex justifyContent="center" direction="column">
-                {posting.map((item, index) => (
-                  <CardUserPosting
-                    data={item}
-                    user={userProfile}
-                    key={index}
-                    getPost={getPostingSelf}
-                    likePosting={likePosting}
-                    unLikePosting={unLikePosting}
-                  />
-                ))}
-              </Flex>
-            </TabPanel>
-            <TabPanel>
-              <Text>Under maintenance</Text>
-            </TabPanel>
-            <TabPanel>
-              <Text>Under maintenance</Text>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </Flex>
+      <CardProfile self={userProfile} stats={stats} />
+      <Box
+        w="100%"
+        mb={{ base: "0", md: "5", lg: "5" }}
+        borderWidth="1px"
+        borderTop="0"
+      >
+        <Flex alignItems={"center"}>
+          <Box w="30%">
+            <Button bg="transparent" rounded={0} w="full">
+              Posting
+            </Button>
+          </Box>
+          <Box w="40%">
+            <Button bg="transparent" rounded={0} w="full">
+              Saved
+            </Button>
+          </Box>
+          <Box w="30%">
+            <Button bg="transparent" rounded={0} w="full">
+              Marked
+            </Button>
+          </Box>
+        </Flex>
+      </Box>
+      {posting.map((item, index) => (
+        <CardUserPosting
+          data={item}
+          user={userProfile}
+          key={index}
+          getPost={getPostingSelf}
+          likePosting={likePosting}
+          unLikePosting={unLikePosting}
+        />
+      ))}
     </>
   );
 }
