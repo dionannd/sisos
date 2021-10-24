@@ -33,6 +33,21 @@ const theme = extendTheme({
         },
       },
     },
+    Tabs: {
+      variants: {
+        unstyled: {
+          paddingY: "4",
+          marging: "0",
+          tab: {
+            _selected: {
+              background: "gray.500",
+              color: "white",
+              boxShadow: "none",
+            },
+          },
+        },
+      },
+    },
   },
   styles: {
     global: {

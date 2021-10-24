@@ -7,24 +7,31 @@ import {
 } from "../pages";
 
 const routeList = [
+  // Homes
   {
     path: "/home",
     component: HomePage,
   },
+  // Profiles
   {
-    path: "/:username",
+    path: "/:username/",
     component: ProfilePage,
   },
   {
-    path: "/setting/accounts/edit",
+    path: "/:username/saved/",
+    component: ProfilePage,
+  },
+  // Settings
+  {
+    path: "/setting/accounts/edit/",
     component: EditProfile,
   },
   {
-    path: "/setting/accounts/password/change",
+    path: "/setting/accounts/password/change/",
     component: EditPassword,
   },
   {
-    path: "/session/activity",
+    path: "/session/activity/",
     component: Activity,
   },
 ];
