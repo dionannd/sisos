@@ -1,78 +1,76 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
-  Text,
+  Avatar,
+  Flex,
   FormControl,
   FormLabel,
   Input,
-  Textarea,
-  Avatar,
-  Flex,
-  Button,
+  Text,
 } from "@chakra-ui/react";
 import { CardSetting } from "components";
 
-export default function EditProfile(props) {
-  const { user } = props;
+export default function EditProfile() {
+  useEffect(() => {
+    document.title = "Edit Profile | Sisos";
+  }, []);
   return (
     <CardSetting>
-      <Flex mb={8}>
-        <Avatar size="md" />
-        <Text ml={4}>
-          Jhon Doe
-          <br />
-          <Button variant="link" fontSize="14px" color="black">
-            Change Profile Pic
-          </Button>
-        </Text>
+      <Flex p={4} ml="5rem" mb={4}>
+        <Avatar width="40px" height="40px" />
+        <Flex ml={6} direction="column">
+          <Text fontSize="20px">Jhon Doe</Text>
+          <Text
+            as="button"
+            color="cyan.500"
+            fontSize="14px"
+            fontWeight="semibold"
+          >
+            Change Profil Pic
+          </Text>
+        </Flex>
       </Flex>
-
-      <FormControl mb={4}>
-        <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-          Username
-        </FormLabel>
-        <Input
-          type="text"
-          variant="filled"
-          bg="#F2F2F2"
-          ms="4px"
-          fontSize="sm"
-          size="sm"
-          _hover={{ bg: "#F2F2F2" }}
-          _focus={{ bg: "#F2F2F2" }}
-          value={user?.uername}
-        />
+      <FormControl px={3}>
+        <Flex justifyContent="-moz-initial">
+          <FormLabel fontWeight="500">Username</FormLabel>
+          <Input
+            type="text"
+            size="sm"
+            borderWidth="1px"
+            borderColor="gray.200"
+            bgColor="transparent"
+            _focus={{ borderWidth: "2px", borderColor: "black" }}
+            width="15rem"
+          />
+        </Flex>
       </FormControl>
-      <FormControl mb={4}>
-        <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-          Email
-        </FormLabel>
-        <Input
-          type="text"
-          variant="filled"
-          bg="#F2F2F2"
-          ms="4px"
-          fontSize="sm"
-          size="sm"
-          _hover={{ bg: "#F2F2F2" }}
-          _focus={{ bg: "#F2F2F2" }}
-        />
+      <FormControl px={3}>
+        <Flex justifyContent="-moz-initial">
+          <FormLabel fontWeight="500">Bio</FormLabel>
+          <Input
+            type="text"
+            size="sm"
+            borderWidth="1px"
+            borderColor="gray.200"
+            bgColor="transparent"
+            _focus={{ borderWidth: "2px", borderColor: "black" }}
+            width="15rem"
+          />
+        </Flex>
       </FormControl>
-      <FormControl mb={4}>
-        <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-          Bio
-        </FormLabel>
-        <Textarea
-          variant="filled"
-          bg="#F2F2F2"
-          ms="4px"
-          fontSize="sm"
-          _hover={{ bg: "#F2F2F2" }}
-          _focus={{ bg: "#F2F2F2" }}
-        />
+      <FormControl px={3}>
+        <Flex justifyContent="-moz-initial">
+          <FormLabel fontWeight="500">Email</FormLabel>
+          <Input
+            type="text"
+            size="sm"
+            borderWidth="1px"
+            borderColor="gray.200"
+            bgColor="transparent"
+            _focus={{ borderWidth: "2px", borderColor: "black" }}
+            width="15rem"
+          />
+        </Flex>
       </FormControl>
-      <Button size="sm" fontSize="12px" color="white" variant="gray" ml={1}>
-        SAVE
-      </Button>
     </CardSetting>
   );
 }

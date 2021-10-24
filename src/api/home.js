@@ -9,9 +9,9 @@ const homeRequest = {
       return Promise.reject(error);
     }
   },
-  getPostingSelf: async () => {
+  getPostingSelf: async (id) => {
     try {
-      const response = await request.get("/posting/self");
+      const response = await request.get(`/posting/self/${id}`);
       return Promise.resolve(response.data);
     } catch (error) {
       return Promise.reject(error);

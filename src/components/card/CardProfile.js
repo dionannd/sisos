@@ -1,62 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { Avatar, Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
-import { CardUserPosting } from "components";
-import homeRequest from "api/home";
+import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
 
-const CardProfile = ({ user, ...rest }) => {
-  const [posting, setPosting] = useState([]);
-  const getPostingSelf = async () => {
-    const response = await homeRequest.getPostingSelf();
-    setPosting(response.data);
-  };
-
-  useEffect(() => {
-    getPostingSelf();
-  }, []);
-
+const CardProfile = ({ stats, self, ...rest }) => {
   return (
-    <>
-      <Flex mb={10} {...rest} px={{ base: "1rem", sm: "1rem" }}>
-        <Avatar width="150px" height="150px" />
+    <Flex
+      mb={10}
+      {...rest}
+      px={{ base: "1rem", sm: "1rem" }}
+      direction="column"
+    >
+      <Flex mb={7}>
+        <Avatar width="150px" height="150px" src={self?.profil_pic} />
         <Box ml={20}>
           <Flex mb={4}>
             <Text fontSize="26px" fontWeight="normal">
-              {user?.username}
+              {stats?.username}
             </Text>
-            <Button size="sm" variant="edit-profile" ml={4} mt="0.5">
-              Edit Profile
-            </Button>
           </Flex>
           <Flex mb={4}>
             <Text>
-              <b>0</b> posts
+              <b>{stats?.total_post}</b> posts
             </Text>
             <Text ml={10}>
-              <b>0</b> followers
+              <b>{stats?.total_follower}</b> followers
             </Text>
             <Text ml={10}>
-              <b>0</b> following
+              <b>{stats?.total_following}</b> following
             </Text>
           </Flex>
-          <Text>
-            "Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry."
-          </Text>
+          <Text>"{stats.bio}"</Text>
         </Box>
       </Flex>
-      <Divider />
-      <Box mt={5} mb={5}></Box>
-      <Flex
-        px={{ base: "1rem", sm: "1rem" }}
-        justifyContent="center"
-        direction="column"
-      >
-        <Text mb={5}>Posting</Text>
-        {posting.map((item, index) => (
-          <CardUserPosting data={item} key={index} getPost={getPostingSelf} />
-        ))}
-      </Flex>
-    </>
+    </Flex>
   );
 };
 

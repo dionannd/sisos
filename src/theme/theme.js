@@ -10,6 +10,9 @@ const theme = extendTheme({
           _hover: {
             background: "#696969",
           },
+          _active: {
+            background: "#A7A7A7",
+          },
         },
         "edit-profile": {
           background: "transparant",
@@ -23,6 +26,9 @@ const theme = extendTheme({
             color: "gray.400",
             borderWidth: "1px",
             borderColor: "gray.400",
+          },
+          _active: {
+            borderWidth: "1px",
           },
         },
       },
