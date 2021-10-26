@@ -1,3 +1,4 @@
+import React from "react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { Flex, Text } from "@chakra-ui/react";
 import {
@@ -7,17 +8,14 @@ import {
   MenuItem,
   MenuDivider,
   Avatar,
-  Input,
-  InputGroup,
   Button,
   HStack,
-  InputLeftElement,
 } from "@chakra-ui/react";
 import { IconUser, SettingIcon, IconPost } from "components";
 import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
-  const { openPosting, user } = props;
+  const { openPosting, user, openSearch } = props;
 
   const handleLogout = () => {
     localStorage.clear();
@@ -38,31 +36,22 @@ const Navbar = (props) => {
         borderBottomWidth="1px"
         justifyContent="space-between"
       >
-        <Text fontWeight="500" fontSize="22px" mt={1.5}>
+        <Text fontWeight="500" fontSize="22px" mt={1.5} as={Link} to="/home">
           SISOS
         </Text>
-        <InputGroup
+        <Button
           mr={{ base: 1, sm: 1, md: 3, lg: "5.5rem" }}
           ml={{ base: 4, lg: "7rem", md: 5 }}
+          width="full"
+          leftIcon={<SearchIcon mr={2} />}
+          size="sm"
+          bgColor="gray.100"
+          color="gray.400"
+          fontWeight="normal"
+          onClick={openSearch}
         >
-          <InputLeftElement
-            pointerEvents="none"
-            color="gray.300"
-            fontSize="12px"
-            pb="0.6rem"
-            children={<SearchIcon />}
-          />
-          <Input
-            type="tel"
-            placeholder="Search"
-            size="sm"
-            bg="#F2F2F2"
-            _focus={{
-              borderColor: "gray.300",
-              borderWidth: "1px",
-            }}
-          />
-        </InputGroup>
+          Search
+        </Button>
         <HStack>
           <Button
             variant="ghost"

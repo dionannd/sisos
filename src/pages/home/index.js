@@ -32,6 +32,7 @@ export default function HomePage() {
   };
 
   useEffect(() => {
+    document.title = "Sisos";
     getPosting();
   }, []);
 

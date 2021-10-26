@@ -16,7 +16,7 @@ const routeList = [
   },
   // Profiles
   {
-    path: "/:username/",
+    path: "/:username",
     component: ProfilePage,
   },
   {

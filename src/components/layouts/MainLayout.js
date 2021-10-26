@@ -1,10 +1,17 @@
 import React from "react";
 import { Box, Flex, useDisclosure } from "@chakra-ui/react";
-import { Navbar, ModalPosting } from "components";
+import { Navbar, ModalPosting, ModalSearch } from "components";
 import UserContext from "context/user/UserContext";
 
 export default function MainLayout({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const {
+    isOpen: isOpenSearch,
+    onOpen: onOpenSearch,
+    onClose: onCloseSearch,
+  } = useDisclosure();
+
   const { getUserInfo, userProfile } = React.useContext(UserContext);
 
   React.useEffect(() => {
@@ -27,7 +34,11 @@ export default function MainLayout({ children }) {
 
   return (
     <>
-      <Navbar openPosting={onOpen} user={userProfile} />
+      <Navbar
+        openPosting={onOpen}
+        openSearch={onOpenSearch}
+        user={userProfile}
+      />
       <Flex justifyContent="center">
         <Box
           px={{ base: 0, sm: 0, md: 4, lg: 4 }}
@@ -40,6 +51,7 @@ export default function MainLayout({ children }) {
         </Box>
       </Flex>
       <ModalPosting isOpen={isOpen} onClose={onClose} />
+      <ModalSearch isOpenSearch={isOpenSearch} onCloseSearch={onCloseSearch} />
     </>
   );
 }
