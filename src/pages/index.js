@@ -8,7 +8,8 @@ export { default as HomePage } from "./home";
 
 // Profile Page
 export { default as ProfilePage } from "./profile";
-export { default as DraftPage } from "./profile/Draft";
+export { default as SavedPage } from "./profile/Saved";
+export { default as TaggedPage } from "./profile/Tagged";
 
 // Setting Page
 export { default as EditProfile } from "./setting";

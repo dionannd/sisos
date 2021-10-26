@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 
-const SidebarProfile = () => (
+const SidebarSetting = () => (
   <Box w="14.5rem">
     <Flex direction="column" mt={4} ml={7}>
       <NavLink to="/setting/accounts/edit">
@@ -26,7 +26,7 @@ const SidebarProfile = () => (
 const CardSetting = ({ children }) => {
   return (
     <Flex borderWidth="1px" borderColor="gray.200">
-      <SidebarProfile />
+      <SidebarSetting />
       <Box p={4} w="44.5rem" borderLeft="1px" borderColor="gray.200">
         {children}
       </Box>

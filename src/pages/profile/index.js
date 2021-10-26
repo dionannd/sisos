@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Box, Button, Flex } from "@chakra-ui/react";
 import { CardProfile } from "components";
 import UserContext from "context/user/UserContext";
 import { CardUserPosting } from "components";
@@ -50,41 +49,18 @@ export default function Profile() {
 
   return (
     <>
-      <CardProfile self={userProfile} stats={stats} />
-      <Box
-        w="100%"
-        mb={{ base: "0", md: "5", lg: "5" }}
-        borderWidth="1px"
-        borderTop="0"
-      >
-        <Flex alignItems={"center"}>
-          <Box w="30%">
-            <Button bg="transparent" rounded={0} w="full">
-              Posting
-            </Button>
-          </Box>
-          <Box w="40%">
-            <Button bg="transparent" rounded={0} w="full">
-              Saved
-            </Button>
-          </Box>
-          <Box w="30%">
-            <Button bg="transparent" rounded={0} w="full">
-              Marked
-            </Button>
-          </Box>
-        </Flex>
-      </Box>
-      {posting.map((item, index) => (
-        <CardUserPosting
-          data={item}
-          user={userProfile}
-          key={index}
-          getPost={getPostingSelf}
-          likePosting={likePosting}
-          unLikePosting={unLikePosting}
-        />
-      ))}
+      <CardProfile self={userProfile} stats={stats}>
+        {posting.map((item, index) => (
+          <CardUserPosting
+            data={item}
+            user={userProfile}
+            key={index}
+            getPost={getPostingSelf}
+            likePosting={likePosting}
+            unLikePosting={unLikePosting}
+          />
+        ))}
+      </CardProfile>
     </>
   );
 }
