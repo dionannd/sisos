@@ -45,22 +45,20 @@ export default function Profile() {
     document.title = "Profile | Sisos";
     getStats(username);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [username]);
 
   return (
-    <>
-      <CardProfile self={userProfile} stats={stats}>
-        {posting.map((item, index) => (
-          <CardUserPosting
-            data={item}
-            user={userProfile}
-            key={index}
-            getPost={getPostingSelf}
-            likePosting={likePosting}
-            unLikePosting={unLikePosting}
-          />
-        ))}
-      </CardProfile>
-    </>
+    <CardProfile self={userProfile} stats={stats}>
+      {posting.map((item, index) => (
+        <CardUserPosting
+          data={item}
+          user={userProfile}
+          key={index}
+          getPost={getPostingSelf}
+          likePosting={likePosting}
+          unLikePosting={unLikePosting}
+        />
+      ))}
+    </CardProfile>
   );
 }

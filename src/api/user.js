@@ -18,6 +18,15 @@ const userRequest = {
       return Promise.reject(error);
     }
   },
+
+  searchUsers: async (q = "") => {
+    try {
+      const res = await request.get(`/user/search?q=${q}`);
+      return Promise.resolve(res.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
 };
 
 export default userRequest;

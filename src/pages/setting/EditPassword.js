@@ -1,82 +1,72 @@
 import React, { useEffect } from "react";
 import {
   Avatar,
-  Box,
   Button,
   Flex,
   FormControl,
+  FormLabel,
   Input,
   Text,
 } from "@chakra-ui/react";
 import { CardSetting } from "components";
 
-export default function EditPassword() {
+export default function EditProfile() {
   useEffect(() => {
-    document.title = "Change Password | Sisos";
+    document.title = "Edit Profile | Sisos";
   }, []);
   return (
     <CardSetting>
-      <Flex pt={4}>
-        <Box w="8.5rem">
-          <Flex justifyContent="end">
-            <Flex direction="column">
-              <Avatar w="40px" h="40px" ml="86px" />
-              <Text mt={9} fontWeight="bold" ml={5}>
-                Old Password
-              </Text>
-              <Text mt={7} fontWeight="bold" ml={3}>
-                New Password
-              </Text>
-              <Text mt={7} fontWeight="bold">
-                Verify Password
-              </Text>
-            </Flex>
-          </Flex>
-        </Box>
-        <Box w="23rem" ml={10}>
-          <Text mb={8} mt={1} fontSize="24px">
-            Jhon Doe
-          </Text>
-          <Flex direction="column">
-            <FormControl>
-              <Input
-                type="text"
-                size="sm"
-                borderWidth="1px"
-                borderColor="gray.200"
-                bgColor="transparent"
-                _focus={{ borderWidth: "2px", borderColor: "black" }}
-                mb={5}
-              />
-            </FormControl>
-            <FormControl>
-              <Input
-                type="text"
-                size="sm"
-                borderWidth="1px"
-                borderColor="gray.200"
-                bgColor="transparent"
-                _focus={{ borderWidth: "2px", borderColor: "black" }}
-                mb={5}
-              />
-            </FormControl>
-            <FormControl>
-              <Input
-                type="text"
-                size="sm"
-                borderWidth="1px"
-                borderColor="gray.200"
-                bgColor="transparent"
-                _focus={{ borderWidth: "2px", borderColor: "black" }}
-                mb={5}
-              />
-            </FormControl>
-          </Flex>
-          <Button size="sm" fontSize="12px" color="white" variant="gray" ml={1}>
-            CHANGE PASSWORD
-          </Button>
-        </Box>
+      <Flex p={4} ml="5rem" mb={4}>
+        <Avatar width="40px" height="40px" ml="0.2rem" />
+        <Flex ml={10} direction="column">
+          <Text fontSize="24px">Jhon Doe</Text>
+        </Flex>
       </Flex>
+      <FormControl px={3} mb={5} ml="1rem">
+        <Flex justifyContent="-moz-initial">
+          <FormLabel fontWeight="bold">Old Password</FormLabel>
+          <Input
+            type="password"
+            borderWidth="1px"
+            borderColor="gray.200"
+            bgColor="gray.50"
+            _focus={{ borderWidth: "1px", borderColor: "gray.400" }}
+            width="23rem"
+            ml={7}
+          />
+        </Flex>
+      </FormControl>
+      <FormControl px={3} mb={5} ml="0.6rem">
+        <Flex justifyContent="-moz-initial">
+          <FormLabel fontWeight="bold">New Password</FormLabel>
+          <Input
+            type="password"
+            borderWidth="1px"
+            borderColor="gray.200"
+            bgColor="gray.50"
+            _focus={{ borderWidth: "1px", borderColor: "gray.400" }}
+            width="23rem"
+            ml={7}
+          />
+        </Flex>
+      </FormControl>
+      <FormControl px={3} mb={6} ml="-0.1rem">
+        <Flex justifyContent="-moz-initial">
+          <FormLabel fontWeight="Bold">Verify Password</FormLabel>
+          <Input
+            type="password"
+            borderWidth="1px"
+            borderColor="gray.200"
+            bgColor="gray.50"
+            _focus={{ borderWidth: "1px", borderColor: "gray.400" }}
+            width="23rem"
+            ml={7}
+          />
+        </Flex>
+      </FormControl>
+      <Button size="sm" variant="gray" fontSize="12px" ml="11rem">
+        Change Password
+      </Button>
     </CardSetting>
   );
 }

@@ -4,17 +4,21 @@ import { NavLink } from "react-router-dom";
 
 const SidebarSetting = () => (
   <Box w="14.5rem">
-    <Flex direction="column" mt={4} ml={7}>
+    <Flex direction="column" mt={3} ml={7}>
       <NavLink to="/setting/accounts/edit">
-        <Text mb={6} fontWeight="bold">
+        <Text mb={6} fontFamily="roboto">
           Edit Profile
         </Text>
       </NavLink>
       <NavLink to="/setting/accounts/password/change">
-        <Text mb={6}>Change Password</Text>
+        <Text mb={6} fontFamily="roboto">
+          Change Password
+        </Text>
       </NavLink>
       <NavLink to="/session/activity">
-        <Text mb="15rem">Login Activity</Text>
+        <Text mb="15rem" fontFamily="roboto">
+          Login Activity
+        </Text>
       </NavLink>
       <Text mb={4} color="red.600">
         Sign Out
