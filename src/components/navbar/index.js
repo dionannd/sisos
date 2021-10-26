@@ -89,7 +89,7 @@ const Navbar = (props) => {
               <MenuItem
                 icon={<IconUser />}
                 as={Link}
-                to={`/${user.username}`}
+                to={`/${user.username}/`}
                 fontWeight="400"
                 fontSize="14px"
               >

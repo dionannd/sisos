@@ -17,6 +17,14 @@ const homeRequest = {
       return Promise.reject(error);
     }
   },
+  deletePosting: async (id) => {
+    try {
+      const res = await request.delete(`/posting/delete/${id}`);
+      return Promise.resolve(res.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
   likePosting: async (payload) => {
     try {
       const response = await request.post("/like/posting", payload);

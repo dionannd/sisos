@@ -1,6 +1,8 @@
 import {
   HomePage,
   ProfilePage,
+  SavedPage,
+  TaggedPage,
   EditProfile,
   EditPassword,
   Activity,
@@ -19,7 +21,11 @@ const routeList = [
   },
   {
     path: "/:username/saved/",
-    component: ProfilePage,
+    component: SavedPage,
+  },
+  {
+    path: "/:username/tagged/",
+    component: TaggedPage,
   },
   // Settings
   {
