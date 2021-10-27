@@ -63,32 +63,29 @@ export default function LoginPage() {
       <CardAuth>
         <Flex
           direction="column"
-          w="100%"
+          w="50vh"
+          h="100vh"
           background="transparant"
-          p="48px"
-          mt={{ md: "100px", lg: "80px" }}
+          py={{ md: "100px", lg: "2rem" }}
+          justifyContent="center"
         >
-          <Heading fontSize="32px" mb="10px">
-            Sign In
-          </Heading>
-          <Text
-            mb="20px"
-            ms="4px"
-            color="gray.500"
-            fontWeight="bold"
-            fontSize="14px"
+          <Heading
+            fontSize="32px"
+            mb="10px"
+            fontFamily="Poppins"
+            fontWeight="500"
           >
-            Enter your account to connect with your friends.
-          </Text>
+            Sisos 👋
+          </Heading>
           <FormControl mb={6} mt={4}>
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-              Email/Username
+              Email, username
             </FormLabel>
             <Input
               type="text"
               variant="filled"
               fontSize="sm"
-              placeholder="Enter your email or username"
+              placeholder="Type your email or username"
               bg="#F2F2F2"
               _hover={{ bg: "#F2F2F2" }}
               _focus={{ bg: "#F2F2F2" }}
@@ -117,7 +114,7 @@ export default function LoginPage() {
               type="password"
               variant="filled"
               fontSize="sm"
-              placeholder="Enter your password"
+              placeholder="Type your password"
               bg="#F2F2F2"
               _hover={{ bg: "#F2F2F2" }}
               _focus={{ bg: "#F2F2F2" }}

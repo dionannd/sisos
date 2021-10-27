@@ -27,6 +27,24 @@ const userRequest = {
       return Promise.reject(error);
     }
   },
+
+  editUser: async (payload, id) => {
+    try {
+      const res = await request.put(`/user/edit/${id}`, payload);
+      return Promise.resolve(res.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+
+  updatePassword: async (payload) => {
+    try {
+      const res = await request.put(`/user/password`, payload);
+      return Promise.resolve(res.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
 };
 
 export default userRequest;

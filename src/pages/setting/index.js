@@ -1,5 +1,9 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
   Avatar,
   Box,
   Button,
@@ -7,32 +11,85 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
   Text,
   Textarea,
 } from "@chakra-ui/react";
 import { CardSetting } from "components";
 import UserContext from "context/user/UserContext";
+import userRequest from "api/user";
 
 export default function EditProfile() {
   const { userProfile } = useContext(UserContext);
+  const [data, setData] = useState(userProfile);
+  const [isLoading, setLoading] = useState(false);
+  const [alertSuccess, setAlertSuccess] = useState(false);
+  const [alertError, setAlertError] = useState(false);
+
+  const editProfile = async (body, id) => {
+    try {
+      setLoading(true);
+      const res = await userRequest.editUser(body, id);
+      localStorage.setItem("token", res.token);
+      setAlertSuccess(true);
+    } catch (error) {
+      setAlertError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     document.title = "Edit Profile | Sisos";
-  }, []);
+
+    setData(userProfile);
+  }, [userProfile]);
   return (
     <CardSetting>
+      {alertSuccess && (
+        <Alert status="success" variant="left-accent">
+          <AlertIcon />
+          <AlertTitle mr={2}>Berhasil!</AlertTitle>
+          <AlertDescription>Data berhasil diperbarui.</AlertDescription>
+        </Alert>
+      )}
+      {alertError && (
+        <Alert status="error" variant="left-accent">
+          <AlertIcon />
+          <AlertTitle mr={2}>Error!</AlertTitle>
+          <AlertDescription>Terjadi kesalahan server.</AlertDescription>
+        </Alert>
+      )}
       <Flex p={4} ml="5rem" mb={1}>
-        <Avatar width="40px" height="40px" ml="0.2rem" />
+        <Avatar
+          src={userProfile.profil_pic}
+          width="40px"
+          height="40px"
+          ml="0.2rem"
+        />
         <Flex ml={10} direction="column">
-          <Text fontSize="20px">Jhon Doe</Text>
-          <Text
-            as="button"
-            color="cyan.500"
-            fontSize="14px"
-            fontWeight="semibold"
-          >
-            Change Profil Pic
-          </Text>
+          <Text fontSize="20px">{userProfile.username}</Text>
+          <Menu isLazy>
+            <MenuButton
+              color="cyan.500"
+              fontSize="14px"
+              fontWeight="semibold"
+              mt="-0.5rem"
+            >
+              Change Profil Pic
+            </MenuButton>
+            <MenuList>
+              <MenuItem fontSize="12px" fontWeight="bold">
+                Upload Foto
+              </MenuItem>
+              <MenuItem fontSize="12px" fontWeight="bold" color="red.500">
+                Remove Foto
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </Flex>
       </Flex>
       <FormControl px={3} ml="5rem">
@@ -43,6 +100,7 @@ export default function EditProfile() {
               type="text"
               size="sm"
               defaultValue={userProfile.fullname}
+              onChange={(e) => setData({ ...data, fullname: e.target.value })}
               borderWidth="1px"
               borderColor="gray.200"
               bgColor="transparent"
@@ -68,6 +126,7 @@ export default function EditProfile() {
           <Input
             type="text"
             defaultValue={userProfile.username}
+            onChange={(e) => setData({ ...data, username: e.target.value })}
             size="sm"
             borderWidth="1px"
             borderColor="gray.200"
@@ -85,6 +144,7 @@ export default function EditProfile() {
             <Textarea
               type="text"
               defaultValue={userProfile.bio}
+              onChange={(e) => setData({ ...data, bio: e.target.value })}
               size="sm"
               borderWidth="1px"
               borderColor="gray.200"
@@ -116,6 +176,7 @@ export default function EditProfile() {
           <Input
             type="text"
             defaultValue={userProfile.email}
+            onChange={(e) => setData({ ...data, email: e.target.value })}
             size="sm"
             borderWidth="1px"
             borderColor="gray.200"
@@ -126,7 +187,15 @@ export default function EditProfile() {
           />
         </Flex>
       </FormControl>
-      <Button size="sm" variant="gray" fontSize="12px" ml="11rem">
+      <Button
+        size="sm"
+        variant="gray"
+        fontSize="12px"
+        ml="11rem"
+        onClick={() => editProfile(data, userProfile.user_id)}
+        isLoading={isLoading}
+        loadingText="Memproses"
+      >
         Save
       </Button>
     </CardSetting>

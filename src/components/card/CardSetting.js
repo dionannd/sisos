@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
+import UserContext from "context/user/UserContext";
 
 const SidebarSetting = () => (
-  <Box w="14.5rem">
+  <Box
+    w="14.5rem"
+    display={{ base: "none", lg: "inline" }}
+    borderRight="1px red"
+  >
     <Flex direction="column" mt={3} ml={7}>
       <NavLink to="/setting/accounts/edit">
         <Text mb={6} fontFamily="roboto">
@@ -16,7 +21,7 @@ const SidebarSetting = () => (
         </Text>
       </NavLink>
       <NavLink to="/session/activity">
-        <Text mb="15rem" fontFamily="roboto">
+        <Text mb={6} fontFamily="roboto">
           Login Activity
         </Text>
       </NavLink>
@@ -28,10 +33,17 @@ const SidebarSetting = () => (
 );
 
 const CardSetting = ({ children }) => {
+  const { userProfile } = useContext(UserContext);
+
   return (
     <Flex borderWidth="1px" borderColor="gray.200">
       <SidebarSetting />
-      <Box p={4} w="44.5rem" borderLeft="1px" borderColor="gray.200">
+      <Box
+        p={4}
+        w="44.5rem"
+        borderLeft={{ md: "1px red", lg: "1px red" }}
+        user={userProfile}
+      >
         {children}
       </Box>
     </Flex>

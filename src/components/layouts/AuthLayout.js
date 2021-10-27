@@ -6,9 +6,8 @@ export default function AuthLayout({ children, ...rest }) {
     <Flex position="relative">
       <Flex
         w="100%"
-        maxW="1044px"
+        maxW="100vw"
         mx="auto"
-        justifyContent="space-between"
         pt={{ sm: "100px", md: "0px" }}
         {...rest}
       >
