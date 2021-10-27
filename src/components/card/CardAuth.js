@@ -4,8 +4,8 @@ const CardAuth = ({ children, ...rest }) => {
   return (
     <Flex
       alignItems="center"
-      justifyContent="start"
-      w={{ base: "100%", md: "50%", lg: "42%" }}
+      justifyContent="center"
+      w={{ base: "100%", md: "50%", lg: "50%" }}
       {...rest}
     >
       {children}

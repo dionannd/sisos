@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { FormControl, Input, Button, Flex, Text } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Flex,
+  Text,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 export default function RegisterPage() {
@@ -13,39 +20,33 @@ export default function RegisterPage() {
       alignSelf="center"
       justifySelf="center"
       overflow="hidden"
-      bg="gray.50"
     >
       <Flex
         alignItems="center"
         justifyContent="center"
         mb={{ base: 0, sm: "30px", md: "30px", lg: "30px" }}
-        mt={{ base: 0, sm: "40px", md: "40px", lg: "40px" }}
+        mt={{ base: 0, sm: "40px", md: "5rem", lg: "5rem" }}
       >
         <Flex
           direction="column"
           w={{ lg: "445px" }}
           background="transparent"
-          borderRadius="15px"
-          p="40px"
-          mx={{ base: 0, lg: "100px" }}
           bg="white"
-          boxShadow="0 20px 27px 0 rgb(0 0 0 / 5%)"
         >
           <Text fontSize="24px" fontWeight="bold" textAlign="center" mb="10px">
-            Forgot Password?
+            Password Reset
           </Text>
           <Text
             mb="25px"
-            ms="4px"
             color="gray.500"
             fontWeight="bold"
             fontSize="14px"
             textAlign="center"
           >
-            Enter your email below and we'll get an email with a reset link to
-            reset your password.
+            Enter your email and we will send you a reset link.
           </Text>
           <FormControl mb={5}>
+            <FormLabel fontSize="14px">Email</FormLabel>
             <Input
               type="text"
               variant="filled"
@@ -71,7 +72,6 @@ export default function RegisterPage() {
               variant="link"
               color="black"
               to="/"
-              ms="4px"
               fontSize="14px"
             >
               Back to login

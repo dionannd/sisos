@@ -70,7 +70,13 @@ const ModalSearch = (props) => {
                   <Text key={index} ml={3} fontWeight="bold">
                     {item.username}
                   </Text>
-                  <Text key={index} ml={3} color="gray.500" mt="-0.5rem">
+                  <Text
+                    key={index}
+                    ml={3}
+                    color="gray.500"
+                    mt="-0.5rem"
+                    fontSize="14px"
+                  >
                     {item.fullname}
                   </Text>
                 </Flex>

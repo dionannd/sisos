@@ -89,7 +89,7 @@ const CardProfile = ({ stats, self, children, ...rest }) => {
                   <b>{stats?.total_follower}</b>
                 </Text>
                 <Text ml={1} color="gray.500">
-                  Mengikuti
+                  Followers
                 </Text>
               </Flex>
               <Flex ml={5}>

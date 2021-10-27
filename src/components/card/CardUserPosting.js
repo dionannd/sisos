@@ -136,20 +136,30 @@ export default function CardUserPosting(props, { ...rest }) {
             )}
           </Text>
           {Number(data.total_comment) !== 0 && (
-            <Button
-              mb={4}
-              variant="link"
-              size="sm"
-              fontWeight="normal"
-              color="gray.500"
-              _hover={{ bg: "white" }}
-              onClick={() => {
-                getDetailPosting(data.post_id);
-                onOpenComment();
-              }}
-            >
-              View all {data.total_comment} comments
-            </Button>
+            <>
+              <Button
+                variant="link"
+                size="sm"
+                fontWeight="normal"
+                color="gray.500"
+                _hover={{ bg: "white" }}
+                onClick={() => {
+                  getDetailPosting(data.post_id);
+                  onOpenComment();
+                }}
+              >
+                View all {data.total_comment} comments
+              </Button>
+              <Flex mb={3} alignItems="center">
+                <Avatar src={data.comment.profil_pic} size="xs" />
+                <Text ml={2} fontWeight="bold" fontSize="sm">
+                  {data.comment.username}
+                </Text>
+                <Text ml={4} fontSize="sm">
+                  {data.comment.content}
+                </Text>
+              </Flex>
+            </>
           )}
           <Text color="gray.500" fontSize="10px">
             {moment(data.created_at).from(new Date()).toUpperCase()}
