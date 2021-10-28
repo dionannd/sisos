@@ -7,8 +7,8 @@ function App() {
     <Router>
       <Switch>
         <Route component={LoginPage} exact path="/" />
-        <Route component={RegisterPage} exact path="/register" />
-        <Route component={ForgotPage} exact path="/forgot" />
+        <Route component={RegisterPage} exact path="/signup" />
+        <Route component={ForgotPage} exact path="/password_reset" />
         <PrivateRoute />
       </Switch>
     </Router>

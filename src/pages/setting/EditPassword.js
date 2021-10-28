@@ -130,6 +130,7 @@ export default function EditProfile() {
         variant="gray"
         fontSize="12px"
         ml="11rem"
+        rounded="sm"
         onClick={changePassword}
         isLoading={isLoading}
         loadingText="Memproses"

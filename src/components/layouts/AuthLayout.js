@@ -1,16 +1,9 @@
-import React from "react";
 import { Flex } from "@chakra-ui/react";
 
 export default function AuthLayout({ children, ...rest }) {
   return (
-    <Flex position="relative">
-      <Flex
-        w="100%"
-        maxW="100vw"
-        mx="auto"
-        pt={{ sm: "100px", md: "0px" }}
-        {...rest}
-      >
+    <Flex>
+      <Flex w="100%" maxW="100vw" {...rest}>
         {children}
       </Flex>
     </Flex>

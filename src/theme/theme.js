@@ -5,10 +5,10 @@ const theme = extendTheme({
     Button: {
       variants: {
         gray: {
-          background: "#A7A7A7",
+          background: "gray.500",
           color: "white",
           _hover: {
-            background: "#696969",
+            background: "gray.600",
           },
           _active: {
             background: "#A7A7A7",

@@ -1,37 +1,37 @@
 import React, { useState, useCallback } from "react";
 import {
-  Text,
+  Alert,
+  AlertDescription,
   Box,
+  CloseButton,
+  HStack,
+  Text,
   Heading,
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  InputRightElement,
   Button,
   Flex,
-  useToast,
 } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { AuthLayout, CardAuth } from "components";
 import authRequest from "api/auth";
 import { useHistory, Link } from "react-router-dom";
 
 export default function LoginPage() {
-  const history = useHistory();
   const [data, setData] = useState({
     username: "",
     password: "",
   });
   const [isLoading, setLoading] = useState(false);
-  const toast = useToast();
-  const notif = (title, message, type) => {
-    toast({
-      title: title,
-      description: message,
-      status: type,
-      position: "top",
-      duration: 2000,
-      isClosable: true,
-    });
-  };
+  const [alert, setAlert] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleClick = () => setShow(!show);
+
+  const history = useHistory();
 
   const handleLogin = async () => {
     try {
@@ -40,7 +40,7 @@ export default function LoginPage() {
       localStorage.setItem("token", response.token);
       window.location.href = "/home";
     } catch (error) {
-      notif("Ooops!", error.response.data.message, "error");
+      setAlert(true);
     } finally {
       setLoading(false);
     }
@@ -54,112 +54,196 @@ export default function LoginPage() {
 
   React.useEffect(() => {
     isLogedIn();
-    document.title = "Sign in | Sisos";
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    document.title = "Sign in • Sisos";
+  }, [isLogedIn]);
 
   return (
     <AuthLayout>
-      <CardAuth>
-        <Flex
-          direction="column"
-          w="50vh"
-          h="100vh"
-          background="transparant"
-          py={{ md: "100px", lg: "2rem" }}
-          justifyContent="center"
-        >
-          <Heading
-            fontSize="32px"
-            mb="10px"
-            fontFamily="Poppins"
-            fontWeight="500"
-          >
-            Sisos 👋
+      <CardAuth px={{ base: "8" }}>
+        <Flex direction="column" w="48vh" background="transparant" mt={10}>
+          <Heading fontSize="31px" mb={8} textAlign="center">
+            👋
           </Heading>
-          <FormControl mb={6} mt={4}>
-            <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-              Email, username
-            </FormLabel>
-            <Input
-              type="text"
-              variant="filled"
-              fontSize="sm"
-              placeholder="Type your email or username"
-              bg="#F2F2F2"
-              _hover={{ bg: "#F2F2F2" }}
-              _focus={{ bg: "#F2F2F2" }}
-              isRequired={true}
-              onChange={(e) => setData({ ...data, username: e.target.value })}
-            />
-          </FormControl>
-          <FormControl mb={4}>
-            <Flex justifyContent="space-between">
+          <Text textAlign="center" fontSize="24px">
+            Sign in to Sisos
+          </Text>
+          {alert && (
+            <Alert
+              status="error"
+              rounded="sm"
+              px={8}
+              mt={4}
+              bg="red.50"
+              border="1px"
+              borderColor="red.200"
+            >
+              <AlertDescription fontSize="13px" textAlign="center">
+                Incorrect username or password.
+              </AlertDescription>
+              <CloseButton
+                position="absolute"
+                size="sm"
+                color="red.500"
+                right="20px"
+                top="11px"
+                onClick={() => setAlert(false)}
+                _hover={{ bg: "transparant" }}
+                _active={{ bg: "transparant" }}
+              />
+            </Alert>
+          )}
+          <Box
+            bg="gray.50"
+            borderWidth="1.5px"
+            // rounded="lg"
+            mt={4}
+            p={5}
+            mb={4}
+          >
+            <FormControl mb={3.5}>
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-                Password
+                Username or email address
               </FormLabel>
+              <Input
+                type="text"
+                size="sm"
+                fontSize="sm"
+                ms={1}
+                bg="white"
+                isRequired={true}
+                onChange={(e) => setData({ ...data, username: e.target.value })}
+              />
+            </FormControl>
+            <FormControl mb={5}>
+              <Flex justifyContent="space-between">
+                <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                  Password
+                </FormLabel>
+                <Text
+                  as={Link}
+                  to="/password_reset"
+                  mb={2}
+                  ms="4px"
+                  fontSize="xs"
+                  color="blue.500"
+                >
+                  Forgot password?
+                </Text>
+              </Flex>
+              <InputGroup>
+                <Input
+                  type={show ? "text" : "password"}
+                  size="sm"
+                  ms="1"
+                  fontSize="sm"
+                  bg="white"
+                  isRequired={true}
+                  onChange={(e) =>
+                    setData({ ...data, password: e.target.value })
+                  }
+                />
+                <InputRightElement>
+                  <Text
+                    as="button"
+                    onClick={handleClick}
+                    h="5vh"
+                    fontWeight="normal"
+                    color="gray.500"
+                    fontSize="xs"
+                    mt="-5px"
+                    mr="5px"
+                  >
+                    {show ? <ViewOffIcon /> : <ViewIcon />}
+                  </Text>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <Button
+              w="full"
+              rounded="sm"
+              ms="1"
+              size="sm"
+              variant="gray"
+              fontSize="sm"
+              fontWeight="normal"
+              onClick={handleLogin}
+              isLoading={isLoading}
+              loadingText="Signing in..."
+            >
+              Sign in
+            </Button>
+          </Box>
+          <Box borderWidth="1px" py={3} mb="5rem">
+            <Flex justifyContent="center" alignItems="center">
+              <Text ms="4px" fontSize="14px">
+                New to Sisos?
+              </Text>
               <Button
                 as={Link}
-                to="/forgot"
-                mb={2}
+                to="/signup"
+                ml={1}
                 ms="4px"
+                variant="link"
                 fontSize="sm"
                 fontWeight="normal"
-                variant="link"
+                color="blue.500"
               >
-                forgot password?
+                Create an account
               </Button>
+              <Text>.</Text>
             </Flex>
-            <Input
-              type="password"
-              variant="filled"
-              fontSize="sm"
-              placeholder="Type your password"
-              bg="#F2F2F2"
-              _hover={{ bg: "#F2F2F2" }}
-              _focus={{ bg: "#F2F2F2" }}
-              isRequired={true}
-              onChange={(e) => setData({ ...data, password: e.target.value })}
-            />
-          </FormControl>
-          <Button
-            mt={4}
-            w="full"
-            variant="gray"
-            fontSize="12px"
-            onClick={handleLogin}
-            isLoading={isLoading}
-            loadingText="Please wait..."
+          </Box>
+          <Flex
+            alignItems="center"
+            color="gray.500"
+            fontSize="xs"
+            direction="column"
           >
-            SIGN IN
-          </Button>
-          <Flex mt={6} justifyContent="center">
-            <Text ms="4px" fontSize="14px">
-              Not registered yet?
-            </Text>
-            <Button
-              variant="link"
-              color="black"
-              as={Link}
-              to="/register"
-              ml={1}
-              ms="4px"
-              fontSize="14px"
-            >
-              Sign up here
-            </Button>
+            <HStack spacing={4} mb={1}>
+              <Button
+                as={Link}
+                to="#"
+                variant="link"
+                color="blue.500"
+                fontSize="xs"
+                fontWeight="normal"
+              >
+                Terms
+              </Button>
+              <Button
+                as={Link}
+                to="#"
+                variant="link"
+                color="blue.500"
+                fontSize="xs"
+                fontWeight="normal"
+              >
+                Privacy
+              </Button>
+              <Button
+                as={Link}
+                to="#"
+                variant="link"
+                color="blue.500"
+                fontSize="xs"
+                fontWeight="normal"
+              >
+                Security
+              </Button>
+              <Button
+                as={Link}
+                to="#"
+                variant="link"
+                fontSize="xs"
+                fontWeight="normal"
+                _hover={{ color: "blue.500" }}
+              >
+                Contact Dev
+              </Button>
+            </HStack>
           </Flex>
         </Flex>
       </CardAuth>
-      <Box
-        display={{ base: "none", md: "block" }}
-        overflowX="hidden"
-        h="100vh"
-        w="50vw"
-        position="absolute"
-        right="0px"
-        bg="#DFDFDF"
-      ></Box>
     </AuthLayout>
   );
 }
