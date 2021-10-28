@@ -191,6 +191,7 @@ export default function EditProfile() {
         size="sm"
         variant="gray"
         fontSize="12px"
+        rounded="sm"
         ml="11rem"
         onClick={() => editProfile(data, userProfile.user_id)}
         isLoading={isLoading}

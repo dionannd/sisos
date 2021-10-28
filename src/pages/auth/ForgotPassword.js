@@ -1,84 +1,121 @@
 import React, { useEffect } from "react";
 import {
+  Box,
+  HStack,
+  Text,
+  Heading,
   FormControl,
   FormLabel,
   Input,
   Button,
   Flex,
-  Text,
 } from "@chakra-ui/react";
+import { AuthLayout, CardAuth } from "components";
 import { Link } from "react-router-dom";
 
-export default function RegisterPage() {
+export default function ForgotPassword() {
   useEffect(() => {
-    document.title = "Forgot Password | Sisos";
-  }, []);
+    document.title = "Forgot your password? • Sisos";
+  });
 
   return (
-    <Flex
-      direction="column"
-      alignSelf="center"
-      justifySelf="center"
-      overflow="hidden"
-    >
-      <Flex
-        alignItems="center"
-        justifyContent="center"
-        mb={{ base: 0, sm: "30px", md: "30px", lg: "30px" }}
-        mt={{ base: 0, sm: "40px", md: "5rem", lg: "5rem" }}
-      >
-        <Flex
-          direction="column"
-          w={{ lg: "445px" }}
-          background="transparent"
-          bg="white"
-        >
-          <Text fontSize="24px" fontWeight="bold" textAlign="center" mb="10px">
-            Password Reset
+    <AuthLayout>
+      <CardAuth>
+        <Flex direction="column" w="83vh" background="transparant" mt={10}>
+          <Heading fontSize="31px" mb={8} textAlign="center">
+            👋
+          </Heading>
+          <Text textAlign="center" fontSize="23px">
+            Reset your password
           </Text>
-          <Text
-            mb="25px"
-            color="gray.500"
-            fontWeight="bold"
-            fontSize="14px"
-            textAlign="center"
+          <Box
+            bg="gray.50"
+            borderWidth="1.5px"
+            // rounded="lg"
+            mt={4}
+            p={5}
+            mb="5rem"
           >
-            Enter your email and we will send you a reset link.
-          </Text>
-          <FormControl mb={5}>
-            <FormLabel fontSize="14px">Email</FormLabel>
-            <Input
-              type="text"
-              variant="filled"
-              fontSize="sm"
-              placeholder="Enter your email address"
-              bg="#F2F2F2"
-              _hover={{ bg: "#F2F2F2" }}
-              _focus={{ bg: "#F2F2F2" }}
-              isRequired={true}
-            />
-          </FormControl>
-          <Button
-            w="full"
-            fontSize="12px"
-            variant="gray"
-            loadingText="Please wait..."
-          >
-            SEND REQUEST
-          </Button>
-          <Flex mt={6} justifyContent="center">
+            <FormControl mb={3.5}>
+              <FormLabel ms="4px" fontSize="sm" fontWeight="bold">
+                Enter your user account's verified email address and we will
+                send you a password reset link.
+              </FormLabel>
+              <Input
+                type="email"
+                size="sm"
+                fontSize="sm"
+                placeholder="Enter your email address"
+                ms={1}
+                bg="white"
+                isRequired={true}
+              />
+            </FormControl>
             <Button
-              as={Link}
-              variant="link"
-              color="black"
-              to="/"
-              fontSize="14px"
+              mt={1}
+              w="full"
+              ms="1"
+              size="sm"
+              rounded="sm "
+              variant="gray"
+              fontSize="sm"
+              fontWeight="normal"
+              loadingText="Please wait..."
             >
-              Back to login
+              Send password reset email
             </Button>
+          </Box>
+          <Flex
+            alignItems="center"
+            color="gray.500"
+            fontSize="xs"
+            direction="column"
+          >
+            <HStack spacing={4} mb={1}>
+              <Button
+                as={Link}
+                to="#"
+                variant="link"
+                color="blue.500"
+                fontSize="xs"
+                fontWeight="normal"
+              >
+                Terms
+              </Button>
+              <Button
+                as={Link}
+                to="#"
+                variant="link"
+                color="blue.500"
+                fontSize="xs"
+                fontWeight="normal"
+              >
+                Privacy
+              </Button>
+              <Button
+                as={Link}
+                to="#"
+                variant="link"
+                color="blue.500"
+                fontSize="xs"
+                fontWeight="normal"
+              >
+                Security
+              </Button>
+              <Button
+                as={Link}
+                to="#"
+                variant="link"
+                fontSize="xs"
+                fontWeight="normal"
+                _hover={{ color: "blue.500" }}
+              >
+                Contact Dev
+              </Button>
+            </HStack>
           </Flex>
         </Flex>
-      </Flex>
-    </Flex>
+      </CardAuth>
+    </AuthLayout>
   );
 }

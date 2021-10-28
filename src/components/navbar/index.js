@@ -45,6 +45,7 @@ const Navbar = (props) => {
           width="full"
           leftIcon={<SearchIcon mr={2} />}
           size="sm"
+          rounded="sm"
           bgColor="gray.100"
           color="gray.400"
           fontWeight="normal"
