@@ -28,7 +28,6 @@ const Navbar = (props) => {
         height="3.4rem"
         px={{ base: "1rem", md: "1.5rem", lg: "13rem" }}
         alignItems="center"
-        top={0}
         bg="white"
         w="full"
         position="fixed"
@@ -41,7 +40,7 @@ const Navbar = (props) => {
         </Text>
         <Button
           mr={{ base: 1, sm: 1, md: 3, lg: "5.5rem" }}
-          ml={{ base: 4, lg: "7rem", md: 5 }}
+          ml={{ base: 4, lg: "7rem", md: 9 }}
           width="full"
           leftIcon={<SearchIcon mr={2} />}
           size="sm"
@@ -79,7 +78,7 @@ const Navbar = (props) => {
               <MenuItem
                 icon={<IconUser />}
                 as={Link}
-                to={`/${user.username}/`}
+                to={`/${user.username}`}
                 fontWeight="400"
                 fontSize="14px"
               >

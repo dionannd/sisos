@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CardProfile } from "components";
 import UserContext from "context/user/UserContext";
-import { CardUserPosting } from "components";
+import { CardPost } from "components";
 import homeRequest from "api/home";
 import userRequest from "api/user";
 import { useParams } from "react-router-dom";
@@ -50,7 +50,7 @@ export default function Profile() {
   return (
     <CardProfile self={userProfile} stats={stats}>
       {posting.map((item, index) => (
-        <CardUserPosting
+        <CardPost
           data={item}
           user={userProfile}
           key={index}
