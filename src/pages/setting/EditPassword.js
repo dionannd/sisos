@@ -67,6 +67,7 @@ export default function EditProfile() {
           width="40px"
           height="40px"
           ml="0.2rem"
+          border="0.5px"
         />
         <Flex ml={10} direction="column">
           <Text fontSize="24px">{userProfile.username}</Text>

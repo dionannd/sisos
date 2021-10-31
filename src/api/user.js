@@ -45,6 +45,15 @@ const userRequest = {
       return Promise.reject(error);
     }
   },
+
+  updateProfilePic: async (payload) => {
+    try {
+      const res = await request.put(`/user/upload/image`, payload);
+      return Promise.resolve(res.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
 };
 
 export default userRequest;

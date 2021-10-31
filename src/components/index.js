@@ -7,7 +7,8 @@ export { default as Navbar } from "./navbar";
 
 // Cards
 export { default as CardAuth } from "./card/CardAuth";
-export { default as CardUserPosting } from "./card/CardUserPosting";
+export { default as CardPost } from "./card/CardPost";
+export { default as CardPostDetail } from "./card/CardPostDetail";
 export { default as CardSetting } from "./card/CardSetting";
 export { default as CardProfile } from "./card/CardProfile";
 export { default as CardSaved } from "./card/CardSaved";

@@ -205,7 +205,7 @@ export default function RegisterPage() {
               bg="white"
               borderColor="gray.300"
               mt={3}
-              mb={5}
+              mb="5rem"
               w="22rem"
               justifyContent="center"
             >

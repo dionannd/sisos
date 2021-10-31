@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import homeRequest from "api/home";
-import { CardUserPosting } from "components";
+import { CardPost } from "components";
 import UserContext from "context/user/UserContext";
 
 export default function HomePage() {
@@ -39,7 +39,7 @@ export default function HomePage() {
   return (
     <>
       {posting.map((item, index) => (
-        <CardUserPosting
+        <CardPost
           data={item}
           user={userProfile}
           key={index}

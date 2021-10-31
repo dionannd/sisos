@@ -7,7 +7,8 @@ const SidebarSetting = () => (
   <Box
     w="14.5rem"
     display={{ base: "none", lg: "inline" }}
-    borderRight="1px red"
+    borderRight="1px"
+    borderRightColor="gray.200"
   >
     <Flex direction="column" mt={3} ml={7}>
       <NavLink to="/setting/accounts/edit">

@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import {
   Flex,
+  Divider,
+  FormControl,
+  InputGroup,
+  Input,
+  InputRightElement,
   Text,
   Box,
   Avatar,
@@ -16,15 +21,16 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { IconLike, IconLikeActive, IconComment, IconMore } from "components";
-import { ModalListComment, ModalComment } from "components";
+import { ModalListComment } from "components";
 import homeRequest from "api/home";
 import moment from "moment";
 
-export default function CardUserPosting(props, { ...rest }) {
+export default function CardPost(props, { ...rest }) {
   const { data, likePosting, unLikePosting, user, getPost } = props;
   const [detail, setDetail] = useState({});
   const [readMore, setMore] = useState(true);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [comment, setComment] = React.useState("");
+  // const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
     isOpen: isOpenComment,
@@ -43,8 +49,8 @@ export default function CardUserPosting(props, { ...rest }) {
 
   const createComments = async (payload) => {
     await homeRequest.createComments(payload);
-    onClose();
     getPost(user.user_id);
+    setComment("");
   };
 
   const deleteComments = async (id) => {
@@ -60,19 +66,17 @@ export default function CardUserPosting(props, { ...rest }) {
         borderColor="#E5E5E5"
         borderWidth={{ base: 0, sm: 0, md: "1px" }}
         mb={{ base: 4, md: 8, lg: 8 }}
-        w={{ md: "36rem", lg: "36rem" }}
+        w={{ md: "35rem", lg: "36rem" }}
         {...rest}
       >
         {data.image !== null && (
-          <Box borderColor="gray.200">
-            <Image
-              alignItems="center"
-              src={data.image}
-              w="full"
-              h="35rem"
-              objectFit="cover"
-            />
-          </Box>
+          <Image
+            alignItems="center"
+            src={data.image}
+            w="full"
+            h="35rem"
+            objectFit="cover"
+          />
         )}
         <Box px={{ base: "1rem", lg: 4 }} py={{ base: "1rem", lg: 2 }}>
           <Flex justifyContent="space-between">
@@ -172,11 +176,12 @@ export default function CardUserPosting(props, { ...rest }) {
           >
             <HStack>
               <Button
+                as={Link}
+                to={`/posting/detail/${data.post_id}`}
                 size="sm"
                 variant="ghost"
                 _hover={{ bg: "transparent" }}
                 _focus={{ bg: "transparent" }}
-                onClick={onOpen}
                 p={0}
               >
                 <IconComment />
@@ -206,16 +211,36 @@ export default function CardUserPosting(props, { ...rest }) {
             </Text>
           )}
         </Box>
+        <Flex display={{ base: "none", md: "inline", lg: "inline" }}>
+          <FormControl>
+            <Divider />
+            <InputGroup size="sm" alignItems="center" p={2}>
+              <Input
+                type="text"
+                placeholder="Add a comment..."
+                border="0"
+                _focus={{ border: 0 }}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+              <InputRightElement>
+                <Text
+                  mr={10}
+                  mt={4}
+                  as="button"
+                  fontSize="sm"
+                  color="blue.500"
+                  onClick={() =>
+                    createComments({ post_id: data.post_id, content: comment })
+                  }
+                >
+                  Post
+                </Text>
+              </InputRightElement>
+            </InputGroup>
+          </FormControl>
+        </Flex>
       </Box>
-
-      <ModalComment
-        data={user}
-        isOpen={isOpen}
-        onClose={onClose}
-        createComments={(comment) =>
-          createComments({ post_id: data.post_id, content: comment })
-        }
-      />
 
       <ModalListComment
         data={detail}

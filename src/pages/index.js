@@ -5,6 +5,7 @@ export { default as ForgotPage } from "./auth/ForgotPassword";
 
 // Home Page
 export { default as HomePage } from "./home";
+export { default as DetailPostPage } from "./home/DetailPost";
 
 // Profile Page
 export { default as ProfilePage } from "./profile";

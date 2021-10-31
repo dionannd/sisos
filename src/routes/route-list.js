@@ -1,5 +1,6 @@
 import {
   HomePage,
+  DetailPostPage,
   ProfilePage,
   SavedPage,
   TaggedPage,
@@ -14,30 +15,34 @@ const routeList = [
     path: "/home",
     component: HomePage,
   },
+  {
+    path: "/posting/detail/:id",
+    component: DetailPostPage,
+  },
   // Profiles
   {
     path: "/:username",
     component: ProfilePage,
   },
   {
-    path: "/:username/saved/",
+    path: "/:username/saved",
     component: SavedPage,
   },
   {
-    path: "/:username/tagged/",
+    path: "/:username/tagged",
     component: TaggedPage,
   },
   // Settings
   {
-    path: "/setting/accounts/edit/",
+    path: "/setting/accounts/edit",
     component: EditProfile,
   },
   {
-    path: "/setting/accounts/password/change/",
+    path: "/setting/accounts/password/change",
     component: EditPassword,
   },
   {
-    path: "/session/activity/",
+    path: "/session/activity",
     component: Activity,
   },
 ];

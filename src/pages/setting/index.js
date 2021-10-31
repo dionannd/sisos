@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState, useRef } from "react";
 import {
   Alert,
   AlertIcon,
@@ -28,6 +28,7 @@ export default function EditProfile() {
   const [isLoading, setLoading] = useState(false);
   const [alertSuccess, setAlertSuccess] = useState(false);
   const [alertError, setAlertError] = useState(false);
+  const inputFile = useRef(null);
 
   const editProfile = async (body, id) => {
     try {
@@ -42,6 +43,16 @@ export default function EditProfile() {
     }
   };
 
+  const changeProfilPic = async (e) => {
+    try {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      await userRequest.updateProfilePic(formData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     document.title = "Edit Profile | Sisos";
 
@@ -50,10 +61,14 @@ export default function EditProfile() {
   return (
     <CardSetting>
       {alertSuccess && (
-        <Alert status="success" variant="left-accent">
+        <Alert status="success" variant="left-accent" rounded="md">
           <AlertIcon />
-          <AlertTitle mr={2}>Berhasil!</AlertTitle>
-          <AlertDescription>Data berhasil diperbarui.</AlertDescription>
+          <AlertTitle mr={2} fontSize="sm">
+            Ok!
+          </AlertTitle>
+          <AlertDescription fontSize="sm">
+            Data berhasil diperbarui.
+          </AlertDescription>
         </Alert>
       )}
       {alertError && (
@@ -69,6 +84,7 @@ export default function EditProfile() {
           width="40px"
           height="40px"
           ml="0.2rem"
+          border="0.5px"
         />
         <Flex ml={10} direction="column">
           <Text fontSize="20px">{userProfile.username}</Text>
@@ -82,9 +98,21 @@ export default function EditProfile() {
               Change Profil Pic
             </MenuButton>
             <MenuList>
-              <MenuItem fontSize="12px" fontWeight="bold">
-                Upload Foto
-              </MenuItem>
+              <form onSubmit={changeProfilPic} encType="multipart/form-data">
+                <MenuItem fontSize="12px" fontWeight="bold">
+                  <Text onClick={() => inputFile.current.click()}>
+                    <input
+                      type="file"
+                      id="file"
+                      name="image_posting"
+                      ref={inputFile}
+                      style={{ display: "none" }}
+                      onChange="submit"
+                    />
+                    Upload Foto
+                  </Text>
+                </MenuItem>
+              </form>
               <MenuItem fontSize="12px" fontWeight="bold" color="red.500">
                 Remove Foto
               </MenuItem>
