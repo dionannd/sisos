@@ -6,14 +6,14 @@ import homeRequest from "api/home";
 import UserContext from "context/user/UserContext";
 
 export default function DetailPostPage() {
-  const [detail, setDetail] = useState([]);
+  const [posting, setPosting] = useState([]);
 
   const { userProfile } = useContext(UserContext);
   const { id } = useParams();
 
   const getDetailPost = async () => {
     const res = await homeRequest.getDetailPosting(id);
-    setDetail(res);
+    setPosting(res);
   };
 
   useEffect(() => {
@@ -21,5 +21,11 @@ export default function DetailPostPage() {
     getDetailPost();
   }, []);
 
-  return <CardPostDetail data={detail} user={userProfile} />;
+  return (
+    <CardPostDetail
+      data={posting}
+      user={userProfile}
+      getComments={getDetailPost}
+    />
+  );
 }

@@ -29,6 +29,7 @@ export default function CardPost(props, { ...rest }) {
   const { data, likePosting, unLikePosting, user, getPost } = props;
   const [detail, setDetail] = useState({});
   const [readMore, setMore] = useState(true);
+  const [readComment] = useState(true);
   const [comment, setComment] = React.useState("");
   // const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -38,13 +39,14 @@ export default function CardPost(props, { ...rest }) {
     onClose: onCloseComment,
   } = useDisclosure();
 
-  const deletePosts = async (id) => {
-    await homeRequest.deletePosting(id);
-    getPost(user.user_id);
-  };
   const getDetailPosting = async (id) => {
     const res = await homeRequest.getDetailPosting(id);
     setDetail(res);
+  };
+
+  const deletePosts = async (id) => {
+    await homeRequest.deletePosting(id);
+    getPost(user.user_id);
   };
 
   const createComments = async (payload) => {
@@ -66,7 +68,7 @@ export default function CardPost(props, { ...rest }) {
         borderColor="#E5E5E5"
         borderWidth={{ base: 0, sm: 0, md: "1px" }}
         mb={{ base: 4, md: 8, lg: 8 }}
-        w={{ md: "35rem", lg: "36rem" }}
+        w={{ md: "35rem", lg: "35rem" }}
         {...rest}
       >
         {data.image !== null && (
@@ -121,7 +123,7 @@ export default function CardPost(props, { ...rest }) {
             </Menu>
           </Flex>
           <Text
-            mt={4}
+            mt={2}
             mb={Number(data.total_comment) !== 0 ? 0 : 4}
             fontSize="14px"
             whiteSpace="pre-line"
@@ -154,13 +156,10 @@ export default function CardPost(props, { ...rest }) {
               >
                 View all {data.total_comment} comments
               </Button>
-              <Flex mb={3} alignItems="center">
+              <Flex mb={3}>
                 <Avatar src={data.comment.profil_pic} size="xs" />
-                <Text ml={2} fontWeight="bold" fontSize="sm">
-                  {data.comment.username}
-                </Text>
-                <Text ml={4} fontSize="sm">
-                  {data.comment.content}
+                <Text ml={2} fontSize="sm" isTruncated={readComment}>
+                  <b>{data.comment.username}</b> {data.comment.content}
                 </Text>
               </Flex>
             </>
@@ -228,6 +227,7 @@ export default function CardPost(props, { ...rest }) {
                   mr={10}
                   mt={4}
                   as="button"
+                  type="submit"
                   fontSize="sm"
                   color="blue.500"
                   onClick={() =>
