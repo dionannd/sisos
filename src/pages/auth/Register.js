@@ -46,6 +46,7 @@ export default function RegisterPage() {
       setLoading(true);
       await authRequest.register(data);
       notif("Success!", "Please sign in", "success");
+      setData({});
     } catch (error) {
       notif("Error!", error.response.data.message, "error");
     } finally {
@@ -112,7 +113,7 @@ export default function RegisterPage() {
                   bg="gray.50"
                   _hover={{ borderColor: "gray.200" }}
                   _focus={{ borderColor: "gray.400" }}
-                  isRequired={true}
+                  isRequired
                   onChange={(e) => setData({ ...data, email: e.target.value })}
                 />
               </FormControl>
@@ -125,7 +126,7 @@ export default function RegisterPage() {
                   bg="gray.50"
                   _hover={{ borderColor: "gray.200" }}
                   _focus={{ borderColor: "gray.400" }}
-                  isRequired={true}
+                  isRequired
                   onChange={(e) =>
                     setData({ ...data, fullname: e.target.value })
                   }
@@ -142,7 +143,7 @@ export default function RegisterPage() {
                     borderColor: "gray.200",
                   }}
                   _focus={{ borderColor: "gray.400" }}
-                  isRequired={true}
+                  isRequired
                   onChange={(e) =>
                     setData({ ...data, username: e.target.value })
                   }
@@ -158,7 +159,7 @@ export default function RegisterPage() {
                     bg="gray.50"
                     _hover={{ borderColor: "gray.200" }}
                     _focus={{ borderColor: "gray.400" }}
-                    isRequired={true}
+                    isRequired
                     onChange={(e) =>
                       setData({ ...data, password: e.target.value })
                     }
@@ -189,13 +190,12 @@ export default function RegisterPage() {
                 onClick={handleRegister}
                 isLoading={isLoading}
                 loadingText="Signing up..."
-                isDisabled={data === "" ? true : false}
               >
                 Sign up
               </Button>
               <Text fontSize="xs" textAlign="center" color="gray.500">
-                Dengan mendaftar, Anda menyetujui Ketentuan, Kebijakan Data, dan
-                Kebijakan Cookie kami.
+                By registering, you agree to our Terms, Data Policy and Cookie
+                Policy.
               </Text>
             </Flex>
             <Flex
