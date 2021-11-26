@@ -1,7 +1,7 @@
 import React from "react";
-import { SearchIcon } from "@chakra-ui/icons";
-import { Flex, Text } from "@chakra-ui/react";
 import {
+  Flex,
+  Text,
   Menu,
   MenuButton,
   MenuList,
@@ -10,8 +10,16 @@ import {
   Avatar,
   Button,
   HStack,
+  IconButton,
 } from "@chakra-ui/react";
-import { IconUser, SettingIcon, IconPost } from "components";
+import { SearchIcon } from "@chakra-ui/icons";
+import {
+  IconUser,
+  SettingIcon,
+  IconPost,
+  IconHome,
+  IconMessage,
+} from "components";
 import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
@@ -25,43 +33,54 @@ const Navbar = (props) => {
   return (
     <>
       <Flex
-        height="3.4rem"
+        height="4rem"
         px={{ base: "1rem", md: "1.5rem", lg: "13rem" }}
         alignItems="center"
-        bg="white"
+        bg="#F6F6F6"
         w="full"
         position="fixed"
-        zIndex="1"
+        zIndex="5"
         borderBottomWidth="1px"
         justifyContent="space-between"
       >
-        <Text fontWeight="500" fontSize="22px" mt={1.5} as={Link} to="/home">
+        <Text fontWeight="semibold" fontSize="20px" as={Link} to="/home">
           SISOS
         </Text>
         <Button
           mr={{ base: 1, sm: 1, md: 3, lg: "5.5rem" }}
           ml={{ base: 4, lg: "7rem", md: 9 }}
-          width="full"
           leftIcon={<SearchIcon mr={2} />}
-          size="sm"
-          rounded="sm"
-          bgColor="gray.100"
-          color="gray.400"
+          width="15%"
+          rounded="full"
+          bg="white"
+          color="gray.500"
+          _hover={{ bg: "#E5E5E5" }}
           fontWeight="normal"
           onClick={openSearch}
         >
           Search
         </Button>
         <HStack>
-          <Button
-            variant="ghost"
+          <IconButton
+            aria-label="Tombol Home"
+            icon={<IconHome />}
+            bg="transparent"
             _hover={{ bg: "transparent" }}
-            _focus={{ borderWidth: 0 }}
-            _active={{ borderWidth: 0, bg: "white" }}
+          />
+          <IconButton
+            aria-label="Tombol DM"
+            icon={<IconMessage />}
+            bg="transparent"
+            _hover={{ bg: "transparent" }}
+          />
+          <IconButton
+            aria-label="Tombol New Post"
+            icon={<IconPost />}
+            bg="transparent"
+            _hover={{ bg: "transparent" }}
+            mb={4}
             onClick={openPosting}
-          >
-            <IconPost h="26px" w="26px" />
-          </Button>
+          />
           <Menu isLazy lazyBehavior="unmount">
             <MenuButton>
               <Avatar size="xs" src={user?.profil_pic} />

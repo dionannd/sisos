@@ -40,7 +40,7 @@ export default function MainLayout({ children }) {
         user={userProfile}
       />
       <Flex justifyContent="center">
-        <Box maxW="100%" margin="auto" mb={10} mt="5.5rem" bg="white">
+        <Box maxW="100%" margin="auto" mb={10} mt="5.5rem">
           {children}
         </Box>
       </Flex>

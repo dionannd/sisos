@@ -3,12 +3,12 @@ import {
   Alert,
   AlertDescription,
   Box,
+  Divider,
   CloseButton,
   HStack,
   Text,
   Heading,
   FormControl,
-  FormLabel,
   Input,
   InputGroup,
   InputRightElement,
@@ -54,31 +54,27 @@ export default function LoginPage() {
 
   React.useEffect(() => {
     isLogedIn();
-    document.title = "Sign in • Sisos";
+    document.title = "Masuk • Sisos";
   }, [isLogedIn]);
 
   return (
     <AuthLayout>
-      <CardAuth px={{ base: "8" }}>
-        <Flex direction="column" w="48vh" background="transparant" mt={10}>
-          <Heading fontSize="31px" mb={8} textAlign="center">
-            👋
+      <CardAuth>
+        <Flex direction="column" w="100%" px={16} bg="#F6F6F6">
+          <Heading fontSize="30px" py={10} textAlign="center" color="#929292">
+            Sisos
           </Heading>
-          <Text textAlign="center" fontSize="24px">
-            Sign in to Sisos
-          </Text>
           {alert && (
             <Alert
               status="error"
-              rounded="sm"
-              px={8}
-              mt={4}
+              rounded="full"
+              mb={5}
               bg="red.50"
               border="1px"
               borderColor="red.200"
             >
               <AlertDescription fontSize="13px" textAlign="center">
-                Incorrect username or password.
+                Nama pengguna atau Kata sandi salah.
               </AlertDescription>
               <CloseButton
                 position="absolute"
@@ -92,52 +88,33 @@ export default function LoginPage() {
               />
             </Alert>
           )}
-          <Box
-            bg="gray.50"
-            borderWidth="1.5px"
-            // rounded="lg"
-            mt={4}
-            p={5}
-            mb={4}
-          >
-            <FormControl mb={3.5}>
-              <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-                Username or email address
-              </FormLabel>
+          <Box>
+            <FormControl mb={5}>
               <Input
                 type="text"
-                size="sm"
+                placeholder="Alamat Email atau Nama Pengguna"
+                fontStyle="italic"
+                bg="white"
                 fontSize="sm"
                 ms={1}
-                bg="white"
                 isRequired={true}
+                rounded="full"
+                border={0}
                 onChange={(e) => setData({ ...data, username: e.target.value })}
               />
             </FormControl>
             <FormControl mb={5}>
-              <Flex justifyContent="space-between">
-                <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
-                  Password
-                </FormLabel>
-                <Text
-                  as={Link}
-                  to="/password_reset"
-                  mb={2}
-                  ms="4px"
-                  fontSize="xs"
-                  color="blue.500"
-                >
-                  Forgot password?
-                </Text>
-              </Flex>
               <InputGroup>
                 <Input
                   type={show ? "text" : "password"}
-                  size="sm"
-                  ms="1"
-                  fontSize="sm"
+                  placeholder="Kata Sandi"
+                  fontStyle="italic"
                   bg="white"
+                  fontSize="sm"
+                  ms="1"
                   isRequired={true}
+                  rounded="full"
+                  border={0}
                   onChange={(e) =>
                     setData({ ...data, password: e.target.value })
                   }
@@ -146,12 +123,11 @@ export default function LoginPage() {
                   <Text
                     as="button"
                     onClick={handleClick}
-                    h="5vh"
-                    fontWeight="normal"
-                    color="gray.500"
-                    fontSize="xs"
+                    fontSize="lg"
+                    h="20px"
+                    color="#929292"
                     mt="-5px"
-                    mr="5px"
+                    mr="8px"
                   >
                     {show ? <ViewOffIcon /> : <ViewIcon />}
                   </Text>
@@ -160,39 +136,44 @@ export default function LoginPage() {
             </FormControl>
             <Button
               w="full"
-              rounded="sm"
+              rounded="full"
               ms="1"
-              size="sm"
-              variant="gray"
-              fontSize="sm"
-              fontWeight="normal"
+              bg="#30BA00"
+              _hover={{ bg: "#289901" }}
+              color="white"
               onClick={handleLogin}
               isLoading={isLoading}
-              loadingText="Signing in..."
+              loadingText="Memasuki..."
             >
-              Sign in
+              Masuk
             </Button>
           </Box>
-          <Box borderWidth="1px" py={3} mb="5rem">
-            <Flex justifyContent="center" alignItems="center">
-              <Text ms="4px" fontSize="14px">
-                New to Sisos?
-              </Text>
-              <Button
-                as={Link}
-                to="/signup"
-                ml={1}
-                ms="4px"
-                variant="link"
-                fontSize="sm"
-                fontWeight="normal"
-                color="blue.500"
-              >
-                Create an account
-              </Button>
-              <Text>.</Text>
-            </Flex>
-          </Box>
+          <Button
+            variant="link"
+            fontWeight="normal"
+            textAlign="center"
+            mt={3}
+            mb={5}
+            as={Link}
+            to="/password_reset"
+            fontSize="13px"
+            style={{ fontStyle: "italic" }}
+          >
+            Lupa Kata Sandi?
+          </Button>
+          <Divider height="2px" bg="gray.600" style={{}} mb={5} />
+          <Button
+            as={Link}
+            to="/signup"
+            bg="#3EC6FF"
+            _hover={{ bg: "#37AFE1" }}
+            mb={14}
+            ms="1px"
+            color="white"
+            rounded="full"
+          >
+            Daftar Akun
+          </Button>
           <Flex
             alignItems="center"
             color="gray.500"

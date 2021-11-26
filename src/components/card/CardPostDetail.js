@@ -93,7 +93,7 @@ const CardPostDetail = (props) => {
             <Flex
               key={index}
               alignItems="center"
-              mb={2}
+              mb={1}
               mx={4}
               justifyContent="space-between"
             >
@@ -101,18 +101,17 @@ const CardPostDetail = (props) => {
                 <Avatar size="sm" src={item.profil_pic} />
                 <Flex direction="column">
                   <Flex alignItems="center">
-                    <Box bg="gray.200" rounded="2xl" ml={2} p={2} mb={0.5}>
+                    <Box ml={1} px={2} py={1} mb={0.5}>
                       <Flex alignItems="center">
                         <Text>
                           <b>{item.username}</b> {item.content}
                         </Text>
                       </Flex>
-                      <Text></Text>
                     </Box>
                   </Flex>
                   <Flex
                     color="gray.500"
-                    ml={2}
+                    ml={1}
                     fontSize="12px"
                     alignItems="center"
                   >

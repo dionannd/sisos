@@ -1,10 +1,12 @@
+export { default as IconComment } from "./IconComment";
+export { default as IconGallery } from "./IconGallery";
+export { default as IconHome } from "./IconHome";
 export { default as IconLike } from "./IconLike";
 export { default as IconLikeActive } from "./IconLikeActive";
-export { default as IconComment } from "./IconComment";
-export { default as SignOutIcon } from "./SignOutIcon";
-export { default as SettingIcon } from "./SettingIcon";
+export { default as IconMessage } from "./IconMessage";
 export { default as IconUser } from "./IconUser";
 export { default as IconPost } from "./IconPost";
-export { default as IconHome } from "./IconHome";
-export { default as IconGallery } from "./IconGallery";
+export { default as IconSharePost } from "./IconSharePost";
 export { default as IconMore } from "./IconMore";
+export { default as SettingIcon } from "./SettingIcon";
+export { default as SignOutIcon } from "./SignOutIcon";
