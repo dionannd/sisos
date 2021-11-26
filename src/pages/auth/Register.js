@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
-  Divider,
   HStack,
+  Heading,
   FormControl,
   Input,
   Button,
@@ -45,7 +45,7 @@ export default function RegisterPage() {
     try {
       setLoading(true);
       await authRequest.register(data);
-      notif("Success!", "Please sign in", "success");
+      notif("Sukses!", "Silahkan masuk", "success");
       setData({});
     } catch (error) {
       notif("Error!", error.response.data.message, "error");
@@ -55,223 +55,168 @@ export default function RegisterPage() {
   };
 
   useEffect(() => {
-    document.title = "Sign up • Sisos";
+    document.title = "Daftar • Sisos";
   }, []);
 
   return (
     <AuthLayout>
-      <CardAuth bg="gray.50">
-        <Flex alignItems="center" justifyContent="center">
+      <CardAuth>
+        <Flex direction="column" w="100%" px={16} bg="#F6F6F6">
+          <Heading fontSize="30px" py={10} textAlign="center" color="#929292">
+            Sisos
+          </Heading>
+          <Button
+            rounded="full"
+            bg="#AFAFAF"
+            _hover={{ bg: "#929292" }}
+            leftIcon={<FaGoogle />}
+          >
+            Masuk dengan Google
+          </Button>
+          <Text textAlign="center" fontSize="sm" color="#929292" py={2}>
+            o
+          </Text>
+          <FormControl id="email" mb={5}>
+            <Input
+              type="email"
+              placeholder="Alamat Email"
+              fontSize="sm"
+              fontStyle="italic"
+              bg="white"
+              border={0}
+              rounded="full"
+              isRequired
+              onChange={(e) => setData({ ...data, email: e.target.value })}
+            />
+          </FormControl>
+          <FormControl id="fullname" mb={5}>
+            <Input
+              type="text"
+              placeholder="Nama Lengkap"
+              fontSize="sm"
+              fontStyle="italic"
+              bg="white"
+              border={0}
+              rounded="full"
+              isRequired={true}
+              onChange={(e) => setData({ ...data, fullname: e.target.value })}
+            />
+          </FormControl>
+          <FormControl id="username" mb={5} isRequired>
+            <Input
+              type="text"
+              placeholder="Nama Pengguna"
+              fontSize="sm"
+              fontStyle="italic"
+              bg="white"
+              border={0}
+              rounded="full"
+              isRequired={true}
+              onChange={(e) => setData({ ...data, username: e.target.value })}
+            />
+          </FormControl>
+          <FormControl id="password" mb={5}>
+            <InputGroup>
+              <Input
+                type={show ? "text" : "password"}
+                placeholder="Kata Sandi"
+                fontSize="sm"
+                rounded="full"
+                fontStyle="italic"
+                bg="white"
+                border={0}
+                isRequired
+                onChange={(e) => setData({ ...data, password: e.target.value })}
+              />
+              <InputRightElement>
+                <Text
+                  as="button"
+                  onClick={handleClick}
+                  fontSize="lg"
+                  h="20px"
+                  color="#929292"
+                  mt="-5px"
+                  mr="8px"
+                >
+                  {show ? <ViewOffIcon /> : <ViewIcon />}
+                </Text>
+              </InputRightElement>
+            </InputGroup>
+          </FormControl>
+          <Button
+            bg="#3EC6FF"
+            _hover={{ bg: "#37AFE1" }}
+            color="white"
+            rounded="full"
+            onClick={handleRegister}
+            isLoading={isLoading}
+            loadingText="Mendaftar..."
+          >
+            Daftar Akun
+          </Button>
+          <Text pt={2} pb={4} fontSize="xs" textAlign="center" color="gray.500">
+            Dengan mendaftar, Anda menyetujui Ketentuan, Kebijakan Data, dan
+            Kebijakan Cookie kami.
+          </Text>
+          <Button
+            as={Link}
+            mb={5}
+            to="/"
+            rounded="full"
+            bg="#30BA00"
+            _hover={{ bg: "#289901" }}
+            color="white"
+          >
+            Masuk
+          </Button>
           <Flex
             alignItems="center"
-            justifyContent="center"
-            my={{ base: "4", sm: "8", md: "8", lg: "8" }}
-            w="22rem"
+            color="gray.500"
+            fontSize="xs"
             direction="column"
           >
-            <Flex
-              direction="column"
-              p={10}
-              background="transparent"
-              bg="white"
-              border="1px"
-              borderColor="gray.300"
-            >
-              <Text
-                fontSize="24px"
-                fontWeight="bold"
-                textAlign="center"
-                mb="5px"
-              >
-                Sisos
-              </Text>
-              <Text
-                mb="20px"
-                ms="4px"
-                color="gray.500"
-                fontWeight="bold"
-                fontSize="14px"
-              >
-                Sign up to see photos and videos from your friends.
-              </Text>
-              <Button rounded="sm" leftIcon={<FaGoogle />} size="sm">
-                Sign in with Google
-              </Button>
-              <Flex alignItems="center" color="gray.500" mt={3} mb={3}>
-                <Divider />
-                <Text fontSize="xs" mx={5} fontWeight="bold">
-                  ATAU
-                </Text>
-                <Divider />
-              </Flex>
-              <FormControl id="email" mb={2}>
-                <Input
-                  type="email"
-                  placeholder="Email address"
-                  fontSize="12px"
-                  rounded="sm"
-                  bg="gray.50"
-                  _hover={{ borderColor: "gray.200" }}
-                  _focus={{ borderColor: "gray.400" }}
-                  isRequired
-                  onChange={(e) => setData({ ...data, email: e.target.value })}
-                />
-              </FormControl>
-              <FormControl id="fullname" mb={2}>
-                <Input
-                  type="text"
-                  placeholder="Fullname"
-                  fontSize="12px"
-                  rounded="sm"
-                  bg="gray.50"
-                  _hover={{ borderColor: "gray.200" }}
-                  _focus={{ borderColor: "gray.400" }}
-                  isRequired
-                  onChange={(e) =>
-                    setData({ ...data, fullname: e.target.value })
-                  }
-                />
-              </FormControl>
-              <FormControl id="username" mb={2} isRequired>
-                <Input
-                  type="text"
-                  placeholder="Username"
-                  fontSize="12px"
-                  rounded="sm"
-                  bg="gray.50"
-                  _hover={{
-                    borderColor: "gray.200",
-                  }}
-                  _focus={{ borderColor: "gray.400" }}
-                  isRequired
-                  onChange={(e) =>
-                    setData({ ...data, username: e.target.value })
-                  }
-                />
-              </FormControl>
-              <FormControl id="password" mb={4}>
-                <InputGroup>
-                  <Input
-                    type={show ? "text" : "password"}
-                    placeholder="Password"
-                    fontSize="12px"
-                    rounded="sm"
-                    bg="gray.50"
-                    _hover={{ borderColor: "gray.200" }}
-                    _focus={{ borderColor: "gray.400" }}
-                    isRequired
-                    onChange={(e) =>
-                      setData({ ...data, password: e.target.value })
-                    }
-                  />
-                  <InputRightElement>
-                    <Text
-                      as="button"
-                      onClick={handleClick}
-                      h="5vh"
-                      fontWeight="normal"
-                      color="gray.500"
-                      fontSize="xs"
-                      mt="-2px"
-                      mr="5px"
-                    >
-                      {show ? <ViewOffIcon /> : <ViewIcon />}
-                    </Text>
-                  </InputRightElement>
-                </InputGroup>
-              </FormControl>
+            <HStack spacing={4} mb={1}>
               <Button
-                mb={4}
-                size="sm"
-                fontWeight="normal"
-                w="full"
-                rounded="sm"
-                variant="gray"
-                onClick={handleRegister}
-                isLoading={isLoading}
-                loadingText="Signing up..."
-              >
-                Sign up
-              </Button>
-              <Text fontSize="xs" textAlign="center" color="gray.500">
-                By registering, you agree to our Terms, Data Policy and Cookie
-                Policy.
-              </Text>
-            </Flex>
-            <Flex
-              alignItems="center"
-              border="1px"
-              py={5}
-              bg="white"
-              borderColor="gray.300"
-              mt={3}
-              mb="5rem"
-              w="22rem"
-              justifyContent="center"
-            >
-              <Text ms="4px" fontSize="14px">
-                Have an account?
-              </Text>
-              <Text
                 as={Link}
+                to="#"
+                variant="link"
                 color="blue.500"
-                to="/"
-                ml={1}
-                ms="4px"
-                fontSize="14px"
+                fontSize="xs"
+                fontWeight="normal"
               >
-                Sign in
-              </Text>
-            </Flex>
-            <Flex
-              alignItems="center"
-              color="gray.500"
-              fontSize="xs"
-              direction="column"
-            >
-              <HStack spacing={4} mb={1}>
-                <Button
-                  as={Link}
-                  to="#"
-                  variant="link"
-                  color="blue.500"
-                  fontSize="xs"
-                  fontWeight="normal"
-                >
-                  Terms
-                </Button>
-                <Button
-                  as={Link}
-                  to="#"
-                  variant="link"
-                  color="blue.500"
-                  fontSize="xs"
-                  fontWeight="normal"
-                >
-                  Privacy
-                </Button>
-                <Button
-                  as={Link}
-                  to="#"
-                  variant="link"
-                  color="blue.500"
-                  fontSize="xs"
-                  fontWeight="normal"
-                >
-                  Security
-                </Button>
-                <Button
-                  as={Link}
-                  to="#"
-                  variant="link"
-                  fontSize="xs"
-                  fontWeight="normal"
-                  _hover={{ color: "blue.500" }}
-                >
-                  Contact Dev
-                </Button>
-              </HStack>
-            </Flex>
+                Terms
+              </Button>
+              <Button
+                as={Link}
+                to="#"
+                variant="link"
+                color="blue.500"
+                fontSize="xs"
+                fontWeight="normal"
+              >
+                Privacy
+              </Button>
+              <Button
+                as={Link}
+                to="#"
+                variant="link"
+                color="blue.500"
+                fontSize="xs"
+                fontWeight="normal"
+              >
+                Security
+              </Button>
+              <Button
+                as={Link}
+                to="#"
+                variant="link"
+                fontSize="xs"
+                fontWeight="normal"
+                _hover={{ color: "blue.500" }}
+              >
+                Contact Dev
+              </Button>
+            </HStack>
           </Flex>
         </Flex>
       </CardAuth>

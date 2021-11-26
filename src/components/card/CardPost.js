@@ -10,7 +10,7 @@ import {
   Box,
   Avatar,
   Image,
-  HStack,
+  IconButton,
   Button,
   useDisclosure,
   Menu,
@@ -20,7 +20,13 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { IconLike, IconLikeActive, IconComment, IconMore } from "components";
+import {
+  IconLike,
+  IconLikeActive,
+  IconComment,
+  IconMore,
+  IconSharePost,
+} from "components";
 import { ModalListComment } from "components";
 import homeRequest from "api/home";
 import moment from "moment";
@@ -61,28 +67,28 @@ export default function CardPost(props, { ...rest }) {
     getPost(user.user_id);
   };
 
+  var idLocale = require("moment/locale/id");
+
   return (
     <>
       <Box
-        rounded="sm"
+        bg="white "
+        rounded="3xl"
         borderColor="#E5E5E5"
         borderWidth={{ base: 0, sm: 0, md: "1px" }}
         mb={{ base: 4, md: 8, lg: 8 }}
-        w={{ md: "35rem", lg: "35rem" }}
+        w={{ md: "32rem", lg: "32rem" }}
         {...rest}
       >
-        {data.image !== null && (
-          <Image
-            alignItems="center"
-            src={data.image}
-            w="full"
-            h="35rem"
-            objectFit="cover"
-          />
-        )}
-        <Box px={{ base: "1rem", lg: 4 }} py={{ base: "1rem", lg: 2 }}>
-          <Flex justifyContent="space-between">
-            <Flex alignItems="center" mt={2}>
+        <Box>
+          <Flex
+            justifyContent="space-between"
+            px={4}
+            py={4}
+            borderBottom="1px"
+            borderColor="#E5E5E5"
+          >
+            <Flex alignItems="center">
               <Avatar
                 size="sm"
                 mr={4}
@@ -94,7 +100,6 @@ export default function CardPost(props, { ...rest }) {
                 to={`/${data.username}/`}
                 variant="link"
                 color="black"
-                _hover={{ color: "gray.500" }}
                 fontWeight="semibold"
                 fontSize="14px"
               >
@@ -122,93 +127,120 @@ export default function CardPost(props, { ...rest }) {
               </MenuList>
             </Menu>
           </Flex>
-          <Text
-            mt={2}
-            mb={Number(data.total_comment) !== 0 ? 0 : 4}
-            fontSize="14px"
-            whiteSpace="pre-line"
-            isTruncated={readMore}
-          >
-            {data.content}
-            {readMore && data.content.length > 100 && (
-              <Text
-                onClick={() => setMore(false)}
-                cursor="pointer"
-                fontSize="14px"
-                color="gray.500"
-              >
-                ... more
-              </Text>
-            )}
-          </Text>
-          {Number(data.total_comment) !== 0 && (
-            <>
-              <Button
-                variant="link"
-                size="sm"
-                fontWeight="normal"
-                color="gray.500"
-                _hover={{ bg: "white" }}
-                onClick={() => {
-                  getDetailPosting(data.post_id);
-                  onOpenComment();
-                }}
-              >
-                View all {data.total_comment} comments
-              </Button>
-              <Flex mb={3}>
-                <Avatar src={data.comment.profil_pic} size="xs" />
-                <Text ml={2} fontSize="sm" isTruncated={readComment}>
-                  <b>{data.comment.username}</b> {data.comment.content}
-                </Text>
-              </Flex>
-            </>
+          {data.image !== null && (
+            <Image
+              alignItems="center"
+              src={data.image}
+              w="full"
+              h="32rem"
+              objectFit="cover"
+            />
           )}
-          <Text color="gray.500" fontSize="10px">
-            {moment(data.created_at).from(new Date()).toUpperCase()}
-          </Text>
-          <Flex
-            alignItems="center"
-            justifyContent="space-between"
-            mb={2}
-            mt={1}
-          >
-            <HStack>
-              <Button
-                as={Link}
-                to={`/posting/detail/${data.post_id}`}
-                size="sm"
-                variant="ghost"
-                _hover={{ bg: "transparent" }}
-                _focus={{ bg: "transparent" }}
-                p={0}
-              >
-                <IconComment />
-              </Button>
-              <Button
-                size="sm"
-                ml={1}
-                variant="ghost"
-                _hover={{ bg: "transparent" }}
-                _focus={{ bg: "transparent" }}
-                onClick={() => {
-                  if (data.has_you_like) {
-                    unLikePosting(data.post_id);
-                  } else {
-                    likePosting(data.post_id);
-                  }
-                }}
-                p={0}
-              >
-                {data.has_you_like ? <IconLikeActive /> : <IconLike />}
-              </Button>
-            </HStack>
+          <Flex alignItems="center" py={2} pl={4}>
+            <IconButton
+              bg="transparent"
+              _hover={{ bg: "transparent" }}
+              _active={{ bg: "transparent" }}
+              onClick={() => {
+                if (data.has_you_like) {
+                  unLikePosting(data.post_id);
+                } else {
+                  likePosting(data.post_id);
+                }
+              }}
+            >
+              {data.has_you_like ? <IconLikeActive /> : <IconLike />}
+            </IconButton>
+            <IconButton
+              as={Link}
+              to={`/posting/detail/${data.post_id}`}
+              bg="transparent"
+              _hover={{ bg: "transparent" }}
+              _active={{ bg: "transparent" }}
+              icon={<IconComment />}
+            />
+            <IconButton
+              bg="transparent"
+              _hover={{ bg: "transparent" }}
+              _active={{ bg: "transparent" }}
+              icon={<IconSharePost />}
+            />
           </Flex>
           {Number(data.total_like) !== 0 && (
-            <Text fontSize="12px" fontWeight="semibold">
-              {data.total_like} Likes
+            <Text fontSize="sm" fontWeight="semibold" px={5}>
+              {data.total_like} suka
             </Text>
           )}
+          <Box px={5}>
+            <Text
+              mb={Number(data.total_comment) !== 0 ? 0 : 3}
+              fontSize="sm"
+              whiteSpace="pre-line"
+              isTruncated={readMore}
+            >
+              <Text color="black">
+                <Button
+                  as={Link}
+                  to={`/${data.username}/`}
+                  variant="link"
+                  color="black"
+                  fontWeight="semibold"
+                  fontSize="14px"
+                >
+                  {data.username}
+                </Button>{" "}
+                {data.content}
+              </Text>
+              {readMore && data.content.length > 50 && (
+                <Text
+                  onClick={() => setMore(false)}
+                  cursor="pointer"
+                  fontSize="sm"
+                  color="#969696"
+                >
+                  ... selengkapnya
+                </Text>
+              )}
+            </Text>
+            {Number(data.total_comment) !== 0 && (
+              <>
+                <Button
+                  variant="link"
+                  size="sm"
+                  fontWeight="normal"
+                  color="#969696"
+                  _hover={{ bg: "white" }}
+                  onClick={() => {
+                    getDetailPosting(data.post_id);
+                    onOpenComment();
+                  }}
+                >
+                  Lihat semua {data.total_comment} komentar
+                </Button>
+                <Flex>
+                  <Text fontSize="sm" isTruncated={readComment}>
+                    <Button
+                      as={Link}
+                      to={`/${data.comment.username}`}
+                      variant="link"
+                      color="black"
+                      fontWeight="semibold"
+                      fontSize="14px"
+                    >
+                      {data.comment.username}
+                    </Button>{" "}
+                    {data.comment.content}
+                  </Text>
+                </Flex>
+              </>
+            )}
+            <Text color="gray.500" fontSize="10px" mt={1} mb={4}>
+              {moment(data.created_at)
+                .locale("id", idLocale)
+                .from(new Date())
+                .toUpperCase()}
+            </Text>
+          </Box>
         </Box>
         <Flex display={{ base: "none", md: "inline", lg: "inline" }}>
           <FormControl>
@@ -216,7 +248,7 @@ export default function CardPost(props, { ...rest }) {
             <InputGroup size="sm" alignItems="center" p={2}>
               <Input
                 type="text"
-                placeholder="Add a comment..."
+                placeholder="Tambahkan komentar..."
                 border="0"
                 _focus={{ border: 0 }}
                 value={comment}
@@ -227,14 +259,13 @@ export default function CardPost(props, { ...rest }) {
                   mr={10}
                   mt={4}
                   as="button"
-                  type="submit"
                   fontSize="sm"
-                  color="blue.500"
+                  color="#00A5F9"
                   onClick={() =>
                     createComments({ post_id: data.post_id, content: comment })
                   }
                 >
-                  Post
+                  Kirim
                 </Text>
               </InputRightElement>
             </InputGroup>

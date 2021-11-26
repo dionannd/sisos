@@ -62,6 +62,7 @@ const theme = extendTheme({
       /* width */
       "::-webkit-scrollbar": {
         width: "4px",
+        display: "none",
       },
 
       /* Track */
@@ -77,6 +78,10 @@ const theme = extendTheme({
       /* Handle on hover */
       "::-webkit-scrollbar-thumb:hover": {
         background: "#555",
+      },
+      body: {
+        background: "#E5E5E5",
+        fontFamily: "Montserrat",
       },
     },
   },
