@@ -7,6 +7,7 @@ import {
   EditProfile,
   EditPassword,
   Activity,
+  MessagePage,
 } from "../pages";
 
 const routeList = [
@@ -18,6 +19,10 @@ const routeList = [
   {
     path: "/posting/detail/:id",
     component: DetailPostPage,
+  },
+  {
+    path: "/direct/inbox",
+    component: MessagePage,
   },
   // Profiles
   {

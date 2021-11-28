@@ -7,6 +7,9 @@ export { default as ForgotPage } from "./auth/ForgotPassword";
 export { default as HomePage } from "./home";
 export { default as DetailPostPage } from "./home/DetailPost";
 
+// Message Page
+export { default as MessagePage } from "./message";
+
 // Profile Page
 export { default as ProfilePage } from "./profile";
 export { default as SavedPage } from "./profile/Saved";
