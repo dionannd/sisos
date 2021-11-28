@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Flex,
   Text,
@@ -9,18 +9,20 @@ import {
   MenuDivider,
   Avatar,
   Button,
-  HStack,
   IconButton,
 } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
 import {
   IconUser,
-  SettingIcon,
+  IconSearch,
   IconPost,
   IconHome,
+  IconHomeActive,
   IconMessage,
+  IconMessageActive,
+  IconSave,
+  IconSetting,
 } from "components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = (props) => {
   const { openPosting, user, openSearch } = props;
@@ -30,59 +32,73 @@ const Navbar = (props) => {
     window.location.href = "/";
   };
 
+  const [newActiveLink, setNewActiveLink] = useState(false);
+
   return (
     <>
       <Flex
         height="4rem"
-        px={{ base: "1rem", md: "1.5rem", lg: "13rem" }}
+        px={{ base: "1rem", md: "1.5rem", lg: "20rem" }}
         alignItems="center"
         bg="#F6F6F6"
         w="full"
         position="fixed"
         zIndex="5"
-        borderBottomWidth="1px"
         justifyContent="space-between"
       >
         <Text fontWeight="semibold" fontSize="20px" as={Link} to="/home">
           SISOS
         </Text>
         <Button
-          mr={{ base: 1, sm: 1, md: 3, lg: "5.5rem" }}
-          ml={{ base: 4, lg: "7rem", md: 9 }}
-          leftIcon={<SearchIcon mr={2} />}
+          mx="7rem"
+          leftIcon={<IconSearch />}
           width="15%"
           rounded="full"
           bg="white"
           color="gray.500"
           _hover={{ bg: "#E5E5E5" }}
-          fontWeight="normal"
+          fontSize="xs"
+          size="sm"
           onClick={openSearch}
         >
-          Search
+          Cari
         </Button>
-        <HStack>
-          <IconButton
-            aria-label="Tombol Home"
-            icon={<IconHome />}
-            bg="transparent"
-            _hover={{ bg: "transparent" }}
-          />
-          <IconButton
-            aria-label="Tombol DM"
-            icon={<IconMessage />}
-            bg="transparent"
-            _hover={{ bg: "transparent" }}
-          />
+        <Flex alignItems="center">
+          <NavLink
+            style={{ marginRight: "10px" }}
+            to="/home"
+            isActive={(match, location) => {
+              match ? setNewActiveLink(true) : setNewActiveLink(false);
+              return match;
+            }}
+          >
+            {newActiveLink === true ? <IconHome /> : <IconHomeActive />}
+          </NavLink>
+          <NavLink
+            mx={2}
+            to="/direct/inbox"
+            isActive={(match, location) => {
+              match ? setNewActiveLink(true) : setNewActiveLink(false);
+              return match;
+            }}
+          >
+            {newActiveLink !== true ? <IconMessage /> : <IconMessageActive />}
+          </NavLink>
           <IconButton
             aria-label="Tombol New Post"
             icon={<IconPost />}
             bg="transparent"
             _hover={{ bg: "transparent" }}
-            mb={4}
             onClick={openPosting}
           />
           <Menu isLazy lazyBehavior="unmount">
-            <MenuButton>
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              bg="transparent"
+              _hover={{ bg: "transparent" }}
+              _active={{ bg: "transparent" }}
+            >
               <Avatar size="xs" src={user?.profil_pic} />
             </MenuButton>
             <MenuList
@@ -90,35 +106,39 @@ const Navbar = (props) => {
               border="0"
               boxShadow="md"
               rounded="lg"
-              fontWeight="800"
-              color="gray.600"
               tabIndex={0}
             >
               <MenuItem
-                icon={<IconUser />}
+                icon={<IconUser width="18" height="18" />}
                 as={Link}
                 to={`/${user.username}`}
-                fontWeight="400"
-                fontSize="14px"
+                fontSize="sm"
               >
-                Profile
+                Profil
               </MenuItem>
               <MenuItem
-                icon={<SettingIcon />}
+                icon={<IconSave width="18" height="18" />}
+                as={Link}
+                to={`/${user.username}`}
+                fontSize="sm"
+              >
+                Disimpan
+              </MenuItem>
+              <MenuItem
+                icon={<IconSetting width="18" height="18" />}
                 as={Link}
                 to="/setting/accounts/edit"
-                fontWeight="400"
-                fontSize="14px"
+                fontSize="sm"
               >
-                Setting
+                Pengaturan
               </MenuItem>
               <MenuDivider borderColor="gray.300" />
-              <MenuItem color="#FF4C4C" onClick={handleLogout} fontSize="14px">
-                Logout
+              <MenuItem onClick={handleLogout} fontSize="sm">
+                Keluar
               </MenuItem>
             </MenuList>
           </Menu>
-        </HStack>
+        </Flex>
       </Flex>
     </>
   );

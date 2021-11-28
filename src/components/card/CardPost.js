@@ -26,6 +26,7 @@ import {
   IconComment,
   IconMore,
   IconSharePost,
+  IconSave,
 } from "components";
 import { ModalListComment } from "components";
 import homeRequest from "api/home";
@@ -84,7 +85,7 @@ export default function CardPost(props, { ...rest }) {
           <Flex
             justifyContent="space-between"
             px={4}
-            py={4}
+            py={3}
             borderBottom="1px"
             borderColor="#E5E5E5"
           >
@@ -97,7 +98,7 @@ export default function CardPost(props, { ...rest }) {
               />
               <Button
                 as={Link}
-                to={`/${data.username}/`}
+                to={`/${data.username}`}
                 variant="link"
                 color="black"
                 fontWeight="semibold"
@@ -136,35 +137,43 @@ export default function CardPost(props, { ...rest }) {
               objectFit="cover"
             />
           )}
-          <Flex alignItems="center" py={2} pl={4}>
-            <IconButton
-              bg="transparent"
-              _hover={{ bg: "transparent" }}
-              _active={{ bg: "transparent" }}
-              onClick={() => {
-                if (data.has_you_like) {
-                  unLikePosting(data.post_id);
-                } else {
-                  likePosting(data.post_id);
-                }
-              }}
-            >
-              {data.has_you_like ? <IconLikeActive /> : <IconLike />}
-            </IconButton>
-            <IconButton
-              as={Link}
-              to={`/posting/detail/${data.post_id}`}
-              bg="transparent"
-              _hover={{ bg: "transparent" }}
-              _active={{ bg: "transparent" }}
-              icon={<IconComment />}
-            />
-            <IconButton
-              bg="transparent"
-              _hover={{ bg: "transparent" }}
-              _active={{ bg: "transparent" }}
-              icon={<IconSharePost />}
-            />
+          <Flex
+            py={2}
+            px={4}
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Flex alignItems="center">
+              <IconButton
+                bg="transparent"
+                _hover={{ bg: "transparent" }}
+                _active={{ bg: "transparent" }}
+                onClick={() => {
+                  if (data.has_you_like) {
+                    unLikePosting(data.post_id);
+                  } else {
+                    likePosting(data.post_id);
+                  }
+                }}
+              >
+                {data.has_you_like ? <IconLikeActive /> : <IconLike />}
+              </IconButton>
+              <IconButton
+                as={Link}
+                to={`/posting/detail/${data.post_id}`}
+                bg="transparent"
+                _hover={{ bg: "transparent" }}
+                _active={{ bg: "transparent" }}
+                icon={<IconComment />}
+              />
+              <IconButton
+                bg="transparent"
+                _hover={{ bg: "transparent" }}
+                _active={{ bg: "transparent" }}
+                icon={<IconSharePost />}
+              />
+            </Flex>
+            <IconSave />
           </Flex>
           {Number(data.total_like) !== 0 && (
             <Text fontSize="sm" fontWeight="semibold" px={5}>
@@ -181,11 +190,11 @@ export default function CardPost(props, { ...rest }) {
               <Text color="black">
                 <Button
                   as={Link}
-                  to={`/${data.username}/`}
+                  to={`/${data.username}`}
                   variant="link"
                   color="black"
                   fontWeight="semibold"
-                  fontSize="14px"
+                  fontSize="sm"
                 >
                   {data.username}
                 </Button>{" "}

@@ -4,7 +4,7 @@ import {
   Box,
   Flex,
   Avatar,
-  Divider,
+  Button,
   Text,
   Image,
   Input,
@@ -13,13 +13,19 @@ import {
   IconButton,
   FormControl,
 } from "@chakra-ui/react";
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { IconMore, IconLike, IconComment } from "components";
+import {
+  IconLike,
+  IconLikeActive,
+  IconComment,
+  IconMore,
+  IconSharePost,
+  IconSave,
+} from "components";
 import homeRequest from "api/home";
 import moment from "moment";
 
 const CardPostDetail = (props) => {
-  const { data, getComments, user } = props;
+  const { data, getComments } = props;
   const [comment, setComment] = useState("");
 
   const createComments = async (payload) => {
@@ -31,114 +37,176 @@ const CardPostDetail = (props) => {
       console.log(error);
     }
   };
+
+  var idLocale = require("moment/locale/id");
+
   return (
-    <Box w="35rem" border="1px" borderColor="gray.200" rounded="sm">
-      <Flex direction="column">
-        <Flex
-          py={1}
+    <Flex>
+      {data.detail?.image !== null && (
+        <Image
           alignItems="center"
+          src={data?.detail?.image}
+          w="32rem"
+          h="32rem"
+          objectFit="cover"
+          bg="white"
+          roundedLeft="3xl"
+        />
+      )}
+      <Box
+        w={data.detail?.image === null ? "32rem" : "22rem "}
+        h="32rem"
+        bg="white"
+        roundedRight="3xl"
+        roundedLeft={data.detail?.image === null ? "3xl" : "0"}
+      >
+        <Flex
+          alignItems="center"
+          px={4}
+          py={3}
+          justifyContent="space-between"
           borderBottom="1px"
-          borderBottomColor="gray.200"
+          borderColor="#E5E5E5"
         >
-          <IconButton
-            as={Link}
-            to="/home"
-            size="sm"
-            borderRadius="50"
-            _hover={{ bg: "gray.200" }}
-            ml={1}
-            icon={<ArrowBackIcon h="20px" w="20px" />}
-            variant="transparant"
-          />
-          <Flex direction="column">
-            <Text ml={3} fontWeight="bold" mt={1} fontSize="md">
-              Home
-            </Text>
-          </Flex>
-        </Flex>
-        {data.detail?.image !== null && (
-          <Image
-            alignItems="center"
-            src={data.detail?.image}
-            w="full"
-            h="35rem"
-          />
-        )}
-        <Flex alignItems="center" p={4} justifyContent="space-between">
           <Flex alignItems="center">
-            <Avatar w="40px" h="40px" src={data.detail?.profil_pic} />
-            <Text ml={2} fontWeight="bold">
+            <Avatar
+              size="sm"
+              mr={4}
+              name={data.detail?.username}
+              src={data.detail?.profil_pic}
+            />
+            <Button
+              as={Link}
+              to={`/${data.detail?.username}`}
+              variant="link"
+              color="black"
+              fontWeight="semibold"
+              fontSize="14px"
+            >
               {data.detail?.username}
-            </Text>
+            </Button>
           </Flex>
           <IconMore w="20px" h="20px" />
         </Flex>
-        <Text px={4} mb={8} mt={-1}>
-          {data.detail?.content}
-        </Text>
-        <Text px={4} mb={2} color="gray.500" fontSize="10px">
-          {moment(data.detail?.created_at).from(new Date()).toUpperCase()}
-        </Text>
-        <Flex ml={4} mb={2}>
-          <Text as="button">
-            <IconComment />
-          </Text>
-          <Text as="button">
-            <IconLike ml={2} />
-          </Text>
-        </Flex>
-        <Divider mb={4} />
-        <Box maxH="30rem" overflowY="auto">
+        <Box px={4} py={5} h="19rem" overflowY="auto">
+          <Flex mb={3}>
+            <Avatar
+              size="sm"
+              mr={4}
+              name={data.detail?.username}
+              src={data.detail?.profil_pic}
+            />
+            <Text color="black" fontSize="sm" whiteSpace="pre-line">
+              <Button
+                mt={1}
+                as={Link}
+                to={`/${data.detail?.username}`}
+                variant="link"
+                color="black"
+                fontWeight="semibold"
+                fontSize="sm"
+              >
+                {data.detail?.username}
+              </Button>{" "}
+              {data.detail?.content}
+              <Text color="gray.500" fontSize="10px" pt={3}>
+                {moment(data.created_at)
+                  .locale("id", idLocale)
+                  .from(new Date())
+                  .toUpperCase()}
+              </Text>
+            </Text>
+          </Flex>
           {data.comments?.map((item, index) => (
-            <Flex
-              key={index}
-              alignItems="center"
-              mb={1}
-              mx={4}
-              justifyContent="space-between"
-            >
-              <Flex>
-                <Avatar size="sm" src={item.profil_pic} />
-                <Flex direction="column">
-                  <Flex alignItems="center">
-                    <Box ml={1} px={2} py={1} mb={0.5}>
-                      <Flex alignItems="center">
-                        <Text>
-                          <b>{item.username}</b> {item.content}
-                        </Text>
-                      </Flex>
-                    </Box>
-                  </Flex>
-                  <Flex
-                    color="gray.500"
-                    ml={1}
-                    fontSize="12px"
-                    alignItems="center"
-                  >
-                    <Text ml={2} fontWeight="bold">
-                      Likes
-                    </Text>
-                    {item.user_id === user.user_id && (
-                      <Text ml={2} fontWeight="bold">
-                        Edit
-                      </Text>
-                    )}
-                    <Text ml={2} fontSize="10px">
-                      {moment(item.created_at).from(new Date()).toUpperCase()}{" "}
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Flex>
+            <Flex key="index">
+              <Avatar
+                size="sm"
+                mr={4}
+                name={item.username}
+                src={item.profil_pic}
+              />
+              <Text color="black" fontSize="sm" whiteSpace="pre-line">
+                <Button
+                  mt={1}
+                  as={Link}
+                  to={`/${item.username}`}
+                  variant="link"
+                  color="black"
+                  fontWeight="semibold"
+                  fontSize="sm"
+                >
+                  {item.username}
+                </Button>{" "}
+                {item.content}
+                <Text color="gray.500" fontSize="10px" py={3}>
+                  {moment(item.created_at)
+                    .locale("id", idLocale)
+                    .from(new Date())
+                    .toUpperCase()}
+                </Text>
+              </Text>
             </Flex>
           ))}
         </Box>
-        <Flex display={{ base: "none", md: "inline", lg: "inline" }}>
-          <FormControl mt={4}>
-            <Divider />
+        <Box>
+          <Flex
+            py={1}
+            px={4}
+            alignItems="center"
+            justifyContent="space-between"
+            borderTop="1px"
+            borderColor="#E5E5E5"
+          >
+            <Flex alignItems="center">
+              <IconButton
+                bg="transparent"
+                _hover={{ bg: "transparent" }}
+                _active={{ bg: "transparent" }}
+                // onClick={() => {
+                //   if (data.has_you_like) {
+                //     unLikePosting(data.post_id);
+                //   } else {
+                //     likePosting(data.post_id);
+                //   }
+                // }}
+              >
+                {data.has_you_like ? <IconLikeActive /> : <IconLike />}
+              </IconButton>
+              <IconButton
+                as={Link}
+                to={`/posting/detail/${data.post_id}`}
+                bg="transparent"
+                _hover={{ bg: "transparent" }}
+                _active={{ bg: "transparent" }}
+                icon={<IconComment />}
+              />
+              <IconButton
+                bg="transparent"
+                _hover={{ bg: "transparent" }}
+                _active={{ bg: "transparent" }}
+                icon={<IconSharePost />}
+              />
+            </Flex>
+            <IconSave />
+          </Flex>
+          {Number(data.detail?.total_like) !== 0 && (
+            <Text fontSize="sm" fontWeight="semibold" px={5}>
+              {data.detail?.total_like} suka
+            </Text>
+          )}
+          <Text color="gray.500" fontSize="10px" px={5} mt={1} mb={3}>
+            {moment(data.created_at)
+              .locale("id", idLocale)
+              .from(new Date())
+              .toUpperCase()}
+          </Text>
+        </Box>
+        <Flex borderTop="1px" borderColor="#E5E5E5">
+          <FormControl>
             <InputGroup size="sm" alignItems="center" p={2}>
               <Input
                 type="text"
-                placeholder="Add a comment..."
+                placeholder="Tambahkan komentar..."
                 border="0"
                 _focus={{ border: 0 }}
                 value={comment}
@@ -150,7 +218,7 @@ const CardPostDetail = (props) => {
                   mt={4}
                   as="Button"
                   fontSize="sm"
-                  color="blue.500"
+                  color="#00A5F9"
                   type="submit"
                   onClick={() =>
                     createComments({
@@ -159,14 +227,14 @@ const CardPostDetail = (props) => {
                     })
                   }
                 >
-                  Post
+                  Kirim
                 </Text>
               </InputRightElement>
             </InputGroup>
           </FormControl>
         </Flex>
-      </Flex>
-    </Box>
+      </Box>
+    </Flex>
   );
 };
 
