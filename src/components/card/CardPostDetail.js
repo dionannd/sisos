@@ -59,6 +59,8 @@ const CardPostDetail = (props) => {
         bg="white"
         roundedRight="3xl"
         roundedLeft={data.detail?.image === null ? "3xl" : "0"}
+        borderLeft={data.detail?.image !== null ? "1px" : "0"}
+        borderLeftColor="#E5E5E5"
       >
         <Flex
           alignItems="center"
