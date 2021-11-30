@@ -75,20 +75,12 @@ export default function CardPost(props, { ...rest }) {
       <Box
         bg="white "
         rounded="3xl"
-        borderColor="#E5E5E5"
-        borderWidth={{ base: 0, sm: 0, md: "1px" }}
         mb={{ base: 4, md: 8, lg: 8 }}
         w={{ md: "32rem", lg: "32rem" }}
         {...rest}
       >
         <Box>
-          <Flex
-            justifyContent="space-between"
-            px={4}
-            py={3}
-            borderBottom="1px"
-            borderColor="#E5E5E5"
-          >
+          <Flex justifyContent="space-between" px={4} py={3}>
             <Flex alignItems="center">
               <Avatar
                 size="sm"

@@ -50,7 +50,6 @@ const Navbar = (props) => {
           SISOS
         </Text>
         <Button
-          mx="7rem"
           leftIcon={<IconSearch />}
           width="15%"
           rounded="full"
@@ -58,6 +57,7 @@ const Navbar = (props) => {
           color="gray.500"
           _hover={{ bg: "#E5E5E5" }}
           fontSize="xs"
+          fontWeight="normal"
           size="sm"
           onClick={openSearch}
         >
@@ -65,7 +65,7 @@ const Navbar = (props) => {
         </Button>
         <Flex alignItems="center">
           <NavLink
-            style={{ marginRight: "10px" }}
+            style={{ marginRight: "20px" }}
             to="/home"
             isActive={(match, location) => {
               match ? setNewActiveLink(true) : setNewActiveLink(false);
@@ -75,7 +75,7 @@ const Navbar = (props) => {
             {newActiveLink === true ? <IconHome /> : <IconHomeActive />}
           </NavLink>
           <NavLink
-            mx={2}
+            style={{ marginRight: "10px" }}
             to="/direct/inbox"
             isActive={(match, location) => {
               match ? setNewActiveLink(true) : setNewActiveLink(false);
@@ -89,11 +89,12 @@ const Navbar = (props) => {
             icon={<IconPost />}
             bg="transparent"
             _hover={{ bg: "transparent" }}
+            _active={{ bg: "transparent" }}
             onClick={openPosting}
           />
           <Menu isLazy lazyBehavior="unmount">
             <MenuButton
-              as={IconButton}
+              ml={2}
               aria-label="Options"
               bg="transparent"
               _hover={{ bg: "transparent" }}
