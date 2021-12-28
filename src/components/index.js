@@ -18,6 +18,7 @@ export { default as ModalComment } from "./modal/ModalComment";
 export { default as ModalListComment } from "./modal/ModalListComment";
 export { default as ModalPosting } from "./modal/ModalPosting";
 export { default as ModalSearch } from "./modal/ModalSearch";
+export { default as ModalMorePost } from "./modal/ModalMorePost";
 
 // icons
 export * from "./icons";
