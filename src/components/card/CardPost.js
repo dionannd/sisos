@@ -13,11 +13,6 @@ import {
   IconButton,
   Button,
   useDisclosure,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuDivider,
-  MenuItem,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import {
@@ -28,7 +23,7 @@ import {
   IconSharePost,
   IconSave,
 } from "components";
-import { ModalListComment } from "components";
+import { ModalListComment, ModalMorePost } from "components";
 import homeRequest from "api/home";
 import moment from "moment";
 
@@ -38,12 +33,17 @@ export default function CardPost(props, { ...rest }) {
   const [readMore, setMore] = useState(true);
   const [readComment] = useState(true);
   const [comment, setComment] = React.useState("");
-  // const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
     isOpen: isOpenComment,
     onOpen: onOpenComment,
     onClose: onCloseComment,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenMore,
+    onOpen: onOpenMore,
+    onClose: onCloseMore,
   } = useDisclosure();
 
   const getDetailPosting = async (id) => {
@@ -80,7 +80,12 @@ export default function CardPost(props, { ...rest }) {
         {...rest}
       >
         <Box>
-          <Flex justifyContent="space-between" px={4} py={3}>
+          <Flex
+            justifyContent="space-between"
+            px={4}
+            py={2}
+            alignItems="center"
+          >
             <Flex alignItems="center">
               <Avatar
                 size="sm"
@@ -99,26 +104,14 @@ export default function CardPost(props, { ...rest }) {
                 {data.username}
               </Button>
             </Flex>
-            <Menu isLazy>
-              <MenuButton>
-                <IconMore />
-              </MenuButton>
-              <MenuList>
-                <MenuItem fontSize="14px">Send</MenuItem>
-                <MenuItem fontSize="14px">Save</MenuItem>
-                {data.user_id === user.user_id && <MenuDivider />}
-                {data.user_id === user.user_id && (
-                  <MenuItem
-                    as="button"
-                    color="red.500"
-                    fontSize="14px"
-                    onClick={() => deletePosts(data.post_id)}
-                  >
-                    Delete
-                  </MenuItem>
-                )}
-              </MenuList>
-            </Menu>
+            <IconButton
+              pl={4}
+              bg="transparent"
+              _hover={{ bg: "transparent" }}
+              _active={{ bg: "transparent" }}
+              icon={<IconMore />}
+              onClick={onOpenMore}
+            />
           </Flex>
           {data.image !== null && (
             <Image
@@ -165,7 +158,13 @@ export default function CardPost(props, { ...rest }) {
                 icon={<IconSharePost />}
               />
             </Flex>
-            <IconSave />
+            <IconButton
+              pl={4}
+              bg="transparent"
+              _hover={{ bg: "transparent" }}
+              _active={{ bg: "transparent" }}
+              icon={<IconSave />}
+            />
           </Flex>
           {Number(data.total_like) !== 0 && (
             <Text fontSize="sm" fontWeight="semibold" px={5}>
@@ -273,6 +272,15 @@ export default function CardPost(props, { ...rest }) {
           </FormControl>
         </Flex>
       </Box>
+
+      <ModalMorePost
+        user={user}
+        data={data}
+        detail={detail}
+        isOpenMore={isOpenMore}
+        onCloseMore={onCloseMore}
+        deletePosts={(id) => deletePosts(id)}
+      />
 
       <ModalListComment
         data={detail}
